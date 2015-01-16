@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 
@@ -14,6 +15,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextArea;
 
 import java.awt.Insets;
+import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
@@ -1399,7 +1401,51 @@ public class processConditions {
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					submitProcessSQL();
+					if (workStationComboBox.getSelectedItem().equals(
+							"FEX340001")) {
+						submitProcessLine1();
+						JOptionPane.showMessageDialog(null,
+								"SOC submitted for Line 1");
+					} else if (workStationComboBox.getSelectedItem().equals(
+							"FEX340002")) {
+						submitProcessLine2();
+						JOptionPane.showMessageDialog(null,
+								"SOC submitted for Line 2");
+					}
+
+					else if (workStationComboBox.getSelectedItem().equals(
+							"FEX340003")) {
+						submitProcessLine3();
+						JOptionPane.showMessageDialog(null,
+								"SOC submitted for Line 3");
+					} else if (workStationComboBox.getSelectedItem().equals(
+							"FEX340004")) {
+						submitProcessLine4();
+						JOptionPane.showMessageDialog(null,
+								"SOC submitted for Line 4");
+					}
+
+					else if (workStationComboBox.getSelectedItem().equals(
+							"FEX340006")) {
+						submitProcessLine6();
+						JOptionPane.showMessageDialog(null,
+								"SOC submitted for Line 6");
+					}
+
+					else if (workStationComboBox.getSelectedItem().equals(
+							"FEX340007")) {
+						submitProcessLine7();
+						JOptionPane.showMessageDialog(null,
+								"SOC submitted for Line 7");
+					}
+
+					else if (workStationComboBox.getSelectedItem().equals(
+							"FEX340008")) {
+						submitProcessLine8();
+						JOptionPane.showMessageDialog(null,
+								"SOC submitted for Line 8");
+					}
+
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				} catch (SQLException e) {
@@ -1540,285 +1586,863 @@ public class processConditions {
 		panel.add(textArea, gbc_textArea);
 	}
 
-	public void submitProcessSQL() throws ClassNotFoundException, SQLException,
-			IOException {
+	public void submitProcessLine1() throws ClassNotFoundException,
+			SQLException, IOException {
 		weights.sqlConnection();
-		// get date
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
-		// String workStation = textField.getText();
+		String shift = shiftField.getText();
+		String workStation = (String) workStationComboBox.getSelectedItem();
+		String operator = operatorField.getText();
 		String gauge = gaugeField.getText();
-		double gaugeDec = convertToDouble(gauge);
-		String formula = formulaField.getText();
-		int formulaInt = convertToInt(formula);
+		double gaugeDouble = convertToDouble(gauge);
 		String piw = piwField.getText();
 		double piwDouble = convertToDouble(piw);
-		String rollLength = dieNumberField.getText();
-		int rollLengthInt = convertToInt(rollLength);
-		String shift = shiftField.getText();
-		String primeNipSpeed = secondNipSpeedField.getText();
-		double primeNipSpeedDouble = convertToDouble(primeNipSpeed);
-		String secondaryNipSpeed = secondNipSpeedField.getText();
-		double secondaryNipDouble = convertToDouble(secondaryNipSpeed);
-		String primeWinderSpeed = primeWinderSpeedField.getText();
-		double primeWinderDouble = convertToDouble(primeWinderSpeed);
-		String secondaryWinderSpeed = secondWinderSpeedField.getText();
-		double secondaryWinderDouble = convertToDouble(secondaryWinderSpeed);
+		String formula = formulaField.getText();
+		int formulaInt = convertToInt(formula);
+		String feetPerRoll = feetPerRollField.getText();
+		int feetPerRollDec = convertToInt(feetPerRoll);
+		String workOrder1 = workOrder1Field.getText();
+		double workOrder1Double = convertToDouble(workOrder1);
+		String workOrder2 = workOrder2Field.getText();
+		double workOrder2Double = convertToDouble(workOrder2);
+		String workOrder3 = workOrder3Field.getText();
+		double workOrder3Double = convertToDouble(workOrder3);
+		String workOrder4 = workOrder4Field.getText();
+		double workOrder4Double = convertToDouble(workOrder4);
+		String jNumber = jNumberField.getText();
+		double jNumberDouble = convertToDouble(jNumber);
+		String tableSpeed = tableSpeedField.getText();
+		double tableSpeedDec = convertToDouble(tableSpeed);
 		String screwSpeed = screwSpeedField.getText();
 		double screwDouble = convertToDouble(screwSpeed);
+		String dieNumber = dieNumberField.getText();
+		double dieNumberDec = convertToDouble(dieNumber);
 		String rbTemp = rbTempField.getText();
-		double rbDouble = convertToDouble(rbTemp);
+		double rbTempDouble = convertToDouble(rbTemp);
 		String screenpack = screenPackField.getText();
-		double screenDouble = convertToDouble(screenpack);
+		double screenpackDouble = convertToDouble(screenpack);
 		String extruderAmps = extruderAmpsField.getText();
-		double extruderDouble = convertToDouble(extruderAmps);
+		double extruderAmpsDouble = convertToDouble(extruderAmps);
 		String extruderPSI = extruderPSIField.getText();
-		double PSIdouble = convertToDouble(extruderPSI);
+		double extruderPSIdouble = convertToDouble(extruderPSI);
+		String stretch = stretchField.getText();
+		double stretchDouble = convertToDouble(stretch);
 		String scrap = scrapField.getText();
 		double scrapDouble = convertToDouble(scrap);
 		String airRingSpeed = airRingSpeedField.getText();
-		double airRingDouble = convertToDouble(airRingSpeed);
+		double airRingSpeedDouble = convertToDouble(airRingSpeed);
 		String airRingTemp = airRingTempField.getText();
-		double ringTempDouble = convertToDouble(airRingTemp);
+		double airRingTempDouble = convertToDouble(airRingTemp);
+		String tempo = tempoField.getText();
+		double tempoDouble = convertToDouble(tempo);
+		String threeP = threePField.getText();
+		double threePDouble = convertToDouble(threeP);
+		String drumNip = drumNipField.getText();
+		double drumNipDouble = convertToDouble(drumNip);
+		String horizontalApply = horizontalApplyField.getText();
+		double horizontalApplyDouble = convertToDouble(horizontalApply);
+		String inflateAirShaft = inflateAirShaftField.getText();
+		double inflateAirShaftDouble = convertToDouble(inflateAirShaft);
 		String winderNipRoll = winderNipRollField.getText();
-		double winderNipDouble = convertToDouble(winderNipRoll);
-		String mixDropTemp = mixDropTempField.getText();
-		double mixDropDouble = convertToDouble(mixDropTemp);
+		double winderNipRollDouble = convertToDouble(winderNipRoll);
+		String winderNipSpeed = winderNipSpeedField.getText();
+		double winderNipSpeedDouble = convertToDouble(winderNipSpeed);
+		String collapsingShieldSpeed = collapsingShieldSpeedField.getText();
+		double collapsingShieldSpeedDouble = convertToDouble(collapsingShieldSpeed);
+		String collapsingShieldTemp = collapsingShieldTempField.getText();
+		double collapsingShieldTempField = convertToDouble(collapsingShieldTemp);
 		String plenumTemp = plenumTempField.getText();
-		double plenumDouble = convertToDouble(plenumTemp);
-		String plenumSpeed = plenumSpeedField.getText();
-		double plenumSpeedDouble = convertToDouble(plenumSpeed);
+		double plenumTempDouble = convertToDouble(plenumTemp);
 		String airRingGap = airRingGapField.getText();
 		double airRingGapDouble = convertToDouble(airRingGap);
 		String trimPullerSpeed = trimPullerSpeedField.getText();
-		double trimPullerDouble = convertToDouble(trimPullerSpeed);
+		double trimPullerSpeedDouble = convertToDouble(trimPullerSpeed);
+		String zone0Set = zone0SetField.getText();
+		double zone0SetDouble = convertToDouble(zone0Set);
+		String zone0Act = zone0ActField.getText();
+		double zone0ActDouble = convertToDouble(zone0Act);
+		String zone1Set = zone1SetField.getText();
+		double zone1SetDouble = convertToDouble(zone1Set);
+		String zone1Act = zone1ActField.getText();
+		double zone1ActDouble = convertToDouble(zone1Act);
+		String zone2Set = zone2SetField.getText();
+		double zone2SetDouble = convertToDouble(zone2Set);
+		String zone2Act = zone2ActField.getText();
+		double zone2ActDouble = convertToDouble(zone2Act);
+		String zone3Set = zone3SetField.getText();
+		double zone3SetDouble = convertToDouble(zone3Set);
+		String zone3Act = zone3ActField.getText();
+		double zone3ActDouble = convertToDouble(zone3Act);
+		String zone4Set = zone4SetField.getText();
+		double zone4SetDouble = convertToDouble(zone4Set);
+		String zone4Act = zone4ActField.getText();
+		double zone4ActDouble = convertToDouble(zone4Act);
+		String zone5Set = zone5SetField.getText();
+		double zone5SetDouble = convertToDouble(zone5Set);
+		String zone5Act = zone5ActField.getText();
+		double zone5ActDouble = convertToDouble(zone5Act);
+		String zone6Set = zone6SetField.getText();
+		double zone6SetDouble = convertToDouble(zone6Set);
+		String zone6Act = zone6ActField.getText();
+		double zone6ActDouble = convertToDouble(zone6Act);
+		String zone7Set = zone7SetField.getText();
+		double zone7SetDouble = convertToDouble(zone7Set);
+		String zone7Act = zone7ActField.getText();
+		double zone7ActDouble = convertToDouble(zone7Act);
+		String zone8Set = zone8SetField.getText();
+		double zone8SetDouble = convertToDouble(zone8Set);
+		String zone8Act = zone8ActField.getText();
+		double zone8ActDouble = convertToDouble(zone8Act);
+		String zone9Set = zone9SetField.getText();
+		double zone9SetDouble = convertToDouble(zone9Set);
+		String zone9Act = zone9ActField.getText();
+		double zone9ActDouble = convertToDouble(zone9Act);
+		String zoneB1Set = zoneB1SetField.getText();
+		double zoneB1SetDouble = convertToDouble(zoneB1Set);
+		String zoneB1Act = zoneB1ActField.getText();
+		double zoneB1ActDouble = convertToDouble(zoneB1Act);
+		String zoneB2Set = zoneB2SetField.getText();
+		double zoneB2SetDouble = convertToDouble(zoneB2Set);
+		String zoneB2Act = zoneB2ActField.getText();
+		double zoneB2ActDouble = convertToDouble(zoneB2Act);
+
+		try {
+			CallableStatement cs = null;
+			cs = weights.conn
+					.prepareCall("{call InsertArrProcessLine1(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			cs.setString(1, dateTime);
+			cs.setString(2, shift);
+			cs.setString(3, workStation);
+			cs.setString(4, operator);
+			cs.setDouble(5, gaugeDouble);
+			cs.setDouble(6, piwDouble);
+			cs.setInt(7, formulaInt);
+			cs.setDouble(8, feetPerRollDec);
+			cs.setDouble(9, workOrder1Double);
+			cs.setDouble(10, workOrder2Double);
+			cs.setDouble(11, workOrder3Double);
+			cs.setDouble(12, workOrder4Double);
+			cs.setDouble(13, jNumberDouble);
+			cs.setDouble(14, tableSpeedDec);
+			cs.setDouble(15, screwDouble);
+			cs.setDouble(16, dieNumberDec);
+			cs.setDouble(17, rbTempDouble);
+			cs.setDouble(18, screenpackDouble);
+			cs.setDouble(19, extruderAmpsDouble);
+			cs.setDouble(20, extruderPSIdouble);
+			cs.setDouble(21, stretchDouble);
+			cs.setDouble(22, scrapDouble);
+			cs.setDouble(23, airRingSpeedDouble);
+			cs.setDouble(24, airRingTempDouble);
+			cs.setDouble(25, tempoDouble);
+			cs.setDouble(26, threePDouble);
+			cs.setDouble(27, drumNipDouble);
+			cs.setDouble(28, horizontalApplyDouble);
+			cs.setDouble(29, inflateAirShaftDouble);
+			cs.setDouble(30, winderNipRollDouble);
+			cs.setDouble(31, winderNipSpeedDouble);
+			cs.setDouble(32, collapsingShieldSpeedDouble);
+			cs.setDouble(33, collapsingShieldTempField);
+			cs.setDouble(34, plenumTempDouble);
+			cs.setDouble(35, airRingGapDouble);
+			cs.setDouble(36, trimPullerSpeedDouble);
+			cs.setDouble(37, zone0SetDouble);
+			cs.setDouble(38, zone0ActDouble);
+			cs.setDouble(39, zone1SetDouble);
+			cs.setDouble(40, zone1ActDouble);
+			cs.setDouble(41, zone2SetDouble);
+			cs.setDouble(42, zone2ActDouble);
+			cs.setDouble(43, zone3SetDouble);
+			cs.setDouble(44, zone3ActDouble);
+			cs.setDouble(45, zone4SetDouble);
+			cs.setDouble(46, zone4ActDouble);
+			cs.setDouble(47, zone5SetDouble);
+			cs.setDouble(48, zone5ActDouble);
+			cs.setDouble(49, zone6SetDouble);
+			cs.setDouble(50, zone6ActDouble);
+			cs.setDouble(51, zone7SetDouble);
+			cs.setDouble(52, zone7ActDouble);
+			cs.setDouble(53, zone8SetDouble);
+			cs.setDouble(54, zone8ActDouble);
+			cs.setDouble(55, zone9SetDouble);
+			cs.setDouble(56, zone9ActDouble);
+			cs.setDouble(57, zoneB1SetDouble);
+			cs.setDouble(58, zoneB1ActDouble);
+			cs.setDouble(59, zoneB2SetDouble);
+			cs.setDouble(60, zoneB2ActDouble);
+			cs.execute();
+			cs.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				if (weights.conn != null)
+					weights.conn.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public void submitProcessLine2() throws ClassNotFoundException,
+			SQLException, IOException {
+		weights.sqlConnection();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
+		String shift = shiftField.getText();
+		String workStation = (String) workStationComboBox.getSelectedItem();
+		String operator = operatorField.getText();
+		String gauge = gaugeField.getText();
+		double gaugeDouble = convertToDouble(gauge);
+		String piw = piwField.getText();
+		double piwDouble = convertToDouble(piw);
+		String formula = formulaField.getText();
+		int formulaInt = convertToInt(formula);
+		String feetPerRoll = feetPerRollField.getText();
+		int feetPerRollDec = convertToInt(feetPerRoll);
+		String workOrder1 = workOrder1Field.getText();
+		double workOrder1Double = convertToDouble(workOrder1);
+		String workOrder2 = workOrder2Field.getText();
+		double workOrder2Double = convertToDouble(workOrder2);
+		String workOrder3 = workOrder3Field.getText();
+		double workOrder3Double = convertToDouble(workOrder3);
+		String workOrder4 = workOrder4Field.getText();
+		double workOrder4Double = convertToDouble(workOrder4);
+		String jNumber = jNumberField.getText();
+		double jNumberDouble = convertToDouble(jNumber);
+		String tableSpeed = tableSpeedField.getText();
+		double tableSpeedDec = convertToDouble(tableSpeed);
+		String screwSpeed = screwSpeedField.getText();
+		double screwDouble = convertToDouble(screwSpeed);
+		String dieNumber = dieNumberField.getText();
+		double dieNumberDec = convertToDouble(dieNumber);
+		String rbTemp = rbTempField.getText();
+		double rbTempDouble = convertToDouble(rbTemp);
+		String screenpack = screenPackField.getText();
+		double screenpackDouble = convertToDouble(screenpack);
+		String extruderAmps = extruderAmpsField.getText();
+		double extruderAmpsDouble = convertToDouble(extruderAmps);
+		String extruderPSI = extruderPSIField.getText();
+		double extruderPSIdouble = convertToDouble(extruderPSI);
+		String stretch = stretchField.getText();
+		double stretchDouble = convertToDouble(stretch);
+		String scrap = scrapField.getText();
+		double scrapDouble = convertToDouble(scrap);
+		String airRingSpeed = airRingSpeedField.getText();
+		double airRingSpeedDouble = convertToDouble(airRingSpeed);
+		String airRingTemp = airRingTempField.getText();
+		double airRingTempDouble = convertToDouble(airRingTemp);
+		String drumNip = drumNipField.getText();
+		double drumNipDouble = convertToDouble(drumNip);
+		String winderNipRoll = winderNipRollField.getText();
+		double winderNipRollDouble = convertToDouble(winderNipRoll);
+		String winderNipSpeed = winderNipSpeedField.getText();
+		double winderNipSpeedDouble = convertToDouble(winderNipSpeed);
+		String collapsingShieldSpeed = collapsingShieldSpeedField.getText();
+		double collapsingShieldSpeedDouble = convertToDouble(collapsingShieldSpeed);
+		String collapsingShieldTemp = collapsingShieldTempField.getText();
+		double collapsingShieldTempField = convertToDouble(collapsingShieldTemp);
+		String plenumTemp = plenumTempField.getText();
+		double plenumTempDouble = convertToDouble(plenumTemp);
+		String airRingGap = airRingGapField.getText();
+		double airRingGapDouble = convertToDouble(airRingGap);
+		String fingerAdjustLeft = fingerAdjustLeftField.getText();
+		double fingerAdjustLeftDouble = convertToDouble(fingerAdjustLeft);
+		String fingerAdjustRight = fingerAdjustRightField.getText();
+		double fingerAdjustRightDouble = convertToDouble(fingerAdjustRight);
+		String trimPullerSpeed = trimPullerSpeedField.getText();
+		double trimPullerSpeedDouble = convertToDouble(trimPullerSpeed);
+		String mandrelAirPressure = mandrelAirPressureField.getText();
+		double mandrelAirPressureDouble = convertToDouble(mandrelAirPressure);
+		String zone1Set = zone1SetField.getText();
+		double zone1SetDouble = convertToDouble(zone1Set);
+		String zone1Act = zone1ActField.getText();
+		double zone1ActDouble = convertToDouble(zone1Act);
+		String zone2Set = zone2SetField.getText();
+		double zone2SetDouble = convertToDouble(zone2Set);
+		String zone2Act = zone2ActField.getText();
+		double zone2ActDouble = convertToDouble(zone2Act);
+		String zone3Set = zone3SetField.getText();
+		double zone3SetDouble = convertToDouble(zone3Set);
+		String zone3Act = zone3ActField.getText();
+		double zone3ActDouble = convertToDouble(zone3Act);
+		String zone4Set = zone4SetField.getText();
+		double zone4SetDouble = convertToDouble(zone4Set);
+		String zone4Act = zone4ActField.getText();
+		double zone4ActDouble = convertToDouble(zone4Act);
+		String zone5Set = zone5SetField.getText();
+		double zone5SetDouble = convertToDouble(zone5Set);
+		String zone5Act = zone5ActField.getText();
+		double zone5ActDouble = convertToDouble(zone5Act);
+		String zone6Set = zone6SetField.getText();
+		double zone6SetDouble = convertToDouble(zone6Set);
+		String zone6Act = zone6ActField.getText();
+		double zone6ActDouble = convertToDouble(zone6Act);
+		String zone7Set = zone7SetField.getText();
+		double zone7SetDouble = convertToDouble(zone7Set);
+		String zone7Act = zone7ActField.getText();
+		double zone7ActDouble = convertToDouble(zone7Act);
+		String zone8Set = zone8SetField.getText();
+		double zone8SetDouble = convertToDouble(zone8Set);
+		String zone8Act = zone8ActField.getText();
+		double zone8ActDouble = convertToDouble(zone8Act);
+		String zone9Set = zone9SetField.getText();
+		double zone9SetDouble = convertToDouble(zone9Set);
+		String zone9Act = zone9ActField.getText();
+		double zone9ActDouble = convertToDouble(zone9Act);
+		String zone10Set = zone10SetField.getText();
+		double zone10SetDouble = convertToDouble(zone10Set);
+		String zone10Act = zone10ActField.getText();
+		double zone10ActDouble = convertToDouble(zone10Act);
+		String zone11Set = zone11SetField.getText();
+		double zone11SetDouble = convertToDouble(zone11Set);
+		String zone11Act = zone11ActField.getText();
+		double zone11ActDouble = convertToDouble(zone11Act);
+		String zone12Set = zone12SetField.getText();
+		double zone12SetDouble = convertToDouble(zone12Set);
+		String zone12Act = zone12ActField.getText();
+		double zone12ActDouble = convertToDouble(zone12Act);
+		String zone13Set = zone13SetField.getText();
+		double zone13SetDouble = convertToDouble(zone13Set);
+		String zone13Act = zone13ActField.getText();
+		double zone13ActDouble = convertToDouble(zone13Act);
+		try {
+			CallableStatement cs = null;
+			cs = weights.conn
+					.prepareCall("{call InsertArrProcessLine2(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			cs.setString(1, dateTime);
+			cs.setString(2, shift);
+			cs.setString(3, workStation);
+			cs.setString(4, operator);
+			cs.setDouble(5, gaugeDouble);
+			cs.setDouble(6, piwDouble);
+			cs.setInt(7, formulaInt);
+			cs.setDouble(8, feetPerRollDec);
+			cs.setDouble(9, workOrder1Double);
+			cs.setDouble(10, workOrder2Double);
+			cs.setDouble(11, workOrder3Double);
+			cs.setDouble(12, workOrder4Double);
+			cs.setDouble(13, jNumberDouble);
+			cs.setDouble(14, tableSpeedDec);
+			cs.setDouble(15, screwDouble);
+			cs.setDouble(16, dieNumberDec);
+			cs.setDouble(17, rbTempDouble);
+			cs.setDouble(18, screenpackDouble);
+			cs.setDouble(19, extruderAmpsDouble);
+			cs.setDouble(20, extruderPSIdouble);
+			cs.setDouble(21, stretchDouble);
+			cs.setDouble(22, scrapDouble);
+			cs.setDouble(23, airRingSpeedDouble);
+			cs.setDouble(24, airRingTempDouble);
+			cs.setDouble(25, drumNipDouble);
+			cs.setDouble(26, winderNipRollDouble);
+			cs.setDouble(27, winderNipSpeedDouble);
+			cs.setDouble(28, collapsingShieldSpeedDouble);
+			cs.setDouble(29, collapsingShieldTempField);
+			cs.setDouble(30, plenumTempDouble);
+			cs.setDouble(31, airRingGapDouble);
+			cs.setDouble(32, fingerAdjustLeftDouble);
+			cs.setDouble(33, fingerAdjustRightDouble);
+			cs.setDouble(34, trimPullerSpeedDouble);
+			cs.setDouble(35, mandrelAirPressureDouble);
+			cs.setDouble(36, zone1SetDouble);
+			cs.setDouble(37, zone1ActDouble);
+			cs.setDouble(38, zone2SetDouble);
+			cs.setDouble(39, zone2ActDouble);
+			cs.setDouble(40, zone3SetDouble);
+			cs.setDouble(41, zone3ActDouble);
+			cs.setDouble(42, zone4SetDouble);
+			cs.setDouble(43, zone4ActDouble);
+			cs.setDouble(44, zone5SetDouble);
+			cs.setDouble(45, zone5ActDouble);
+			cs.setDouble(46, zone6SetDouble);
+			cs.setDouble(47, zone6ActDouble);
+			cs.setDouble(48, zone7SetDouble);
+			cs.setDouble(49, zone7ActDouble);
+			cs.setDouble(50, zone8SetDouble);
+			cs.setDouble(51, zone8ActDouble);
+			cs.setDouble(52, zone9SetDouble);
+			cs.setDouble(53, zone9ActDouble);
+			cs.setDouble(54, zone10SetDouble);
+			cs.setDouble(55, zone10ActDouble);
+			cs.setDouble(56, zone11SetDouble);
+			cs.setDouble(57, zone11ActDouble);
+			cs.setDouble(58, zone12SetDouble);
+			cs.setDouble(59, zone12ActDouble);
+			cs.setDouble(60, zone13SetDouble);
+			cs.setDouble(61, zone13ActDouble);
+			cs.execute();
+			cs.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				if (weights.conn != null)
+					weights.conn.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public void submitProcessLine3() throws ClassNotFoundException,
+			SQLException, IOException {
+		weights.sqlConnection();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
+		String shift = shiftField.getText();
+		String workStation = (String) workStationComboBox.getSelectedItem();
+		String operator = operatorField.getText();
+		String gauge = gaugeField.getText();
+		double gaugeDouble = convertToDouble(gauge);
+		String piw = piwField.getText();
+		double piwDouble = convertToDouble(piw);
+		String formula = formulaField.getText();
+		int formulaInt = convertToInt(formula);
+		String feetPerRoll = feetPerRollField.getText();
+		int feetPerRollDec = convertToInt(feetPerRoll);
+		String workOrder1 = workOrder1Field.getText();
+		double workOrder1Double = convertToDouble(workOrder1);
+		String workOrder2 = workOrder2Field.getText();
+		double workOrder2Double = convertToDouble(workOrder2);
+		String workOrder3 = workOrder3Field.getText();
+		double workOrder3Double = convertToDouble(workOrder3);
+		String workOrder4 = workOrder4Field.getText();
+		double workOrder4Double = convertToDouble(workOrder4);
+		String jNumber = jNumberField.getText();
+		double jNumberDouble = convertToDouble(jNumber);
+		String tableSpeed = tableSpeedField.getText();
+		double tableSpeedDec = convertToDouble(tableSpeed);
+		String screwSpeed = screwSpeedField.getText();
+		double screwDouble = convertToDouble(screwSpeed);
+		String dieNumber = dieNumberField.getText();
+		double dieNumberDec = convertToDouble(dieNumber);
+		String rbTemp = rbTempField.getText();
+		double rbTempDouble = convertToDouble(rbTemp);
+		String screenpack = screenPackField.getText();
+		double screenpackDouble = convertToDouble(screenpack);
+		String extruderAmps = extruderAmpsField.getText();
+		double extruderAmpsDouble = convertToDouble(extruderAmps);
+		String stretch = stretchField.getText();
+		double stretchDouble = convertToDouble(stretch);
+		String scrap = scrapField.getText();
+		double scrapDouble = convertToDouble(scrap);
+		String drumTemp = drumTempField.getText();
+		double drumTempDouble = convertToDouble(drumTemp);
+		String pinchRollTemp = pinchRollTempField.getText();
+		double pinchRollTempDouble = convertToDouble(pinchRollTemp);
+		String airRingSpeed = airRingSpeedField.getText();
+		double airRingSpeedDouble = convertToDouble(airRingSpeed);
+		String airRingTemp = airRingTempField.getText();
+		double airRingTempDouble = convertToDouble(airRingTemp);
+		String trimLeftMeasure = trimLeftMeasureField.getText();
+		double trimLeftMeasureDouble = convertToDouble(trimLeftMeasure);
+		String trimRightMeasure = trimRightMeasureField.getText();
+		double trimRightMeasureDouble = convertToDouble(trimRightMeasure);
+		String airRingGap = airRingGapField.getText();
+		double airRingGapDouble = convertToDouble(airRingGap);
+		String trimPullerSpeed = trimPullerSpeedField.getText();
+		double trimPullerSpeedDouble = convertToDouble(trimPullerSpeed);
 		String feedValves = feedValvesField.getText();
+		double feedValvesDouble = convertToDouble(feedValves);
 		String doors = doorsField.getText();
-		String feedValvesOpenPercent = feedValvesOpenPercentField.getText();
-		double feedValveDouble = convertToDouble(feedValvesOpenPercent);
-		String zone1Setting = zone1SetField.getText();
-		double zone1Double = convertToDouble(zone1Setting);
-		String zone1Actual = zone1ActField.getText();
-		double zone1ActualDouble = convertToDouble(zone1Actual);
-		String zone2Setting = zone2SetField.getText();
-		double zone2Double = convertToDouble(zone2Setting);
-		String zone2Actual = zone2ActField.getText();
-		double zone2ActualDouble = convertToDouble(zone2Actual);
-		String zone3Setting = zone3SetField.getText();
-		double zone3Double = convertToDouble(zone3Setting);
-		String zone3Actual = zone3ActField.getText();
-		double zone3ActualDouble = convertToDouble(zone3Actual);
-		String zone4Setting = zone4SetField.getText();
-		double zone4Double = convertToDouble(zone4Setting);
-		String zone4Actual = zone4ActField.getText();
-		double zone4ActualDouble = convertToDouble(zone4Actual);
-		String zone5Setting = zone5SetField.getText();
-		double zone5Double = convertToDouble(zone5Setting);
-		String zone5Actual = zone5ActField.getText();
-		double zone5ActualDouble = convertToDouble(zone5Actual);
-		String zone6Setting = zone6SetField.getText();
-		double zone6Double = convertToDouble(zone6Setting);
-		String zone6Actual = zone6ActField.getText();
-		double zone6ActualDouble = convertToDouble(zone6Actual);
-		String zone7aSetting = zone7ASetField.getText();
-		double zone7aDouble = convertToDouble(zone7aSetting);
-		String zone7aActual = zone7AActField.getText();
-		double zone7aActualDouble = convertToDouble(zone7aActual);
-		String zone7bSetting = zone7BSetField.getText();
-		double zone7bDouble = convertToDouble(zone7bSetting);
-		String zone7bActual = zone7BActField.getText();
-		double zone7bActualDouble = convertToDouble(zone7bActual);
-		String zone7cSetting = zone7CSetField.getText();
-		double zone7cDouble = convertToDouble(zone7cSetting);
-		String zone7cActual = zone7CActField.getText();
-		double zone7cActualDouble = convertToDouble(zone7cActual);
-		String zone8Setting = zone8SetField.getText();
-		double zone8Double = convertToDouble(zone8Setting);
-		String zone8Actual = zone8ActField.getText();
-		double zone8ActualDouble = convertToDouble(zone8Actual);
-		String zone9Setting = zone9SetField.getText();
-		double zone9Double = convertToDouble(zone9Setting);
-		String zone9Actual = zone9ActField.getText();
-		double zone9ActualDouble = convertToDouble(zone9Actual);
-		String zone10Setting = zone10SetField.getText();
-		double zone10Double = convertToDouble(zone10Setting);
-		String zone10Actual = zone10ActField.getText();
-		double zone10ActualDouble = convertToDouble(zone10Actual);
-		String comments = textArea.getText();
-		String coreOutDiameterPrimary = coreOutDiameterPrimaryField.getText();
-		double coreOutDiameterPrimaryDouble = convertToDouble(coreOutDiameterPrimary);
-		String rollLengthPrimary = rollLengthPrimaryField.getText();
-		double rollLengthDouble = convertToDouble(rollLengthPrimary);
-		String endRollWarningPrimary = endRollWarningPrimaryField.getText();
-		double endRolLWarningPrimaryDouble = convertToDouble(endRollWarningPrimary);
-		String endRollTransferPrimary = endRollTransferPrimaryField.getText();
-		double endRolLTransferPrimaryDouble = convertToDouble(endRollTransferPrimary);
-		String forceSetPointPrimary = forceSetPointPrimaryField.getText();
-		double forceSetPointPrimaryDouble = convertToDouble(forceSetPointPrimary);
-		String drumToNipTrimPrimary = drumtoNipTrimPrimaryField.getText();
-		double drumToNipTrimPrimaryDouble = convertToDouble(drumToNipTrimPrimary);
-		String coreOutDiameterSecondary = coreOutDiameterSecondaryField
-				.getText();
-		double coreOutDiameterSecondaryDouble = convertToDouble(coreOutDiameterSecondary);
-		String rollLengthPrimarySecondary = rollLengthPrimarySecondaryField
-				.getText();
-		double rollLengthPrimarySecondaryDouble = convertToDouble(rollLengthPrimarySecondary);
-		String endRollWarningSecondary = endRollWarningSecondaryField.getText();
-		double endRollWarningSecondaryDouble = convertToDouble(endRollWarningSecondary);
-		String endRollTransferSecondary = endRollTransferSecondaryField
-				.getText();
-		double endRollTransferSecondaryDouble = convertToDouble(endRollTransferSecondary);
-		String forceSetPointSecondary = forceSetPointSecondaryField.getText();
-		double forceSetPointSecondaryDouble = convertToDouble(forceSetPointSecondary);
-		String drumToNipTrimSecondary = drumToNipTrimSecondaryField.getText();
-		double drumToNipTrimSecondaryDouble = convertToDouble(drumToNipTrimSecondary);
+		double doorsDouble = convertToDouble(doors);
+		String zone1Set = zone1SetField.getText();
+		double zone1SetDouble = convertToDouble(zone1Set);
+		String zone1Act = zone1ActField.getText();
+		double zone1ActDouble = convertToDouble(zone1Act);
+		String zone2Set = zone2SetField.getText();
+		double zone2SetDouble = convertToDouble(zone2Set);
+		String zone2Act = zone2ActField.getText();
+		double zone2ActDouble = convertToDouble(zone2Act);
+		String zone3Set = zone3SetField.getText();
+		double zone3SetDouble = convertToDouble(zone3Set);
+		String zone3Act = zone3ActField.getText();
+		double zone3ActDouble = convertToDouble(zone3Act);
+		String zone4Set = zone4SetField.getText();
+		double zone4SetDouble = convertToDouble(zone4Set);
+		String zone4Act = zone4ActField.getText();
+		double zone4ActDouble = convertToDouble(zone4Act);
+		String zone5Set = zone5SetField.getText();
+		double zone5SetDouble = convertToDouble(zone5Set);
+		String zone5Act = zone5ActField.getText();
+		double zone5ActDouble = convertToDouble(zone5Act);
+		String zone6Set = zone6SetField.getText();
+		double zone6SetDouble = convertToDouble(zone6Set);
+		String zone6Act = zone6ActField.getText();
+		double zone6ActDouble = convertToDouble(zone6Act);
+		String zone8Set = zone8SetField.getText();
+		double zone8SetDouble = convertToDouble(zone8Set);
+		String zone8Act = zone8ActField.getText();
+		double zone8ActDouble = convertToDouble(zone8Act);
+		String zone9Set = zone9SetField.getText();
+		double zone9SetDouble = convertToDouble(zone9Set);
+		String zone9Act = zone9ActField.getText();
+		double zone9ActDouble = convertToDouble(zone9Act);
+		String zone10Set = zone10SetField.getText();
+		double zone10SetDouble = convertToDouble(zone10Set);
+		String zone10Act = zone10ActField.getText();
+		double zone10ActDouble = convertToDouble(zone10Act);
+		try {
+			CallableStatement cs = null;
+			cs = weights.conn
+					.prepareCall("{call InsertArrProcessLine3(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			cs.setString(1, dateTime);
+			cs.setString(2, shift);
+			cs.setString(3, workStation);
+			cs.setString(4, operator);
+			cs.setDouble(5, gaugeDouble);
+			cs.setDouble(6, piwDouble);
+			cs.setInt(7, formulaInt);
+			cs.setDouble(8, feetPerRollDec);
+			cs.setDouble(9, workOrder1Double);
+			cs.setDouble(10, workOrder2Double);
+			cs.setDouble(11, workOrder3Double);
+			cs.setDouble(12, workOrder4Double);
+			cs.setDouble(13, jNumberDouble);
+			cs.setDouble(14, tableSpeedDec);
+			cs.setDouble(15, screwDouble);
+			cs.setDouble(16, dieNumberDec);
+			cs.setDouble(17, rbTempDouble);
+			cs.setDouble(18, screenpackDouble);
+			cs.setDouble(19, extruderAmpsDouble);
+			cs.setDouble(20, stretchDouble);
+			cs.setDouble(21, scrapDouble);
+			cs.setDouble(22, drumTempDouble);
+			cs.setDouble(23, pinchRollTempDouble);
+			cs.setDouble(24, airRingSpeedDouble);
+			cs.setDouble(25, airRingTempDouble);
+			cs.setDouble(26, trimLeftMeasureDouble);
+			cs.setDouble(27, trimRightMeasureDouble);
+			cs.setDouble(28, airRingGapDouble);
+			cs.setDouble(29, trimPullerSpeedDouble);
+			cs.setDouble(30, feedValvesDouble);
+			cs.setDouble(31, doorsDouble);
+			cs.setDouble(32, zone1SetDouble);
+			cs.setDouble(33, zone1ActDouble);
+			cs.setDouble(34, zone2SetDouble);
+			cs.setDouble(35, zone2ActDouble);
+			cs.setDouble(36, zone3SetDouble);
+			cs.setDouble(37, zone3ActDouble);
+			cs.setDouble(38, zone4SetDouble);
+			cs.setDouble(39, zone4ActDouble);
+			cs.setDouble(40, zone5SetDouble);
+			cs.setDouble(41, zone5ActDouble);
+			cs.setDouble(42, zone6SetDouble);
+			cs.setDouble(43, zone6ActDouble);
+			cs.setDouble(44, zone8SetDouble);
+			cs.setDouble(45, zone8ActDouble);
+			cs.setDouble(46, zone9SetDouble);
+			cs.setDouble(47, zone9ActDouble);
+			cs.setDouble(48, zone10SetDouble);
+			cs.setDouble(49, zone10ActDouble);
+			cs.execute();
+			cs.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				if (weights.conn != null)
+					weights.conn.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public void submitProcessLine4() throws ClassNotFoundException,
+			SQLException, IOException {
+		weights.sqlConnection();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
+		String shift = shiftField.getText();
+		String workStation = (String) workStationComboBox.getSelectedItem();
+		String operator = operatorField.getText();
+		String gauge = gaugeField.getText();
+		double gaugeDouble = convertToDouble(gauge);
+		String piw = piwField.getText();
+		double piwDouble = convertToDouble(piw);
+		String formula = formulaField.getText();
+		int formulaInt = convertToInt(formula);
+		String feetPerRoll = feetPerRollField.getText();
+		int feetPerRollDec = convertToInt(feetPerRoll);
+		String workOrder1 = workOrder1Field.getText();
+		double workOrder1Double = convertToDouble(workOrder1);
+		String workOrder2 = workOrder2Field.getText();
+		double workOrder2Double = convertToDouble(workOrder2);
+		String workOrder3 = workOrder3Field.getText();
+		double workOrder3Double = convertToDouble(workOrder3);
+		String workOrder4 = workOrder4Field.getText();
+		double workOrder4Double = convertToDouble(workOrder4);
+		String jNumber = jNumberField.getText();
+		double jNumberDouble = convertToDouble(jNumber);
+		String tableSpeed = tableSpeedField.getText();
+		double tableSpeedDec = convertToDouble(tableSpeed);
+		String screwSpeed = screwSpeedField.getText();
+		double screwDouble = convertToDouble(screwSpeed);
+		String dieNumber = dieNumberField.getText();
+		double dieNumberDec = convertToDouble(dieNumber);
+		String rbTemp = rbTempField.getText();
+		double rbTempDouble = convertToDouble(rbTemp);
+		String screenpack = screenPackField.getText();
+		double screenpackDouble = convertToDouble(screenpack);
+		String extruderAmps = extruderAmpsField.getText();
+		double extruderAmpsDouble = convertToDouble(extruderAmps);
+		String stretch = stretchField.getText();
+		double stretchDouble = convertToDouble(stretch);
+		String scrap = scrapField.getText();
+		double scrapDouble = convertToDouble(scrap);
+		String drumTemp = drumTempField.getText();
+		double drumTempDouble = convertToDouble(drumTemp);
+		String pinchRollTemp = pinchRollTempField.getText();
+		double pinchRollTempDouble = convertToDouble(pinchRollTemp);
+		String airRingSpeed = airRingSpeedField.getText();
+		double airRingSpeedDouble = convertToDouble(airRingSpeed);
+		String airRingTemp = airRingTempField.getText();
+		double airRingTempDouble = convertToDouble(airRingTemp);
+		String trimLeftMeasure = trimLeftMeasureField.getText();
+		double trimLeftMeasureDouble = convertToDouble(trimLeftMeasure);
+		String trimRightMeasure = trimRightMeasureField.getText();
+		double trimRightMeasureDouble = convertToDouble(trimRightMeasure);
+		String airRingGap = airRingGapField.getText();
+		double airRingGapDouble = convertToDouble(airRingGap);
+		String trimPullerSpeed = trimPullerSpeedField.getText();
+		double trimPullerSpeedDouble = convertToDouble(trimPullerSpeed);
+		String feedValves = feedValvesField.getText();
+		double feedValvesDouble = convertToDouble(feedValves);
+		String doors = doorsField.getText();
+		double doorsDouble = convertToDouble(doors);
+		String zone1Set = zone1SetField.getText();
+		double zone1SetDouble = convertToDouble(zone1Set);
+		String zone1Act = zone1ActField.getText();
+		double zone1ActDouble = convertToDouble(zone1Act);
+		String zone2Set = zone2SetField.getText();
+		double zone2SetDouble = convertToDouble(zone2Set);
+		String zone2Act = zone2ActField.getText();
+		double zone2ActDouble = convertToDouble(zone2Act);
+		String zone3Set = zone3SetField.getText();
+		double zone3SetDouble = convertToDouble(zone3Set);
+		String zone3Act = zone3ActField.getText();
+		double zone3ActDouble = convertToDouble(zone3Act);
+		String zone4Set = zone4SetField.getText();
+		double zone4SetDouble = convertToDouble(zone4Set);
+		String zone4Act = zone4ActField.getText();
+		double zone4ActDouble = convertToDouble(zone4Act);
+		String zone5Set = zone5SetField.getText();
+		double zone5SetDouble = convertToDouble(zone5Set);
+		String zone5Act = zone5ActField.getText();
+		double zone5ActDouble = convertToDouble(zone5Act);
+		String zone6Set = zone6SetField.getText();
+		double zone6SetDouble = convertToDouble(zone6Set);
+		String zone6Act = zone6ActField.getText();
+		double zone6ActDouble = convertToDouble(zone6Act);
+		String zone8Set = zone8SetField.getText();
+		double zone8SetDouble = convertToDouble(zone8Set);
+		String zone8Act = zone8ActField.getText();
+		double zone8ActDouble = convertToDouble(zone8Act);
+		String zone9Set = zone9SetField.getText();
+		double zone9SetDouble = convertToDouble(zone9Set);
+		String zone9Act = zone9ActField.getText();
+		double zone9ActDouble = convertToDouble(zone9Act);
+		String zone10Set = zone10SetField.getText();
+		double zone10SetDouble = convertToDouble(zone10Set);
+		String zone10Act = zone10ActField.getText();
+		double zone10ActDouble = convertToDouble(zone10Act);
+		try {
+			CallableStatement cs = null;
+			cs = weights.conn
+					.prepareCall("{call InsertArrProcessLine4(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+			cs.setString(1, dateTime);
+			cs.setString(2, shift);
+			cs.setString(3, workStation);
+			cs.setString(4, operator);
+			cs.setDouble(5, gaugeDouble);
+			cs.setDouble(6, piwDouble);
+			cs.setInt(7, formulaInt);
+			cs.setDouble(8, feetPerRollDec);
+			cs.setDouble(9, workOrder1Double);
+			cs.setDouble(10, workOrder2Double);
+			cs.setDouble(11, workOrder3Double);
+			cs.setDouble(12, workOrder4Double);
+			cs.setDouble(13, jNumberDouble);
+			cs.setDouble(14, tableSpeedDec);
+			cs.setDouble(15, screwDouble);
+			cs.setDouble(16, dieNumberDec);
+			cs.setDouble(17, rbTempDouble);
+			cs.setDouble(18, screenpackDouble);
+			cs.setDouble(19, extruderAmpsDouble);
+			cs.setDouble(20, stretchDouble);
+			cs.setDouble(21, scrapDouble);
+			cs.setDouble(22, drumTempDouble);
+			cs.setDouble(23, pinchRollTempDouble);
+			cs.setDouble(24, airRingSpeedDouble);
+			cs.setDouble(25, airRingTempDouble);
+			cs.setDouble(26, trimLeftMeasureDouble);
+			cs.setDouble(27, trimRightMeasureDouble);
+			cs.setDouble(28, airRingGapDouble);
+			cs.setDouble(29, trimPullerSpeedDouble);
+			cs.setDouble(30, feedValvesDouble);
+			cs.setDouble(31, doorsDouble);
+			cs.setDouble(32, zone1SetDouble);
+			cs.setDouble(33, zone1ActDouble);
+			cs.setDouble(34, zone2SetDouble);
+			cs.setDouble(35, zone2ActDouble);
+			cs.setDouble(36, zone3SetDouble);
+			cs.setDouble(37, zone3ActDouble);
+			cs.setDouble(38, zone4SetDouble);
+			cs.setDouble(39, zone4ActDouble);
+			cs.setDouble(40, zone5SetDouble);
+			cs.setDouble(41, zone5ActDouble);
+			cs.setDouble(42, zone6SetDouble);
+			cs.setDouble(43, zone6ActDouble);
+			cs.setDouble(44, zone8SetDouble);
+			cs.setDouble(45, zone8ActDouble);
+			cs.setDouble(46, zone9SetDouble);
+			cs.setDouble(47, zone9ActDouble);
+			cs.setDouble(48, zone10SetDouble);
+			cs.setDouble(49, zone10ActDouble);
+			cs.execute();
+			cs.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				if (weights.conn != null)
+					weights.conn.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public void submitProcessLine6() throws ClassNotFoundException,
+			SQLException, IOException {
+		weights.sqlConnection();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
+		String shift = shiftField.getText();
+		String workStation = (String) workStationComboBox.getSelectedItem();
+		String operator = operatorField.getText();
+		String gauge = gaugeField.getText();
+		double gaugeDouble = convertToDouble(gauge);
+		String piw = piwField.getText();
+		double piwDouble = convertToDouble(piw);
+		String formula = formulaField.getText();
+		int formulaInt = convertToInt(formula);
+		String feetPerRoll = feetPerRollField.getText();
+		int feetPerRollDec = convertToInt(feetPerRoll);
+		String workOrder1 = workOrder1Field.getText();
+		double workOrder1Double = convertToDouble(workOrder1);
+		String workOrder2 = workOrder2Field.getText();
+		double workOrder2Double = convertToDouble(workOrder2);
+		String workOrder3 = workOrder3Field.getText();
+		double workOrder3Double = convertToDouble(workOrder3);
+		String workOrder4 = workOrder4Field.getText();
+		double workOrder4Double = convertToDouble(workOrder4);
+		String jNumber = jNumberField.getText();
+		double jNumberDouble = convertToDouble(jNumber);
 		try {
 			Statement statement = weights.conn.createStatement();
 			statement.setQueryTimeout(30); // set timeout to 30 sec.
 
 			statement.executeUpdate("INSERT INTO ArrProcessConditions VALUES("
-					+ "'"
-					+ dateTime
-					+ "'"
-					+ ", "
-					+ "'"
-					// + workStation
-					+ "'"
-					+ ","
-					+ gaugeDec
-					+ ","
-					+ formulaInt
-					+ ","
-					+ piwDouble
-					+ ","
-					+ rollLengthInt
-					+ ","
-					+ "'"
-					+ shift
-					+ "'"
-					+ ","
-					+ primeNipSpeedDouble
-					+ ","
-					+ secondaryNipDouble
-					+ ","
-					+ primeWinderDouble
-					+ ","
-					+ secondaryWinderDouble
-					+ ","
-					+ screwDouble
-					+ ","
-					+ rbDouble
-					+ ","
-					+ screenDouble
-					+ ","
-					+ extruderDouble
-					+ ","
-					+ PSIdouble
-					+ ","
-					+ scrapDouble
-					+ ","
-					+ airRingDouble
-					+ ","
-					+ ringTempDouble
-					+ ","
-					+ winderNipDouble
-					+ ","
-					+ mixDropDouble
-					+ ","
-					+ plenumDouble
-					+ ","
-					+ plenumSpeedDouble
-					+ ","
-					+ airRingGapDouble
-					+ ","
-					+ trimPullerDouble
-					+ ","
-					+ "'"
-					+ feedValves
-					+ "'"
-					+ ","
-					+ "'"
-					+ doors
-					+ "'"
-					+ ","
-					+ feedValveDouble
-					+ ","
-					+ zone1Double
-					+ ","
-					+ zone1ActualDouble
-					+ ","
-					+ zone2Double
-					+ ","
-					+ zone2ActualDouble
-					+ ","
-					+ zone3Double
-					+ ","
-					+ zone3ActualDouble
-					+ ","
-					+ zone4Double
-					+ ","
-					+ zone4ActualDouble
-					+ ","
-					+ zone5Double
-					+ ","
-					+ zone5ActualDouble
-					+ ","
-					+ zone6Double
-					+ ","
-					+ zone6ActualDouble
-					+ ","
-					+ zone7aDouble
-					+ ","
-					+ zone7aActualDouble
-					+ ","
-					+ zone7bDouble
-					+ ","
-					+ zone7bActualDouble
-					+ ","
-					+ zone7cDouble
-					+ ","
-					+ zone7cActualDouble
-					+ ","
-					+ zone8Double
-					+ ","
-					+ zone8ActualDouble
-					+ ","
-					+ zone9Double
-					+ ","
-					+ zone9ActualDouble
-					+ ","
-					+ zone10Double
-					+ ","
-					+ zone10ActualDouble
-					+ ","
-					+ "'"
-					+ comments
-					+ "'"
-					+ ","
-					+ coreOutDiameterPrimaryDouble
-					+ ","
-					+ rollLengthDouble
-					+ ","
-					+ endRolLWarningPrimaryDouble
-					+ ","
-					+ endRolLTransferPrimaryDouble
-					+ ","
-					+ forceSetPointPrimaryDouble
-					+ ","
-					+ drumToNipTrimPrimaryDouble
-					+ ","
-					+ coreOutDiameterSecondaryDouble
-					+ ","
-					+ rollLengthPrimarySecondaryDouble
-					+ ","
-					+ endRollWarningSecondaryDouble
-					+ ","
-					+ endRollTransferSecondaryDouble
-					+ ","
-					+ forceSetPointSecondaryDouble
-					+ ","
-					+ drumToNipTrimSecondaryDouble + ")");
+					+ ")");
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				if (weights.conn != null)
+					weights.conn.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public void submitProcessLine7() throws ClassNotFoundException,
+			SQLException, IOException {
+		weights.sqlConnection();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
+		String shift = shiftField.getText();
+		String workStation = (String) workStationComboBox.getSelectedItem();
+		String operator = operatorField.getText();
+		String gauge = gaugeField.getText();
+		double gaugeDouble = convertToDouble(gauge);
+		String piw = piwField.getText();
+		double piwDouble = convertToDouble(piw);
+		String formula = formulaField.getText();
+		int formulaInt = convertToInt(formula);
+		String feetPerRoll = feetPerRollField.getText();
+		int feetPerRollDec = convertToInt(feetPerRoll);
+		String workOrder1 = workOrder1Field.getText();
+		double workOrder1Double = convertToDouble(workOrder1);
+		String workOrder2 = workOrder2Field.getText();
+		double workOrder2Double = convertToDouble(workOrder2);
+		String workOrder3 = workOrder3Field.getText();
+		double workOrder3Double = convertToDouble(workOrder3);
+		String workOrder4 = workOrder4Field.getText();
+		double workOrder4Double = convertToDouble(workOrder4);
+		String jNumber = jNumberField.getText();
+		double jNumberDouble = convertToDouble(jNumber);
+		try {
+			Statement statement = weights.conn.createStatement();
+			statement.setQueryTimeout(30); // set timeout to 30 sec.
+
+			statement.executeUpdate("INSERT INTO ArrProcessConditions VALUES("
+					+ ")");
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+			try {
+				if (weights.conn != null)
+					weights.conn.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}
+	}
+
+	public void submitProcessLine8() throws ClassNotFoundException,
+			SQLException, IOException {
+		weights.sqlConnection();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
+		String shift = shiftField.getText();
+		String workStation = (String) workStationComboBox.getSelectedItem();
+		String operator = operatorField.getText();
+		String gauge = gaugeField.getText();
+		double gaugeDouble = convertToDouble(gauge);
+		String piw = piwField.getText();
+		double piwDouble = convertToDouble(piw);
+		String formula = formulaField.getText();
+		int formulaInt = convertToInt(formula);
+		String feetPerRoll = feetPerRollField.getText();
+		int feetPerRollDec = convertToInt(feetPerRoll);
+		String workOrder1 = workOrder1Field.getText();
+		double workOrder1Double = convertToDouble(workOrder1);
+		String workOrder2 = workOrder2Field.getText();
+		double workOrder2Double = convertToDouble(workOrder2);
+		String workOrder3 = workOrder3Field.getText();
+		double workOrder3Double = convertToDouble(workOrder3);
+		String workOrder4 = workOrder4Field.getText();
+		double workOrder4Double = convertToDouble(workOrder4);
+		String jNumber = jNumberField.getText();
+		double jNumberDouble = convertToDouble(jNumber);
+		try {
+			Statement statement = weights.conn.createStatement();
+			statement.setQueryTimeout(30); // set timeout to 30 sec.
+
+			statement.executeUpdate("INSERT INTO ArrProcessConditions VALUES("
+					+ ")");
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
