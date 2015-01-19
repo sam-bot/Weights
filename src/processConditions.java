@@ -1,7 +1,6 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JLabel;
@@ -244,8 +243,8 @@ public class processConditions {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					processConditions window = new processConditions();
-					window.frame.setVisible(true);
+					processConditions window = new processConditions("sRenick");
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -256,18 +255,19 @@ public class processConditions {
 	/**
 	 * Create the application.
 	 */
-	public processConditions() {
-		initialize();
+	public processConditions(String operator) {
+		initialize(operator);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame("Standard Operating Conditions");
-		frame.setBounds(100, 1, 1055, 855);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane()
+	private void initialize(String operator) {
+		setFrame(new JFrame("Standard Operating Conditions"));
+		getFrame().setBounds(100, 1, 1055, 855);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame()
+				.getContentPane()
 				.setLayout(
 						new MigLayout(
 								"",
@@ -276,7 +276,8 @@ public class processConditions {
 
 		panel_2 = new JPanel();
 		list = new ArrayList<JTextField>();
-		frame.getContentPane().add(panel_2, "flowx,cell 0 0 12 1,alignx right");
+		getFrame().getContentPane().add(panel_2,
+				"flowx,cell 0 0 12 1,alignx right");
 		panel_2.setLayout(new MigLayout(
 				"",
 				"[grow][grow][grow][grow][grow][grow][grow][grow][grow][][][][][grow]",
@@ -708,6 +709,8 @@ public class processConditions {
 		operatorField = new JTextField();
 		panel_2.add(operatorField, "cell 7 0");
 		operatorField.setColumns(10);
+		operatorField.setText(operator);
+		operatorField.setEditable(false);
 		list.add(operatorField);
 		JLabel lblGauge = new JLabel("Gauge");
 		panel_2.add(lblGauge, "cell 8 0,alignx right");
@@ -781,620 +784,637 @@ public class processConditions {
 		jNumberField.setColumns(10);
 		list.add(jNumberField);
 		label_4 = new JLabel("Table Speed");
-		frame.getContentPane().add(label_4, "cell 0 1,alignx center,growy");
+		getFrame().getContentPane()
+				.add(label_4, "cell 0 1,alignx center,growy");
 
 		tableSpeedField = new JTextField();
 		tableSpeedField.setColumns(10);
-		frame.getContentPane().add(tableSpeedField, "cell 1 1");
+		getFrame().getContentPane().add(tableSpeedField, "cell 1 1");
 		list.add(tableSpeedField);
 
 		lblMixDropTemp = new JLabel("Mix Drop Temp");
-		frame.getContentPane().add(lblMixDropTemp, "cell 3 1,alignx center");
+		getFrame().getContentPane().add(lblMixDropTemp,
+				"cell 3 1,alignx center");
 
 		mixDropTempField = new JTextField();
-		frame.getContentPane().add(mixDropTempField, "cell 4 1");
+		getFrame().getContentPane().add(mixDropTempField, "cell 4 1");
 		mixDropTempField.setColumns(10);
 		list.add(mixDropTempField);
 
 		lblSetting = new JLabel("Setting");
-		frame.getContentPane().add(lblSetting, "cell 9 1,alignx center");
+		getFrame().getContentPane().add(lblSetting, "cell 9 1,alignx center");
 
 		lblActual = new JLabel("Actual");
-		frame.getContentPane().add(lblActual, "cell 11 1,alignx center");
+		getFrame().getContentPane().add(lblActual, "cell 11 1,alignx center");
 
 		lblPrimeNipSpeed = new JLabel("Prime Nip Speed");
-		frame.getContentPane().add(lblPrimeNipSpeed, "cell 0 2,alignx center");
+		getFrame().getContentPane().add(lblPrimeNipSpeed,
+				"cell 0 2,alignx center");
 
 		primeNipSpeedField = new JTextField();
-		frame.getContentPane().add(primeNipSpeedField, "cell 1 2");
+		getFrame().getContentPane().add(primeNipSpeedField, "cell 1 2");
 		primeNipSpeedField.setColumns(10);
 		list.add(primeNipSpeedField);
 
 		label_14 = new JLabel("Winder NIP Speed");
-		frame.getContentPane().add(label_14, "cell 3 2,alignx center");
+		getFrame().getContentPane().add(label_14, "cell 3 2,alignx center");
 
 		winderNipSpeedField = new JTextField();
 		winderNipSpeedField.setColumns(10);
-		frame.getContentPane().add(winderNipSpeedField, "cell 4 2");
+		getFrame().getContentPane().add(winderNipSpeedField, "cell 4 2");
 		list.add(winderNipSpeedField);
 
 		label_22 = new JLabel("Zone 0");
-		frame.getContentPane().add(label_22, "cell 8 2,alignx trailing");
+		getFrame().getContentPane().add(label_22, "cell 8 2,alignx trailing");
 
 		zone0SetField = new JTextField();
 		zone0SetField.setColumns(10);
-		frame.getContentPane().add(zone0SetField, "cell 9 2");
+		getFrame().getContentPane().add(zone0SetField, "cell 9 2");
 		list.add(zone0SetField);
 
 		zone0ActField = new JTextField();
 		zone0ActField.setColumns(10);
-		frame.getContentPane().add(zone0ActField, "cell 11 2");
+		getFrame().getContentPane().add(zone0ActField, "cell 11 2");
 		list.add(zone0ActField);
 
 		lblndNipSpeed = new JLabel("2nd Nip Speed");
-		frame.getContentPane().add(lblndNipSpeed, "cell 0 3,alignx center");
+		getFrame().getContentPane()
+				.add(lblndNipSpeed, "cell 0 3,alignx center");
 
 		secondNipSpeedField = new JTextField();
-		frame.getContentPane().add(secondNipSpeedField, "cell 1 3");
+		getFrame().getContentPane().add(secondNipSpeedField, "cell 1 3");
 		secondNipSpeedField.setColumns(10);
 		list.add(secondNipSpeedField);
 
 		label_15 = new JLabel("Collapsing Shield Speed");
-		frame.getContentPane().add(label_15, "cell 3 3,alignx center");
+		getFrame().getContentPane().add(label_15, "cell 3 3,alignx center");
 
 		collapsingShieldSpeedField = new JTextField();
 		collapsingShieldSpeedField.setColumns(10);
-		frame.getContentPane().add(collapsingShieldSpeedField, "cell 4 3");
+		getFrame().getContentPane().add(collapsingShieldSpeedField, "cell 4 3");
 		list.add(collapsingShieldSpeedField);
 
 		lblZone = new JLabel("Zone 1");
-		frame.getContentPane().add(lblZone, "cell 8 3,alignx trailing");
+		getFrame().getContentPane().add(lblZone, "cell 8 3,alignx trailing");
 
 		zone1SetField = new JTextField();
-		frame.getContentPane().add(zone1SetField, "cell 9 3");
+		getFrame().getContentPane().add(zone1SetField, "cell 9 3");
 		zone1SetField.setColumns(10);
 		list.add(zone1SetField);
 
 		zone1ActField = new JTextField();
-		frame.getContentPane().add(zone1ActField, "cell 11 3");
+		getFrame().getContentPane().add(zone1ActField, "cell 11 3");
 		zone1ActField.setColumns(10);
 		list.add(zone1ActField);
 
 		lblPrimeWinderSpeed = new JLabel("Prime Winder Speed");
-		frame.getContentPane().add(lblPrimeWinderSpeed,
+		getFrame().getContentPane().add(lblPrimeWinderSpeed,
 				"cell 0 4,alignx center");
 
 		primeWinderSpeedField = new JTextField();
-		frame.getContentPane().add(primeWinderSpeedField, "cell 1 4");
+		getFrame().getContentPane().add(primeWinderSpeedField, "cell 1 4");
 		primeWinderSpeedField.setColumns(10);
 		list.add(primeWinderSpeedField);
 
 		label_33 = new JLabel("Collapsing Shield Temperature");
-		frame.getContentPane().add(label_33, "cell 3 4,alignx center");
+		getFrame().getContentPane().add(label_33, "cell 3 4,alignx center");
 
 		collapsingShieldTempField = new JTextField();
 		list.add(collapsingShieldTempField);
 		collapsingShieldTempField.setColumns(10);
-		frame.getContentPane().add(collapsingShieldTempField, "cell 4 4");
+		getFrame().getContentPane().add(collapsingShieldTempField, "cell 4 4");
 
 		lblZone_1 = new JLabel("Zone 2");
-		frame.getContentPane().add(lblZone_1, "cell 8 4,alignx trailing");
+		getFrame().getContentPane().add(lblZone_1, "cell 8 4,alignx trailing");
 
 		zone2SetField = new JTextField();
-		frame.getContentPane().add(zone2SetField, "cell 9 4");
+		getFrame().getContentPane().add(zone2SetField, "cell 9 4");
 		zone2SetField.setColumns(10);
 		list.add(zone2SetField);
 
 		zone2ActField = new JTextField();
-		frame.getContentPane().add(zone2ActField, "cell 11 4");
+		getFrame().getContentPane().add(zone2ActField, "cell 11 4");
 		zone2ActField.setColumns(10);
 		list.add(zone2ActField);
 
 		lblndWinderSpeed = new JLabel("2nd Winder Speed");
-		frame.getContentPane().add(lblndWinderSpeed, "cell 0 5,alignx center");
+		getFrame().getContentPane().add(lblndWinderSpeed,
+				"cell 0 5,alignx center");
 
 		secondWinderSpeedField = new JTextField();
-		frame.getContentPane().add(secondWinderSpeedField, "cell 1 5");
+		getFrame().getContentPane().add(secondWinderSpeedField, "cell 1 5");
 		secondWinderSpeedField.setColumns(10);
 		list.add(secondWinderSpeedField);
 
 		lblPlenumTemp = new JLabel("Plenum Temp");
-		frame.getContentPane().add(lblPlenumTemp, "cell 3 5,alignx center");
+		getFrame().getContentPane()
+				.add(lblPlenumTemp, "cell 3 5,alignx center");
 
 		plenumTempField = new JTextField();
-		frame.getContentPane().add(plenumTempField, "cell 4 5");
+		getFrame().getContentPane().add(plenumTempField, "cell 4 5");
 		plenumTempField.setColumns(10);
 		list.add(plenumTempField);
 
 		lblZone_2 = new JLabel("Zone 3");
-		frame.getContentPane().add(lblZone_2, "cell 8 5,alignx trailing");
+		getFrame().getContentPane().add(lblZone_2, "cell 8 5,alignx trailing");
 
 		zone3SetField = new JTextField();
-		frame.getContentPane().add(zone3SetField, "cell 9 5");
+		getFrame().getContentPane().add(zone3SetField, "cell 9 5");
 		zone3SetField.setColumns(10);
 		list.add(zone3SetField);
 
 		zone3ActField = new JTextField();
-		frame.getContentPane().add(zone3ActField, "cell 11 5");
+		getFrame().getContentPane().add(zone3ActField, "cell 11 5");
 		zone3ActField.setColumns(10);
 		list.add(zone3ActField);
 
 		lblScrewSpeed = new JLabel("Screw Speed");
-		frame.getContentPane().add(lblScrewSpeed, "cell 0 6,alignx center");
+		getFrame().getContentPane()
+				.add(lblScrewSpeed, "cell 0 6,alignx center");
 
 		screwSpeedField = new JTextField();
-		frame.getContentPane().add(screwSpeedField, "cell 1 6");
+		getFrame().getContentPane().add(screwSpeedField, "cell 1 6");
 		screwSpeedField.setColumns(10);
 		list.add(screwSpeedField);
 
 		lblPlenumSpeed = new JLabel("Plenum Speed");
-		frame.getContentPane().add(lblPlenumSpeed, "cell 3 6,alignx center");
+		getFrame().getContentPane().add(lblPlenumSpeed,
+				"cell 3 6,alignx center");
 
 		plenumSpeedField = new JTextField();
-		frame.getContentPane().add(plenumSpeedField, "cell 4 6");
+		getFrame().getContentPane().add(plenumSpeedField, "cell 4 6");
 		plenumSpeedField.setColumns(10);
 		list.add(plenumSpeedField);
 
 		lblZone_3 = new JLabel("Zone 4");
-		frame.getContentPane().add(lblZone_3, "cell 8 6,alignx trailing");
+		getFrame().getContentPane().add(lblZone_3, "cell 8 6,alignx trailing");
 
 		zone4SetField = new JTextField();
 		list.add(zone4SetField);
-		frame.getContentPane().add(zone4SetField, "cell 9 6");
+		getFrame().getContentPane().add(zone4SetField, "cell 9 6");
 		zone4SetField.setColumns(10);
 
 		zone4ActField = new JTextField();
 		list.add(zone4ActField);
-		frame.getContentPane().add(zone4ActField, "cell 11 6");
+		getFrame().getContentPane().add(zone4ActField, "cell 11 6");
 		zone4ActField.setColumns(10);
 
 		label_5 = new JLabel("Die Number");
-		frame.getContentPane().add(label_5, "cell 0 7,alignx center");
+		getFrame().getContentPane().add(label_5, "cell 0 7,alignx center");
 
 		dieNumberField = new JTextField();
 		list.add(dieNumberField);
 		dieNumberField.setColumns(10);
-		frame.getContentPane().add(dieNumberField, "cell 1 7");
+		getFrame().getContentPane().add(dieNumberField, "cell 1 7");
 
 		label_16 = new JLabel("Trim Left Measure");
-		frame.getContentPane().add(label_16, "cell 3 7,alignx center");
+		getFrame().getContentPane().add(label_16, "cell 3 7,alignx center");
 
 		trimLeftMeasureField = new JTextField();
 		trimLeftMeasureField.setColumns(10);
-		frame.getContentPane().add(trimLeftMeasureField, "cell 4 7");
+		getFrame().getContentPane().add(trimLeftMeasureField, "cell 4 7");
 		list.add(trimLeftMeasureField);
 
 		lblZone_4 = new JLabel("Zone 5");
-		frame.getContentPane().add(lblZone_4, "cell 8 7,alignx trailing");
+		getFrame().getContentPane().add(lblZone_4, "cell 8 7,alignx trailing");
 
 		zone5SetField = new JTextField();
 		list.add(zone5SetField);
-		frame.getContentPane().add(zone5SetField, "cell 9 7");
+		getFrame().getContentPane().add(zone5SetField, "cell 9 7");
 		zone5SetField.setColumns(10);
 
 		zone5ActField = new JTextField();
 		list.add(zone5ActField);
-		frame.getContentPane().add(zone5ActField, "cell 11 7");
+		getFrame().getContentPane().add(zone5ActField, "cell 11 7");
 		zone5ActField.setColumns(10);
 
 		lblRbTemp = new JLabel("RB Temp");
-		frame.getContentPane().add(lblRbTemp, "cell 0 8,alignx center");
+		getFrame().getContentPane().add(lblRbTemp, "cell 0 8,alignx center");
 
 		rbTempField = new JTextField();
 		list.add(rbTempField);
-		frame.getContentPane().add(rbTempField, "cell 1 8");
+		getFrame().getContentPane().add(rbTempField, "cell 1 8");
 		rbTempField.setColumns(10);
 
 		label_17 = new JLabel("Trim Right Measure");
-		frame.getContentPane().add(label_17, "cell 3 8,alignx center");
+		getFrame().getContentPane().add(label_17, "cell 3 8,alignx center");
 
 		trimRightMeasureField = new JTextField();
 		list.add(trimRightMeasureField);
 		trimRightMeasureField.setColumns(10);
-		frame.getContentPane().add(trimRightMeasureField, "cell 4 8");
+		getFrame().getContentPane().add(trimRightMeasureField, "cell 4 8");
 
 		lblZone_5 = new JLabel("Zone 6");
-		frame.getContentPane().add(lblZone_5, "cell 8 8,alignx trailing");
+		getFrame().getContentPane().add(lblZone_5, "cell 8 8,alignx trailing");
 
 		zone6SetField = new JTextField();
 		list.add(zone6SetField);
-		frame.getContentPane().add(zone6SetField, "cell 9 8");
+		getFrame().getContentPane().add(zone6SetField, "cell 9 8");
 		zone6SetField.setColumns(10);
 
 		zone6ActField = new JTextField();
 		list.add(zone6ActField);
-		frame.getContentPane().add(zone6ActField, "cell 11 8");
+		getFrame().getContentPane().add(zone6ActField, "cell 11 8");
 		zone6ActField.setColumns(10);
 
 		lblScreenPack = new JLabel("Screen Pack");
-		frame.getContentPane().add(lblScreenPack, "cell 0 9,alignx center");
+		getFrame().getContentPane()
+				.add(lblScreenPack, "cell 0 9,alignx center");
 
 		screenPackField = new JTextField();
 		list.add(screenPackField);
-		frame.getContentPane().add(screenPackField, "cell 1 9");
+		getFrame().getContentPane().add(screenPackField, "cell 1 9");
 		screenPackField.setColumns(10);
 
 		lblAirRingGap = new JLabel("Air Ring Gap");
-		frame.getContentPane().add(lblAirRingGap, "cell 3 9,alignx center");
+		getFrame().getContentPane()
+				.add(lblAirRingGap, "cell 3 9,alignx center");
 
 		airRingGapField = new JTextField();
 		list.add(airRingGapField);
-		frame.getContentPane().add(airRingGapField, "cell 4 9");
+		getFrame().getContentPane().add(airRingGapField, "cell 4 9");
 		airRingGapField.setColumns(10);
 
 		label_31 = new JLabel("Zone 7");
-		frame.getContentPane().add(label_31, "cell 8 9,alignx trailing");
+		getFrame().getContentPane().add(label_31, "cell 8 9,alignx trailing");
 
 		zone7SetField = new JTextField();
 		list.add(zone7SetField);
 		zone7SetField.setColumns(10);
-		frame.getContentPane().add(zone7SetField, "cell 9 9");
+		getFrame().getContentPane().add(zone7SetField, "cell 9 9");
 
 		zone7ActField = new JTextField();
 		list.add(zone7ActField);
 		zone7ActField.setColumns(10);
-		frame.getContentPane().add(zone7ActField, "cell 11 9");
+		getFrame().getContentPane().add(zone7ActField, "cell 11 9");
 
 		lblExtruderAmps = new JLabel("Extruder Amps");
-		frame.getContentPane().add(lblExtruderAmps, "cell 0 10,alignx center");
+		getFrame().getContentPane().add(lblExtruderAmps,
+				"cell 0 10,alignx center");
 
 		extruderAmpsField = new JTextField();
 		list.add(extruderAmpsField);
-		frame.getContentPane().add(extruderAmpsField, "cell 1 10");
+		getFrame().getContentPane().add(extruderAmpsField, "cell 1 10");
 		extruderAmpsField.setColumns(10);
 
 		label_18 = new JLabel("Curtain Links");
-		frame.getContentPane().add(label_18,
+		getFrame().getContentPane().add(label_18,
 				"cell 3 10,alignx center,aligny center");
 
 		curtainLinksField = new JTextField();
 		list.add(curtainLinksField);
 		curtainLinksField.setColumns(10);
-		frame.getContentPane().add(curtainLinksField, "cell 4 10");
+		getFrame().getContentPane().add(curtainLinksField, "cell 4 10");
 
 		lblZonea = new JLabel("Zone 7-A");
-		frame.getContentPane().add(lblZonea, "cell 8 10,alignx trailing");
+		getFrame().getContentPane().add(lblZonea, "cell 8 10,alignx trailing");
 
 		zone7ASetField = new JTextField();
 		list.add(zone7ASetField);
-		frame.getContentPane().add(zone7ASetField, "cell 9 10");
+		getFrame().getContentPane().add(zone7ASetField, "cell 9 10");
 		zone7ASetField.setColumns(10);
 
 		zone7AActField = new JTextField();
 		list.add(zone7AActField);
-		frame.getContentPane().add(zone7AActField, "cell 11 10");
+		getFrame().getContentPane().add(zone7AActField, "cell 11 10");
 		zone7AActField.setColumns(10);
 
 		lblExtruderPsi = new JLabel("Extruder PSI");
-		frame.getContentPane().add(lblExtruderPsi, "cell 0 11,alignx center");
+		getFrame().getContentPane().add(lblExtruderPsi,
+				"cell 0 11,alignx center");
 
 		extruderPSIField = new JTextField();
 		list.add(extruderPSIField);
-		frame.getContentPane().add(extruderPSIField, "cell 1 11");
+		getFrame().getContentPane().add(extruderPSIField, "cell 1 11");
 		extruderPSIField.setColumns(10);
 
 		label_19 = new JLabel("Finger Adjust Left");
-		frame.getContentPane().add(label_19, "cell 3 11,alignx center");
+		getFrame().getContentPane().add(label_19, "cell 3 11,alignx center");
 
 		fingerAdjustLeftField = new JTextField();
 		list.add(fingerAdjustLeftField);
 		fingerAdjustLeftField.setColumns(10);
-		frame.getContentPane().add(fingerAdjustLeftField, "cell 4 11");
+		getFrame().getContentPane().add(fingerAdjustLeftField, "cell 4 11");
 
 		lblZoneb = new JLabel("Zone 7-B");
-		frame.getContentPane().add(lblZoneb, "cell 8 11,alignx trailing");
+		getFrame().getContentPane().add(lblZoneb, "cell 8 11,alignx trailing");
 
 		zone7BSetField = new JTextField();
 		list.add(zone7BSetField);
-		frame.getContentPane().add(zone7BSetField, "cell 9 11");
+		getFrame().getContentPane().add(zone7BSetField, "cell 9 11");
 		zone7BSetField.setColumns(10);
 
 		zone7BActField = new JTextField();
 		list.add(zone7BActField);
-		frame.getContentPane().add(zone7BActField, "cell 11 11");
+		getFrame().getContentPane().add(zone7BActField, "cell 11 11");
 		zone7BActField.setColumns(10);
 
 		label_6 = new JLabel("Stretch");
-		frame.getContentPane().add(label_6, "cell 0 12,alignx center");
+		getFrame().getContentPane().add(label_6, "cell 0 12,alignx center");
 
 		stretchField = new JTextField();
 		list.add(stretchField);
 		stretchField.setColumns(10);
-		frame.getContentPane().add(stretchField, "cell 1 12");
+		getFrame().getContentPane().add(stretchField, "cell 1 12");
 
 		label_20 = new JLabel("Finger Adjust Right");
-		frame.getContentPane().add(label_20, "cell 3 12,alignx center");
+		getFrame().getContentPane().add(label_20, "cell 3 12,alignx center");
 
 		fingerAdjustRightField = new JTextField();
 		list.add(fingerAdjustRightField);
 		fingerAdjustRightField.setColumns(10);
-		frame.getContentPane().add(fingerAdjustRightField, "cell 4 12");
+		getFrame().getContentPane().add(fingerAdjustRightField, "cell 4 12");
 
 		lblZonec = new JLabel("Zone 7-C");
-		frame.getContentPane().add(lblZonec, "cell 8 12,alignx trailing");
+		getFrame().getContentPane().add(lblZonec, "cell 8 12,alignx trailing");
 
 		zone7CSetField = new JTextField();
 		list.add(zone7CSetField);
-		frame.getContentPane().add(zone7CSetField, "cell 9 12");
+		getFrame().getContentPane().add(zone7CSetField, "cell 9 12");
 		zone7CSetField.setColumns(10);
 
 		zone7CActField = new JTextField();
 		list.add(zone7CActField);
-		frame.getContentPane().add(zone7CActField, "cell 11 12");
+		getFrame().getContentPane().add(zone7CActField, "cell 11 12");
 		zone7CActField.setColumns(10);
 
 		lblScrap = new JLabel("Scrap");
-		frame.getContentPane().add(lblScrap, "cell 0 13,alignx center");
+		getFrame().getContentPane().add(lblScrap, "cell 0 13,alignx center");
 
 		scrapField = new JTextField();
 		list.add(scrapField);
-		frame.getContentPane().add(scrapField, "cell 1 13");
+		getFrame().getContentPane().add(scrapField, "cell 1 13");
 		scrapField.setColumns(10);
 
 		lblTrimPullerSpeed = new JLabel("Trim Puller Speed");
-		frame.getContentPane().add(lblTrimPullerSpeed,
+		getFrame().getContentPane().add(lblTrimPullerSpeed,
 				"cell 3 13,alignx center");
 
 		trimPullerSpeedField = new JTextField();
 		list.add(trimPullerSpeedField);
-		frame.getContentPane().add(trimPullerSpeedField, "cell 4 13");
+		getFrame().getContentPane().add(trimPullerSpeedField, "cell 4 13");
 		trimPullerSpeedField.setColumns(10);
 
 		lblZone_6 = new JLabel("Zone 8");
-		frame.getContentPane().add(lblZone_6, "cell 8 13,alignx trailing");
+		getFrame().getContentPane().add(lblZone_6, "cell 8 13,alignx trailing");
 
 		zone8SetField = new JTextField();
 		list.add(zone8SetField);
-		frame.getContentPane().add(zone8SetField, "cell 9 13");
+		getFrame().getContentPane().add(zone8SetField, "cell 9 13");
 		zone8SetField.setColumns(10);
 
 		zone8ActField = new JTextField();
 		list.add(zone8ActField);
-		frame.getContentPane().add(zone8ActField, "cell 11 13");
+		getFrame().getContentPane().add(zone8ActField, "cell 11 13");
 		zone8ActField.setColumns(10);
 
 		label_7 = new JLabel("Drum Temp");
-		frame.getContentPane().add(label_7, "cell 0 14,alignx center");
+		getFrame().getContentPane().add(label_7, "cell 0 14,alignx center");
 
 		drumTempField = new JTextField();
 		drumTempField.setColumns(10);
 		list.add(drumTempField);
-		frame.getContentPane().add(drumTempField, "cell 1 14");
+		getFrame().getContentPane().add(drumTempField, "cell 1 14");
 
 		label_21 = new JLabel("Mandrel Air Pressure");
-		frame.getContentPane().add(label_21, "cell 3 14,alignx center");
+		getFrame().getContentPane().add(label_21, "cell 3 14,alignx center");
 
 		mandrelAirPressureField = new JTextField();
 		list.add(mandrelAirPressureField);
 		mandrelAirPressureField.setColumns(10);
-		frame.getContentPane().add(mandrelAirPressureField, "cell 4 14");
+		getFrame().getContentPane().add(mandrelAirPressureField, "cell 4 14");
 
 		lblZone_7 = new JLabel("Zone 9");
-		frame.getContentPane().add(lblZone_7, "cell 8 14,alignx trailing");
+		getFrame().getContentPane().add(lblZone_7, "cell 8 14,alignx trailing");
 
 		zone9SetField = new JTextField();
 		list.add(zone9SetField);
-		frame.getContentPane().add(zone9SetField, "cell 9 14");
+		getFrame().getContentPane().add(zone9SetField, "cell 9 14");
 		zone9SetField.setColumns(10);
 
 		zone9ActField = new JTextField();
 		list.add(zone9ActField);
-		frame.getContentPane().add(zone9ActField, "cell 11 14");
+		getFrame().getContentPane().add(zone9ActField, "cell 11 14");
 		zone9ActField.setColumns(10);
 
 		label_8 = new JLabel("Pinch Roll Temp");
-		frame.getContentPane().add(label_8, "cell 0 15,alignx center");
+		getFrame().getContentPane().add(label_8, "cell 0 15,alignx center");
 
 		pinchRollTempField = new JTextField();
 		pinchRollTempField.setColumns(10);
 		list.add(pinchRollTempField);
-		frame.getContentPane().add(pinchRollTempField, "cell 1 15");
+		getFrame().getContentPane().add(pinchRollTempField, "cell 1 15");
 
 		lblFeedValves = new JLabel("Feed Valves");
-		frame.getContentPane().add(lblFeedValves, "cell 3 15,alignx center");
+		getFrame().getContentPane().add(lblFeedValves,
+				"cell 3 15,alignx center");
 
 		feedValvesField = new JTextField();
 		list.add(feedValvesField);
-		frame.getContentPane().add(feedValvesField, "cell 4 15");
+		getFrame().getContentPane().add(feedValvesField, "cell 4 15");
 		feedValvesField.setColumns(10);
 
 		label_30 = new JLabel("Zone 10");
-		frame.getContentPane().add(label_30, "cell 8 15,alignx trailing");
+		getFrame().getContentPane().add(label_30, "cell 8 15,alignx trailing");
 
 		zone10SetField = new JTextField();
 		list.add(zone10SetField);
-		frame.getContentPane().add(zone10SetField, "cell 9 15");
+		getFrame().getContentPane().add(zone10SetField, "cell 9 15");
 		zone10SetField.setColumns(10);
 
 		zone10ActField = new JTextField();
 		list.add(zone10ActField);
-		frame.getContentPane().add(zone10ActField, "cell 11 15");
+		getFrame().getContentPane().add(zone10ActField, "cell 11 15");
 		zone10ActField.setColumns(10);
 
 		lblAirRingSpeed = new JLabel("Air Ring Speed");
-		frame.getContentPane().add(lblAirRingSpeed, "cell 0 16,alignx center");
+		getFrame().getContentPane().add(lblAirRingSpeed,
+				"cell 0 16,alignx center");
 
 		airRingSpeedField = new JTextField();
 		list.add(airRingSpeedField);
-		frame.getContentPane().add(airRingSpeedField, "cell 1 16");
+		getFrame().getContentPane().add(airRingSpeedField, "cell 1 16");
 		airRingSpeedField.setColumns(10);
 
 		lblDoors = new JLabel("Doors");
-		frame.getContentPane().add(lblDoors, "cell 3 16,alignx center");
+		getFrame().getContentPane().add(lblDoors, "cell 3 16,alignx center");
 
 		doorsField = new JTextField();
 		list.add(doorsField);
-		frame.getContentPane().add(doorsField, "cell 4 16");
+		getFrame().getContentPane().add(doorsField, "cell 4 16");
 		doorsField.setColumns(10);
 
 		lblZone_8 = new JLabel("Zone 11");
-		frame.getContentPane().add(lblZone_8, "cell 8 16,alignx trailing");
+		getFrame().getContentPane().add(lblZone_8, "cell 8 16,alignx trailing");
 
 		zone11SetField = new JTextField();
 		list.add(zone11SetField);
 		zone11SetField.setColumns(10);
-		frame.getContentPane().add(zone11SetField, "cell 9 16");
+		getFrame().getContentPane().add(zone11SetField, "cell 9 16");
 
 		zone11ActField = new JTextField();
 		list.add(zone11ActField);
 		zone11ActField.setColumns(10);
-		frame.getContentPane().add(zone11ActField, "cell 11 16");
+		getFrame().getContentPane().add(zone11ActField, "cell 11 16");
 
 		lblAirRingTemp = new JLabel("Air Ring Temp");
-		frame.getContentPane().add(lblAirRingTemp, "cell 0 17,alignx center");
+		getFrame().getContentPane().add(lblAirRingTemp,
+				"cell 0 17,alignx center");
 
 		airRingTempField = new JTextField();
 		list.add(airRingTempField);
-		frame.getContentPane().add(airRingTempField, "cell 1 17");
+		getFrame().getContentPane().add(airRingTempField, "cell 1 17");
 		airRingTempField.setColumns(10);
 
 		lblFeedValvesOpen = new JLabel("Feed Valves Open %");
-		frame.getContentPane()
-				.add(lblFeedValvesOpen, "cell 3 17,alignx center");
+		getFrame().getContentPane().add(lblFeedValvesOpen,
+				"cell 3 17,alignx center");
 
 		feedValvesOpenPercentField = new JTextField();
 		list.add(feedValvesOpenPercentField);
-		frame.getContentPane().add(feedValvesOpenPercentField, "cell 4 17");
+		getFrame().getContentPane()
+				.add(feedValvesOpenPercentField, "cell 4 17");
 		feedValvesOpenPercentField.setColumns(10);
 
 		label_23 = new JLabel("Zone 12");
-		frame.getContentPane().add(label_23, "cell 8 17,alignx trailing");
+		getFrame().getContentPane().add(label_23, "cell 8 17,alignx trailing");
 
 		zone12SetField = new JTextField();
 		list.add(zone12SetField);
 		zone12SetField.setColumns(10);
-		frame.getContentPane().add(zone12SetField, "cell 9 17");
+		getFrame().getContentPane().add(zone12SetField, "cell 9 17");
 
 		zone12ActField = new JTextField();
 		list.add(zone12ActField);
 		zone12ActField.setColumns(10);
-		frame.getContentPane().add(zone12ActField, "cell 11 17");
+		getFrame().getContentPane().add(zone12ActField, "cell 11 17");
 
 		label_9 = new JLabel("Tempo");
-		frame.getContentPane().add(label_9, "cell 0 18,alignx center");
+		getFrame().getContentPane().add(label_9, "cell 0 18,alignx center");
 
 		tempoField = new JTextField();
 		list.add(tempoField);
 		tempoField.setColumns(10);
-		frame.getContentPane().add(tempoField, "cell 1 18");
+		getFrame().getContentPane().add(tempoField, "cell 1 18");
 
 		label_24 = new JLabel("Zone 13");
-		frame.getContentPane().add(label_24, "cell 8 18,alignx trailing");
+		getFrame().getContentPane().add(label_24, "cell 8 18,alignx trailing");
 
 		zone13SetField = new JTextField();
 		list.add(zone13SetField);
 		zone13SetField.setColumns(10);
-		frame.getContentPane().add(zone13SetField, "cell 9 18");
+		getFrame().getContentPane().add(zone13SetField, "cell 9 18");
 
 		zone13ActField = new JTextField();
 		list.add(zone13ActField);
 		zone13ActField.setColumns(10);
-		frame.getContentPane().add(zone13ActField, "cell 11 18");
+		getFrame().getContentPane().add(zone13ActField, "cell 11 18");
 
 		label_10 = new JLabel("Three P");
-		frame.getContentPane().add(label_10, "cell 0 19,alignx center");
+		getFrame().getContentPane().add(label_10, "cell 0 19,alignx center");
 
 		threePField = new JTextField();
 		list.add(threePField);
 		threePField.setColumns(10);
-		frame.getContentPane().add(threePField, "cell 1 19");
+		getFrame().getContentPane().add(threePField, "cell 1 19");
 
 		label_25 = new JLabel("Zone B1");
-		frame.getContentPane().add(label_25, "cell 8 19,alignx trailing");
+		getFrame().getContentPane().add(label_25, "cell 8 19,alignx trailing");
 
 		zoneB1SetField = new JTextField();
 		zoneB1SetField.setColumns(10);
 		list.add(zoneB1SetField);
-		frame.getContentPane().add(zoneB1SetField, "cell 9 19");
+		getFrame().getContentPane().add(zoneB1SetField, "cell 9 19");
 
 		zoneB1ActField = new JTextField();
 		list.add(zoneB1ActField);
 		zoneB1ActField.setColumns(10);
-		frame.getContentPane().add(zoneB1ActField, "cell 11 19");
+		getFrame().getContentPane().add(zoneB1ActField, "cell 11 19");
 
 		label_11 = new JLabel("Drum NIP");
-		frame.getContentPane().add(label_11, "cell 0 20,alignx center");
+		getFrame().getContentPane().add(label_11, "cell 0 20,alignx center");
 
 		drumNipField = new JTextField();
 		list.add(drumNipField);
 		drumNipField.setColumns(10);
-		frame.getContentPane().add(drumNipField, "cell 1 20");
+		getFrame().getContentPane().add(drumNipField, "cell 1 20");
 
 		label_26 = new JLabel("Zone B2");
-		frame.getContentPane().add(label_26, "cell 8 20,alignx trailing");
+		getFrame().getContentPane().add(label_26, "cell 8 20,alignx trailing");
 
 		zoneB2SetField = new JTextField();
 		list.add(zoneB2SetField);
 		zoneB2SetField.setColumns(10);
-		frame.getContentPane().add(zoneB2SetField, "cell 9 20");
+		getFrame().getContentPane().add(zoneB2SetField, "cell 9 20");
 
 		zoneB2ActField = new JTextField();
 		list.add(zoneB2ActField);
 		zoneB2ActField.setColumns(10);
-		frame.getContentPane().add(zoneB2ActField, "cell 11 20");
+		getFrame().getContentPane().add(zoneB2ActField, "cell 11 20");
 
 		label_12 = new JLabel("Horizontal Apply");
-		frame.getContentPane().add(label_12, "cell 0 21,alignx center");
+		getFrame().getContentPane().add(label_12, "cell 0 21,alignx center");
 
 		horizontalApplyField = new JTextField();
 		list.add(horizontalApplyField);
 		horizontalApplyField.setColumns(10);
-		frame.getContentPane().add(horizontalApplyField, "cell 1 21");
+		getFrame().getContentPane().add(horizontalApplyField, "cell 1 21");
 
 		label_27 = new JLabel("Hot Roll 1");
-		frame.getContentPane().add(label_27, "cell 8 21,alignx trailing");
+		getFrame().getContentPane().add(label_27, "cell 8 21,alignx trailing");
 
 		hotRoll1SetField = new JTextField();
 		list.add(hotRoll1SetField);
 		hotRoll1SetField.setColumns(10);
-		frame.getContentPane().add(hotRoll1SetField, "cell 9 21");
+		getFrame().getContentPane().add(hotRoll1SetField, "cell 9 21");
 
 		hotRoll1ActField = new JTextField();
 		list.add(hotRoll1ActField);
 		hotRoll1ActField.setColumns(10);
-		frame.getContentPane().add(hotRoll1ActField, "cell 11 21");
+		getFrame().getContentPane().add(hotRoll1ActField, "cell 11 21");
 
 		label_13 = new JLabel("Inflate Air Shaft");
-		frame.getContentPane().add(label_13, "cell 0 22,alignx center");
+		getFrame().getContentPane().add(label_13, "cell 0 22,alignx center");
 
 		inflateAirShaftField = new JTextField();
 		list.add(inflateAirShaftField);
 		inflateAirShaftField.setColumns(10);
-		frame.getContentPane().add(inflateAirShaftField, "cell 1 22");
+		getFrame().getContentPane().add(inflateAirShaftField, "cell 1 22");
 
 		label_28 = new JLabel("Hot Roll 2");
-		frame.getContentPane().add(label_28, "cell 8 22,alignx trailing");
+		getFrame().getContentPane().add(label_28, "cell 8 22,alignx trailing");
 
 		hotRoll2SetField = new JTextField();
 		list.add(hotRoll2SetField);
 		hotRoll2SetField.setColumns(10);
-		frame.getContentPane().add(hotRoll2SetField, "cell 9 22");
+		getFrame().getContentPane().add(hotRoll2SetField, "cell 9 22");
 
 		hotRoll2ActField = new JTextField();
 		list.add(hotRoll2ActField);
 		hotRoll2ActField.setColumns(10);
-		frame.getContentPane().add(hotRoll2ActField, "cell 11 22");
+		getFrame().getContentPane().add(hotRoll2ActField, "cell 11 22");
 
 		lblWinderNipRoll = new JLabel("Winder Nip Roll");
-		frame.getContentPane().add(lblWinderNipRoll, "cell 0 23,alignx center");
+		getFrame().getContentPane().add(lblWinderNipRoll,
+				"cell 0 23,alignx center");
 
 		winderNipRollField = new JTextField();
 		list.add(winderNipRollField);
-		frame.getContentPane().add(winderNipRollField, "cell 1 23");
+		getFrame().getContentPane().add(winderNipRollField, "cell 1 23");
 		winderNipRollField.setColumns(10);
 
 		label_29 = new JLabel("Chill Roll");
-		frame.getContentPane().add(label_29, "cell 8 23,alignx trailing");
+		getFrame().getContentPane().add(label_29, "cell 8 23,alignx trailing");
 
 		chillRollSetField = new JTextField();
 		list.add(chillRollSetField);
 		chillRollSetField.setColumns(10);
-		frame.getContentPane().add(chillRollSetField, "cell 9 23");
+		getFrame().getContentPane().add(chillRollSetField, "cell 9 23");
 
 		chillRollActField = new JTextField();
 		list.add(chillRollActField);
 		chillRollActField.setColumns(10);
-		frame.getContentPane().add(chillRollActField, "cell 11 23");
+		getFrame().getContentPane().add(chillRollActField, "cell 11 23");
 
 		btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -1462,8 +1482,8 @@ public class processConditions {
 		});
 
 		panel_1 = new JPanel();
-		frame.getContentPane()
-				.add(panel_1, "cell 0 24 7 1,alignx center,growy");
+		getFrame().getContentPane().add(panel_1,
+				"cell 0 24 7 1,alignx center,growy");
 		panel_1.setLayout(new MigLayout("", "[][][grow][][][grow][grow][]",
 				"[][][][][][]"));
 
@@ -1562,13 +1582,14 @@ public class processConditions {
 		list.add(drumToNipTrimSecondaryField);
 		panel_1.add(drumToNipTrimSecondaryField, "cell 6 5");
 		drumToNipTrimSecondaryField.setColumns(10);
-		frame.getContentPane().add(btnSubmit, "cell 9 24 3 1,alignx center");
+		getFrame().getContentPane().add(btnSubmit,
+				"cell 9 24 3 1,alignx center");
 
 		separator = new JSeparator();
-		frame.getContentPane().add(separator, "cell 0 25");
+		getFrame().getContentPane().add(separator, "cell 0 25");
 
 		panel = new JPanel();
-		frame.getContentPane().add(panel, "cell 8 26 4 1,grow");
+		getFrame().getContentPane().add(panel, "cell 8 26 4 1,grow");
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 0, 0 };
 		gbl_panel.rowHeights = new int[] { 0, 0, 0 };
@@ -2974,5 +2995,13 @@ public class processConditions {
 			}
 		}
 		return true;
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 }
