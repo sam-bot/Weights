@@ -307,7 +307,9 @@ public class arrQaAudit {
 		weights.sqlConnection();
 		String userName = usernameField.getText();
 		String workStation = workStationField.getText();
-		String dateTime = shiftDateField.getText();
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
 		String shift = (String) shiftComboBox.getSelectedItem();
 		String rollID = rollIdField.getText();
 		String knifeMovement = getSelectedButtonText(knifeGroup);
