@@ -21,5 +21,6 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/srenick/Documents/java_book/Weights/lib/Microsoft JDBC Driver 4.0 for SQL Server/sqljdbc_4.0/enu/auth/x64"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

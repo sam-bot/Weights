@@ -2485,3 +2485,49 @@ BEGIN
 	)
 END
 GO
+
+USE [CAL_QA]
+GO
+
+/****** Object:  Table [dbo].[arrTrimmer]    Script Date: 01/28/2015 10:08:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[arrTrimmer](
+	trimmerID [int] IDENTITY(1,1) NOT NULL,
+	[workStation] [varchar](255) NULL,
+	[shift] [varchar](255) NULL,
+	[operator] [varchar](255) NULL,
+	[dateTimeStamp] [datetime] NULL,
+	[workOrder] [decimal](7, 2) NULL,
+	wipItemNumber int,
+	coreTagNumber [decimal](7, 2) NULL,
+	minimumWeight  [decimal](7, 2) NULL,
+	nominalWeight [decimal](7, 2) NULL,
+	maximumWeight [decimal](7, 2) NULL,
+	piw  [decimal](7, 2) NULL,
+	formula  [decimal](7, 2) NULL,
+	gauge  [decimal](7, 2) NULL,
+	length  [decimal](7, 2) NULL,
+	coreWeight  [decimal](7, 2) NULL,
+	finishedWidth  [decimal](7, 2) NULL,
+	extrudedItemNumber int NULL
+	
+PRIMARY KEY CLUSTERED 
+(
+	trimmerID ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
