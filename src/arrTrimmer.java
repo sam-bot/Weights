@@ -56,7 +56,7 @@ public class arrTrimmer {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application. Stored in plant server. 
 	 */
 	public arrTrimmer() {
 		initialize();
