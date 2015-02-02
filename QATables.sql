@@ -2531,3 +2531,46 @@ SET ANSI_PADDING OFF
 GO
 
 
+USE [CAL_QA]
+GO
+
+/****** Object:  Table [dbo].[ArrDriller]    Script Date: 02/02/2015 12:04:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[ArrDriller](
+	[drillerID] [int] IDENTITY(1,1) NOT NULL,
+	[workStation] [varchar](255) NULL,
+	[shift] [varchar](255) NULL,
+	[operator] [varchar](255) NULL,
+	[dateTimeStamp] [datetime] NULL,
+	[workOrder] [decimal](10, 2) NULL,
+	[wipItemNumber] [decimal](10, 2) NULL,
+	[wipCoreTagNumber] [varchar](255) NULL,
+	[fgCoreTagNumber] [varchar](255) NULL,
+	[rollWeight] [decimal](7, 2) NULL,
+	[piw] [decimal](7, 2) NULL,
+	[formula] [decimal](7, 2) NULL,
+	[gauge] [decimal](7, 2) NULL,
+	[length] [decimal](7, 2) NULL,
+	[finishedWidth] [decimal](7, 2) NULL,
+	[extrudedItemNumber] [decimal](10, 2) NULL,
+	[trimmedItemNumber] [decimal](10, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[drillerID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
