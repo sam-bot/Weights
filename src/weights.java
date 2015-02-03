@@ -46,67 +46,67 @@ import javax.swing.JTable;
 public class weights {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField setNumberField;
 	private JComboBox textField_1;
-	private JTextField textField_2;
+	private JTextField lineSpeedField;
 	private JLabel lblTargetWt;
-	private JTextField textField_3;
+	private JTextField targetWeightOneField;
 	private JLabel lblRollsset;
-	private JTextField textField_4;
+	private JTextField rollsPerSetOneField;
 	private JLabel lblProduct;
 	private JLabel lblRollLength;
-	private JTextField textField_5;
+	private JTextField rollLengthField;
 	private JLabel lblActualLbshr;
 	private JLabel textField_6;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_15;
-	private JTextField textField_16;
-	private JTextField textField_17;
-	private JTextField textField_18;
-	private JTextField textField_19;
-	private JTextField textField_20;
-	private JTextField textField_21;
-	private JTextField textField_22;
-	private JTextField textField_23;
-	private JTextField textField_24;
-	private JTextField textField_25;
-	private JTextField textField_26;
-	private JTextField textField_27;
-	private JTextField textField_28;
-	private JTextField textField_29;
-	private JTextField textField_30;
-	private JTextField textField_31;
-	private JTextField textField_32;
+	private JTextField rollOneField;
+	private JTextField rollThreeField;
+	private JTextField rollFiveField;
+	private JTextField rollSevenField;
+	private JTextField rollNineField;
+	private JTextField rollElevenField;
+	private JTextField setTwoRollElevenField;
+	private JTextField setTwoRollOneField;
+	private JTextField setTwoRollThreeField;
+	private JTextField setTwoRollFiveField;
+	private JTextField setTwoRollSevenField;
+	private JTextField setTwoRollNineField;
+	private JTextField rollTwoField;
+	private JTextField rollFourField;
+	private JTextField rollSixField;
+	private JTextField rollEightField;
+	private JTextField rollTenField;
+	private JTextField rollTwelveField;
+	private JTextField setTwoRollTwelveField;
+	private JTextField setTwoRollTwoField;
+	private JTextField setTwoRollFourField;
+	private JTextField setTwoRollSixField;
+	private JTextField setTwoRollEightField;
+	private JTextField setTwoRollTenField;
 	private JButton btnSubmit;
-	private JLabel label;
-	private JLabel label_2;
-	private JLabel label_4;
-	private JLabel label_6;
-	private JLabel label_7;
-	private JLabel label_8;
-	private JLabel label_10;
-	private JLabel label_13;
-	private JLabel label_15;
-	private JLabel label_17;
-	private JLabel label_21;
-	private JLabel label_23;
-	private JLabel label_1;
-	private JLabel label_3;
-	private JLabel label_5;
-	private JLabel label_9;
-	private JLabel label_11;
-	private JLabel label_12;
-	private JLabel label_14;
-	private JLabel label_16;
-	private JLabel label_18;
-	private JLabel label_19;
-	private JLabel label_20;
-	private JLabel label_22;
+	private JLabel rollOneLabel;
+	private JLabel rollThreeLabel;
+	private JLabel rollFiveLabel;
+	private JLabel rollSevenLabel;
+	private JLabel rollEightLabel;
+	private JLabel rollNineLabel;
+	private JLabel rollElevenLabel;
+	private JLabel rollTwoLabel;
+	private JLabel rollFourLabel;
+	private JLabel rollSixLabel;
+	private JLabel rollTenLabel;
+	private JLabel rollTwelveLabel;
+	private JLabel setTwoRollOneLabel;
+	private JLabel setTwoRollTwoLabel;
+	private JLabel setTwoRollThreeLabel;
+	private JLabel setTwoRollFourLabel;
+	private JLabel setTwoRollFiveLabel;
+	private JLabel setTwoRollSixLabel;
+	private JLabel setTwoRollSevenLabel;
+	private JLabel setTwoRollEightLabel;
+	private JLabel setTwoRollNineLabel;
+	private JLabel setTwoRollTenLabel;
+	private JLabel setTwoRollElevenLabel;
+	private JLabel setTwoRollTwelveLabel;
 	private JLabel lblRollsset_1;
 	private JLabel lblTargetWt_1;
 	private JTextField textField_7;
@@ -159,7 +159,7 @@ public class weights {
 	private double poundsPerHour;
 	private double rollLength;
 	private double lineSpeed;
-	private JTextField textField_38;
+	private JTextField workOrderOneField;
 	private JLabel lblProduct_2;
 	private JTextField textField_39;
 	private JLabel lblProduct_3;
@@ -256,18 +256,18 @@ public class weights {
 		JLabel lblItemNumber = new JLabel("Set Number");
 		panel.add(lblItemNumber, "cell 0 0");
 		lblItemNumber.setFont(lblItemNumber.getFont().deriveFont(newSize2));
-		textField = new JTextField();
-		panel.add(textField, "cell 1 0,growx");
-		textField.setFont(textField.getFont().deriveFont(newSize2));
-		textField.setText("1");
+		setNumberField = new JTextField();
+		panel.add(setNumberField, "cell 1 0,growx");
+		setNumberField.setFont(setNumberField.getFont().deriveFont(newSize2));
+		setNumberField.setText("1");
 
 		lblRollLength = new JLabel("Roll Length");
 		panel.add(lblRollLength, "flowx,cell 2 0");
 		lblRollLength.setFont(lblRollLength.getFont().deriveFont(newSize2));
 
-		textField_5 = new JTextField();
-		panel.add(textField_5, "cell 3 0");
-		textField_5.setColumns(10);
+		rollLengthField = new JTextField();
+		panel.add(rollLengthField, "cell 3 0");
+		rollLengthField.setColumns(10);
 
 		JLabel lblNominalWeight = new JLabel("Target Lbs/Hr");
 		panel.add(lblNominalWeight, "cell 0 2");
@@ -289,9 +289,9 @@ public class weights {
 		JLabel lblLineSpeed = new JLabel("Line Speed");
 		panel.add(lblLineSpeed, "cell 0 3");
 
-		textField_2 = new JTextField();
-		panel.add(textField_2, "cell 1 3");
-		textField_2.setColumns(10);
+		lineSpeedField = new JTextField();
+		panel.add(lineSpeedField, "cell 1 3");
+		lineSpeedField.setColumns(10);
 		String[] lines = { "", "21", "22", "23", "24", "25" };
 		lblLineNumber = new JLabel("Line Number");
 		panel.add(lblLineNumber, "cell 2 3");
@@ -317,78 +317,78 @@ public class weights {
 		lblProduct = new JLabel("Work Order Number");
 		panel.add(lblProduct, "cell 1 6");
 
-		textField_38 = new JTextField();
-		panel.add(textField_38, "cell 2 6");
-		textField_38.setColumns(10);
+		workOrderOneField = new JTextField();
+		panel.add(workOrderOneField, "cell 2 6");
+		workOrderOneField.setColumns(10);
 
 		lblRollsset = new JLabel("Rolls/Set");
 		panel.add(lblRollsset, "cell 1 7");
 
-		textField_4 = new JTextField();
-		panel.add(textField_4, "cell 2 7");
-		textField_4.setColumns(10);
+		rollsPerSetOneField = new JTextField();
+		panel.add(rollsPerSetOneField, "cell 2 7");
+		rollsPerSetOneField.setColumns(10);
 
 		lblTargetWt = new JLabel("Target Wt.");
 		panel.add(lblTargetWt, "cell 1 8");
 
-		textField_3 = new JTextField();
-		panel.add(textField_3, "cell 2 8");
-		textField_3.addFocusListener(new FocusAdapter() {
+		targetWeightOneField = new JTextField();
+		panel.add(targetWeightOneField, "cell 2 8");
+		targetWeightOneField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
 				targetSetWt1Calc();
 			}
 		});
-		textField_3.setColumns(10);
+		targetWeightOneField.setColumns(10);
 
-		label = new JLabel("1");
-		panel.add(label, "cell 0 9,alignx right");
+		rollOneLabel = new JLabel("1");
+		panel.add(rollOneLabel, "cell 0 9,alignx right");
 
-		textField_9 = new JTextField();
-		panel.add(textField_9, "cell 1 9");
-		textField_9.addFocusListener(new FocusAdapter() {
+		rollOneField = new JTextField();
+		panel.add(rollOneField, "cell 1 9");
+		rollOneField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
 				percentCalc();
 			}
 		});
-		textField_9.setColumns(10);
+		rollOneField.setColumns(10);
 
-		label_13 = new JLabel("2");
-		panel.add(label_13, "cell 2 9,alignx right");
+		rollTwoLabel = new JLabel("2");
+		panel.add(rollTwoLabel, "cell 2 9,alignx right");
 
-		textField_21 = new JTextField();
-		panel.add(textField_21, "cell 3 9");
-		textField_21.addFocusListener(new FocusAdapter() {
+		rollTwoField = new JTextField();
+		panel.add(rollTwoField, "cell 3 9");
+		rollTwoField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
 				percentCalc();
 			}
 		});
-		textField_21.setColumns(10);
+		rollTwoField.setColumns(10);
 
-		label_2 = new JLabel("3");
-		panel.add(label_2, "cell 0 10,alignx right");
+		rollThreeLabel = new JLabel("3");
+		panel.add(rollThreeLabel, "cell 0 10,alignx right");
 
-		textField_10 = new JTextField();
-		panel.add(textField_10, "cell 1 10");
-		textField_10.addFocusListener(new FocusAdapter() {
+		rollThreeField = new JTextField();
+		panel.add(rollThreeField, "cell 1 10");
+		rollThreeField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
 				targetUpdate();
 				percentCalc();
 			}
 		});
-		textField_10.setColumns(10);
+		rollThreeField.setColumns(10);
 
-		label_15 = new JLabel("4");
-		panel.add(label_15, "cell 2 10,alignx right");
+		rollFourLabel = new JLabel("4");
+		panel.add(rollFourLabel, "cell 2 10,alignx right");
 
-		textField_22 = new JTextField();
-		panel.add(textField_22, "cell 3 10");
-		textField_22.addFocusListener(new FocusAdapter() {
+		rollFourField = new JTextField();
+		panel.add(rollFourField, "cell 3 10");
+		rollFourField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -396,14 +396,14 @@ public class weights {
 
 			}
 		});
-		textField_22.setColumns(10);
+		rollFourField.setColumns(10);
 
-		label_4 = new JLabel("5");
-		panel.add(label_4, "cell 0 11,alignx right");
+		rollFiveLabel = new JLabel("5");
+		panel.add(rollFiveLabel, "cell 0 11,alignx right");
 
-		textField_11 = new JTextField();
-		panel.add(textField_11, "cell 1 11");
-		textField_11.addFocusListener(new FocusAdapter() {
+		rollFiveField = new JTextField();
+		panel.add(rollFiveField, "cell 1 11");
+		rollFiveField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -411,14 +411,14 @@ public class weights {
 
 			}
 		});
-		textField_11.setColumns(10);
+		rollFiveField.setColumns(10);
 
-		label_17 = new JLabel("6");
-		panel.add(label_17, "cell 2 11,alignx right");
+		rollSixLabel = new JLabel("6");
+		panel.add(rollSixLabel, "cell 2 11,alignx right");
 
-		textField_23 = new JTextField();
-		panel.add(textField_23, "cell 3 11");
-		textField_23.addFocusListener(new FocusAdapter() {
+		rollSixField = new JTextField();
+		panel.add(rollSixField, "cell 3 11");
+		rollSixField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -426,14 +426,14 @@ public class weights {
 
 			}
 		});
-		textField_23.setColumns(10);
+		rollSixField.setColumns(10);
 
-		label_6 = new JLabel("7");
-		panel.add(label_6, "cell 0 12,alignx right");
+		rollSevenLabel = new JLabel("7");
+		panel.add(rollSevenLabel, "cell 0 12,alignx right");
 
-		textField_12 = new JTextField();
-		panel.add(textField_12, "cell 1 12");
-		textField_12.addFocusListener(new FocusAdapter() {
+		rollSevenField = new JTextField();
+		panel.add(rollSevenField, "cell 1 12");
+		rollSevenField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -441,14 +441,14 @@ public class weights {
 
 			}
 		});
-		textField_12.setColumns(10);
+		rollSevenField.setColumns(10);
 
-		label_7 = new JLabel("8");
-		panel.add(label_7, "cell 2 12,alignx right");
+		rollEightLabel = new JLabel("8");
+		panel.add(rollEightLabel, "cell 2 12,alignx right");
 
-		textField_24 = new JTextField();
-		panel.add(textField_24, "cell 3 12");
-		textField_24.addFocusListener(new FocusAdapter() {
+		rollEightField = new JTextField();
+		panel.add(rollEightField, "cell 3 12");
+		rollEightField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -456,14 +456,14 @@ public class weights {
 
 			}
 		});
-		textField_24.setColumns(10);
+		rollEightField.setColumns(10);
 
-		label_8 = new JLabel("9");
-		panel.add(label_8, "cell 0 13,alignx right");
+		rollNineLabel = new JLabel("9");
+		panel.add(rollNineLabel, "cell 0 13,alignx right");
 
-		textField_13 = new JTextField();
-		panel.add(textField_13, "cell 1 13");
-		textField_13.addFocusListener(new FocusAdapter() {
+		rollNineField = new JTextField();
+		panel.add(rollNineField, "cell 1 13");
+		rollNineField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -471,14 +471,14 @@ public class weights {
 
 			}
 		});
-		textField_13.setColumns(10);
+		rollNineField.setColumns(10);
 
-		label_21 = new JLabel("10");
-		panel.add(label_21, "cell 2 13,alignx right");
+		rollTenLabel = new JLabel("10");
+		panel.add(rollTenLabel, "cell 2 13,alignx right");
 
-		textField_25 = new JTextField();
-		panel.add(textField_25, "cell 3 13");
-		textField_25.addFocusListener(new FocusAdapter() {
+		rollTenField = new JTextField();
+		panel.add(rollTenField, "cell 3 13");
+		rollTenField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -486,14 +486,14 @@ public class weights {
 
 			}
 		});
-		textField_25.setColumns(10);
+		rollTenField.setColumns(10);
 
-		label_10 = new JLabel("11");
-		panel.add(label_10, "cell 0 14,alignx right");
+		rollElevenLabel = new JLabel("11");
+		panel.add(rollElevenLabel, "cell 0 14,alignx right");
 
-		textField_14 = new JTextField();
-		panel.add(textField_14, "cell 1 14");
-		textField_14.addFocusListener(new FocusAdapter() {
+		rollElevenField = new JTextField();
+		panel.add(rollElevenField, "cell 1 14");
+		rollElevenField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -501,21 +501,21 @@ public class weights {
 
 			}
 		});
-		textField_14.setColumns(10);
+		rollElevenField.setColumns(10);
 
-		label_23 = new JLabel("12");
-		panel.add(label_23, "cell 2 14,alignx right");
+		rollTwelveLabel = new JLabel("12");
+		panel.add(rollTwelveLabel, "cell 2 14,alignx right");
 
-		textField_26 = new JTextField();
-		panel.add(textField_26, "cell 3 14");
-		textField_26.addFocusListener(new FocusAdapter() {
+		rollTwelveField = new JTextField();
+		panel.add(rollTwelveField, "cell 3 14");
+		rollTwelveField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
 				percentCalc();
 			}
 		});
-		textField_26.setColumns(10);
+		rollTwelveField.setColumns(10);
 
 		lblActualSetWt = new JLabel("Actual Set Wt");
 		panel.add(lblActualSetWt, "cell 0 15");
@@ -565,69 +565,54 @@ public class weights {
 		});
 		textField_8.setColumns(10);
 
-		label_1 = new JLabel("1");
-		panel.add(label_1, "cell 0 21,alignx right");
+		setTwoRollOneLabel = new JLabel("1");
+		panel.add(setTwoRollOneLabel, "cell 0 21,alignx right");
 
-		textField_16 = new JTextField();
-		panel.add(textField_16, "cell 1 21");
-		textField_16.addFocusListener(new FocusAdapter() {
+		setTwoRollOneField = new JTextField();
+		panel.add(setTwoRollOneField, "cell 1 21");
+		setTwoRollOneField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
 				percentCalc();
 			}
 		});
-		textField_16.setColumns(10);
+		setTwoRollOneField.setColumns(10);
 
-		label_3 = new JLabel("2");
-		panel.add(label_3, "cell 2 21,alignx right");
+		setTwoRollTwoLabel = new JLabel("2");
+		panel.add(setTwoRollTwoLabel, "cell 2 21,alignx right");
 
-		textField_28 = new JTextField();
-		panel.add(textField_28, "cell 3 21");
-		textField_28.addFocusListener(new FocusAdapter() {
+		setTwoRollTwoField = new JTextField();
+		panel.add(setTwoRollTwoField, "cell 3 21");
+		setTwoRollTwoField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
 				percentCalc();
 			}
 		});
-		textField_28.setColumns(10);
+		setTwoRollTwoField.setColumns(10);
 
-		label_5 = new JLabel("3");
-		panel.add(label_5, "cell 0 22,alignx right");
+		setTwoRollThreeLabel = new JLabel("3");
+		panel.add(setTwoRollThreeLabel, "cell 0 22,alignx right");
 
-		textField_17 = new JTextField();
-		panel.add(textField_17, "cell 1 22");
-		textField_17.addFocusListener(new FocusAdapter() {
+		setTwoRollThreeField = new JTextField();
+		panel.add(setTwoRollThreeField, "cell 1 22");
+		setTwoRollThreeField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
 				percentCalc();
 			}
 		});
-		textField_17.setColumns(10);
+		setTwoRollThreeField.setColumns(10);
 
-		label_9 = new JLabel("4");
-		panel.add(label_9, "cell 2 22,alignx right");
+		setTwoRollFourLabel = new JLabel("4");
+		panel.add(setTwoRollFourLabel, "cell 2 22,alignx right");
 
-		textField_29 = new JTextField();
-		panel.add(textField_29, "cell 3 22");
-		textField_29.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent arg0) {
-				targetUpdate();
-				percentCalc();
-
-			}
-		});
-		textField_29.setColumns(10);
-
-		label_11 = new JLabel("5");
-		panel.add(label_11, "cell 0 23,alignx right");
-
-		textField_18 = new JTextField();
-		panel.add(textField_18, "cell 1 23");
-		textField_18.addFocusListener(new FocusAdapter() {
+		setTwoRollFourField = new JTextField();
+		panel.add(setTwoRollFourField, "cell 3 22");
+		setTwoRollFourField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -635,14 +620,14 @@ public class weights {
 
 			}
 		});
-		textField_18.setColumns(10);
+		setTwoRollFourField.setColumns(10);
 
-		label_12 = new JLabel("6");
-		panel.add(label_12, "cell 2 23,alignx right");
+		setTwoRollFiveLabel = new JLabel("5");
+		panel.add(setTwoRollFiveLabel, "cell 0 23,alignx right");
 
-		textField_30 = new JTextField();
-		panel.add(textField_30, "cell 3 23");
-		textField_30.addFocusListener(new FocusAdapter() {
+		setTwoRollFiveField = new JTextField();
+		panel.add(setTwoRollFiveField, "cell 1 23");
+		setTwoRollFiveField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -650,14 +635,14 @@ public class weights {
 
 			}
 		});
-		textField_30.setColumns(10);
+		setTwoRollFiveField.setColumns(10);
 
-		label_14 = new JLabel("7");
-		panel.add(label_14, "cell 0 24,alignx right");
+		setTwoRollSixLabel = new JLabel("6");
+		panel.add(setTwoRollSixLabel, "cell 2 23,alignx right");
 
-		textField_19 = new JTextField();
-		panel.add(textField_19, "cell 1 24");
-		textField_19.addFocusListener(new FocusAdapter() {
+		setTwoRollSixField = new JTextField();
+		panel.add(setTwoRollSixField, "cell 3 23");
+		setTwoRollSixField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -665,14 +650,14 @@ public class weights {
 
 			}
 		});
-		textField_19.setColumns(10);
+		setTwoRollSixField.setColumns(10);
 
-		label_16 = new JLabel("8");
-		panel.add(label_16, "cell 2 24,alignx right");
+		setTwoRollSevenLabel = new JLabel("7");
+		panel.add(setTwoRollSevenLabel, "cell 0 24,alignx right");
 
-		textField_31 = new JTextField();
-		panel.add(textField_31, "cell 3 24");
-		textField_31.addFocusListener(new FocusAdapter() {
+		setTwoRollSevenField = new JTextField();
+		panel.add(setTwoRollSevenField, "cell 1 24");
+		setTwoRollSevenField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -680,14 +665,14 @@ public class weights {
 
 			}
 		});
-		textField_31.setColumns(10);
+		setTwoRollSevenField.setColumns(10);
 
-		label_18 = new JLabel("9");
-		panel.add(label_18, "cell 0 25,alignx right");
+		setTwoRollEightLabel = new JLabel("8");
+		panel.add(setTwoRollEightLabel, "cell 2 24,alignx right");
 
-		textField_20 = new JTextField();
-		panel.add(textField_20, "cell 1 25");
-		textField_20.addFocusListener(new FocusAdapter() {
+		setTwoRollEightField = new JTextField();
+		panel.add(setTwoRollEightField, "cell 3 24");
+		setTwoRollEightField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -695,14 +680,14 @@ public class weights {
 
 			}
 		});
-		textField_20.setColumns(10);
+		setTwoRollEightField.setColumns(10);
 
-		label_19 = new JLabel("10");
-		panel.add(label_19, "cell 2 25,alignx right");
+		setTwoRollNineLabel = new JLabel("9");
+		panel.add(setTwoRollNineLabel, "cell 0 25,alignx right");
 
-		textField_32 = new JTextField();
-		panel.add(textField_32, "cell 3 25");
-		textField_32.addFocusListener(new FocusAdapter() {
+		setTwoRollNineField = new JTextField();
+		panel.add(setTwoRollNineField, "cell 1 25");
+		setTwoRollNineField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -710,14 +695,14 @@ public class weights {
 
 			}
 		});
-		textField_32.setColumns(10);
+		setTwoRollNineField.setColumns(10);
 
-		label_20 = new JLabel("11");
-		panel.add(label_20, "cell 0 26,alignx right");
+		setTwoRollTenLabel = new JLabel("10");
+		panel.add(setTwoRollTenLabel, "cell 2 25,alignx right");
 
-		textField_15 = new JTextField();
-		panel.add(textField_15, "cell 1 26");
-		textField_15.addFocusListener(new FocusAdapter() {
+		setTwoRollTenField = new JTextField();
+		panel.add(setTwoRollTenField, "cell 3 25");
+		setTwoRollTenField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -725,14 +710,29 @@ public class weights {
 
 			}
 		});
-		textField_15.setColumns(10);
+		setTwoRollTenField.setColumns(10);
 
-		label_22 = new JLabel("12");
-		panel.add(label_22, "cell 2 26,alignx right");
+		setTwoRollElevenLabel = new JLabel("11");
+		panel.add(setTwoRollElevenLabel, "cell 0 26,alignx right");
+
+		setTwoRollElevenField = new JTextField();
+		panel.add(setTwoRollElevenField, "cell 1 26");
+		setTwoRollElevenField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				targetUpdate();
+				percentCalc();
+
+			}
+		});
+		setTwoRollElevenField.setColumns(10);
+
+		setTwoRollTwelveLabel = new JLabel("12");
+		panel.add(setTwoRollTwelveLabel, "cell 2 26,alignx right");
 		float newSize3 = 17;
-		textField_27 = new JTextField();
-		panel.add(textField_27, "cell 3 26");
-		textField_27.addFocusListener(new FocusAdapter() {
+		setTwoRollTwelveField = new JTextField();
+		panel.add(setTwoRollTwelveField, "cell 3 26");
+		setTwoRollTwelveField.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				targetUpdate();
@@ -740,7 +740,7 @@ public class weights {
 
 			}
 		});
-		textField_27.setColumns(10);
+		setTwoRollTwelveField.setColumns(10);
 
 		lblActualSetWeight = new JLabel("Actual Set Wt");
 		panel.add(lblActualSetWeight, "cell 0 27");
@@ -770,7 +770,7 @@ public class weights {
 			public void actionPerformed(ActionEvent arg0) {
 				model.setRowCount(0);
 				model2.setRowCount(0);
-				textField.setText("1");
+				setNumberField.setText("1");
 			}
 		});
 		panel.add(btnClearSets, "cell 3 28");
@@ -873,112 +873,112 @@ public class weights {
 	public void calc() {
 		// parse roll weights to double
 		// product 1 wts
-		if (!textField_9.getText().equals(""))
-			wt1No = parseInput(textField_9.getText());
+		if (!rollOneField.getText().equals(""))
+			wt1No = parseInput(rollOneField.getText());
 		else
 			wt1No = 0;
-		if (!textField_21.getText().equals(""))
-			wt2No = parseInput(textField_21.getText());
+		if (!rollTwoField.getText().equals(""))
+			wt2No = parseInput(rollTwoField.getText());
 		else
 			wt2No = 0;
-		if (!textField_10.getText().equals(""))
-			wt3No = parseInput(textField_10.getText());
+		if (!rollThreeField.getText().equals(""))
+			wt3No = parseInput(rollThreeField.getText());
 		else
 			wt3No = 0;
-		if (!textField_22.getText().equals(""))
-			wt4No = parseInput(textField_22.getText());
+		if (!rollFourField.getText().equals(""))
+			wt4No = parseInput(rollFourField.getText());
 		else
 			wt4No = 0;
-		if (!textField_11.getText().equals(""))
-			wt5No = parseInput(textField_11.getText());
+		if (!rollFiveField.getText().equals(""))
+			wt5No = parseInput(rollFiveField.getText());
 		else
 			wt5No = 0;
-		if (!textField_23.getText().equals(""))
-			wt6No = parseInput(textField_23.getText());
+		if (!rollSixField.getText().equals(""))
+			wt6No = parseInput(rollSixField.getText());
 		else
 			wt6No = 0;
-		if (!textField_12.getText().equals(""))
-			wt7No = parseInput(textField_12.getText());
+		if (!rollSevenField.getText().equals(""))
+			wt7No = parseInput(rollSevenField.getText());
 		else
 			wt7No = 0;
-		if (!textField_24.getText().equals(""))
-			wt8No = parseInput(textField_24.getText());
+		if (!rollEightField.getText().equals(""))
+			wt8No = parseInput(rollEightField.getText());
 		else
 			wt8No = 0;
-		if (!textField_13.getText().equals(""))
-			wt9No = parseInput(textField_13.getText());
+		if (!rollNineField.getText().equals(""))
+			wt9No = parseInput(rollNineField.getText());
 		else
 			wt9No = 0;
-		if (!textField_25.getText().equals(""))
-			wt10No = parseInput(textField_25.getText());
+		if (!rollTenField.getText().equals(""))
+			wt10No = parseInput(rollTenField.getText());
 		else
 			wt10No = 0;
-		if (!textField_14.getText().equals(""))
-			wt11No = parseInput(textField_14.getText());
+		if (!rollElevenField.getText().equals(""))
+			wt11No = parseInput(rollElevenField.getText());
 		else
 			wt11No = 0;
-		if (!textField_26.getText().equals(""))
-			wt12No = parseInput(textField_26.getText());
+		if (!rollTwelveField.getText().equals(""))
+			wt12No = parseInput(rollTwelveField.getText());
 		else
 			wt12No = 0;
 
 		// product 2 wts
-		if (!textField_16.getText().equals(""))
-			wt13No = parseInput(textField_16.getText());
+		if (!setTwoRollOneField.getText().equals(""))
+			wt13No = parseInput(setTwoRollOneField.getText());
 		else
 			wt13No = 0;
-		if (!textField_28.getText().equals(""))
-			wt14No = parseInput(textField_28.getText());
+		if (!setTwoRollTwoField.getText().equals(""))
+			wt14No = parseInput(setTwoRollTwoField.getText());
 		else
 			wt14No = 0;
-		if (!textField_17.getText().equals(""))
-			wt15No = parseInput(textField_17.getText());
+		if (!setTwoRollThreeField.getText().equals(""))
+			wt15No = parseInput(setTwoRollThreeField.getText());
 		else
 			wt15No = 0;
-		if (!textField_29.getText().equals(""))
-			wt16No = parseInput(textField_29.getText());
+		if (!setTwoRollFourField.getText().equals(""))
+			wt16No = parseInput(setTwoRollFourField.getText());
 		else
 			wt16No = 0;
-		if (!textField_18.getText().equals(""))
-			wt17No = parseInput(textField_18.getText());
+		if (!setTwoRollFiveField.getText().equals(""))
+			wt17No = parseInput(setTwoRollFiveField.getText());
 		else
 			wt17No = 0;
-		if (!textField_30.getText().equals(""))
-			wt18No = parseInput(textField_30.getText());
+		if (!setTwoRollSixField.getText().equals(""))
+			wt18No = parseInput(setTwoRollSixField.getText());
 		else
 			wt18No = 0;
-		if (!textField_19.getText().equals(""))
-			wt19No = parseInput(textField_19.getText());
+		if (!setTwoRollSevenField.getText().equals(""))
+			wt19No = parseInput(setTwoRollSevenField.getText());
 		else
 			wt19No = 0;
-		if (!textField_31.getText().equals(""))
-			wt20No = parseInput(textField_31.getText());
+		if (!setTwoRollEightField.getText().equals(""))
+			wt20No = parseInput(setTwoRollEightField.getText());
 		else
 			wt20No = 0;
-		if (!textField_20.getText().equals(""))
-			wt21No = parseInput(textField_20.getText());
+		if (!setTwoRollNineField.getText().equals(""))
+			wt21No = parseInput(setTwoRollNineField.getText());
 		else
 			wt21No = 0;
-		if (!textField_32.getText().equals(""))
-			wt22No = parseInput(textField_32.getText());
+		if (!setTwoRollTenField.getText().equals(""))
+			wt22No = parseInput(setTwoRollTenField.getText());
 		else
 			wt22No = 0;
-		if (!textField_15.getText().equals(""))
-			wt23No = parseInput(textField_15.getText());
+		if (!setTwoRollElevenField.getText().equals(""))
+			wt23No = parseInput(setTwoRollElevenField.getText());
 		else
 			wt23No = 0;
-		if (!textField_27.getText().equals(""))
-			wt24No = parseInput(textField_27.getText());
+		if (!setTwoRollTwelveField.getText().equals(""))
+			wt24No = parseInput(setTwoRollTwelveField.getText());
 		else
 			wt24No = 0;
 
 		// Rolls per set and target wt for both products
-		if (!textField_4.getText().equals(""))
-			p1RollSet = Double.parseDouble(textField_4.getText());
+		if (!rollsPerSetOneField.getText().equals(""))
+			p1RollSet = Double.parseDouble(rollsPerSetOneField.getText());
 		else
 			p1RollSet = 0;
-		if (!textField_3.getText().equals(""))
-			p1TgWt = Double.parseDouble(textField_3.getText());
+		if (!targetWeightOneField.getText().equals(""))
+			p1TgWt = Double.parseDouble(targetWeightOneField.getText());
 		else
 			p1TgWt = 0;
 		if (!textField_7.getText().equals(""))
@@ -1048,7 +1048,7 @@ public class weights {
 		String percentSum = String.valueOf(roundPercent1);
 
 		if (textField_8.getText().equals("")
-				&& !textField_3.getText().equals(""))
+				&& !targetWeightOneField.getText().equals(""))
 			textField_37.setText(percentSum);
 		else if (!textField_8.getText().equals("")) {
 			double totalPercent = (percentOfTarget1 + percentOfTarget2) / 2;
@@ -1062,12 +1062,12 @@ public class weights {
 
 	private void actualLB() {
 		// update actual pounds per hour
-		if (!textField_5.getText().equals(""))
-			rollLength = Double.parseDouble(textField_5.getText());
+		if (!rollLengthField.getText().equals(""))
+			rollLength = Double.parseDouble(rollLengthField.getText());
 		else
 			rollLength = 0;
-		if (!textField_2.getText().equals(""))
-			lineSpeed = Double.parseDouble(textField_2.getText());
+		if (!lineSpeedField.getText().equals(""))
+			lineSpeed = Double.parseDouble(lineSpeedField.getText());
 		else
 			lineSpeed = 0;
 		targetUpdate();
@@ -1087,12 +1087,12 @@ public class weights {
 		parts = dateTime.split(" ");
 		dateStamp = parts[0];
 		timeStamp = parts[1];
-		setNumber = textField.getText();
+		setNumber = setNumberField.getText();
 		if (!setNumber.equals("")) {
 			s2 = Integer.valueOf(setNumber);
 		} else
 			s2 = 0;
-		workOrder = textField_38.getText();
+		workOrder = workOrderOneField.getText();
 		if (!workOrder.equals("")) {
 			workOrderInt = Integer.valueOf(workOrder);
 		} else
@@ -1138,7 +1138,7 @@ public class weights {
 		parts = dateTime.split(" ");
 		dateStamp = parts[0];
 		timeStamp = parts[1];
-		setNumber = textField.getText().trim();
+		setNumber = setNumberField.getText().trim();
 		if (!setNumber.equals("")) {
 			s2 = Integer.valueOf(setNumber);
 		} else
@@ -1196,15 +1196,15 @@ public class weights {
 		String dateStamp = parts[0];
 		String timeStamp = parts[1];
 		// get set number, change to int
-		String setNumber = textField.getText().trim();
+		String setNumber = setNumberField.getText().trim();
 		int s2 = convertToInt(setNumber);
 
 		// get work product 1 work order number , change to int
-		String workOrder1 = textField_38.getText().trim();
+		String workOrder1 = workOrderOneField.getText().trim();
 		Integer workOrderInt1 = convertToInt(workOrder1);
 
 		// get product 1 rolls per set, change to decimal
-		String rollsPerSet1 = textField_4.getText().trim();
+		String rollsPerSet1 = rollsPerSetOneField.getText().trim();
 		Integer rollsPerSet1Int = convertToInt(rollsPerSet1);
 
 		// get product 1 target wt, change to decimal
@@ -1247,7 +1247,7 @@ public class weights {
 		double actualLB = convertToDouble(actuallbsHr);
 
 		// get linespeed, change to int
-		String lineSpeed = textField_2.getText().trim();
+		String lineSpeed = lineSpeedField.getText().trim();
 		lineSpeed = lineSpeed.substring(0, 3);
 		int lineInt = convertToInt(lineSpeed);
 
@@ -1390,194 +1390,194 @@ public class weights {
 	private void checkFields() throws ClassNotFoundException, SQLException,
 			IOException {
 		p1InfoSet();
-		if (!textField_9.getText().equals(""))
-			P1RollWeightSQL(textField_9);
-		if (!textField_21.getText().equals(""))
-			P1RollWeightSQL(textField_21);
+		if (!rollOneField.getText().equals(""))
+			P1RollWeightSQL(rollOneField);
+		if (!rollTwoField.getText().equals(""))
+			P1RollWeightSQL(rollTwoField);
 
-		if (!textField_10.getText().equals(""))
-			P1RollWeightSQL(textField_10);
+		if (!rollThreeField.getText().equals(""))
+			P1RollWeightSQL(rollThreeField);
 
-		if (!textField_22.getText().equals(""))
-			P1RollWeightSQL(textField_22);
+		if (!rollFourField.getText().equals(""))
+			P1RollWeightSQL(rollFourField);
 
-		if (!textField_11.getText().equals(""))
-			P1RollWeightSQL(textField_11);
+		if (!rollFiveField.getText().equals(""))
+			P1RollWeightSQL(rollFiveField);
 
-		if (!textField_23.getText().equals(""))
-			P1RollWeightSQL(textField_23);
+		if (!rollSixField.getText().equals(""))
+			P1RollWeightSQL(rollSixField);
 
-		if (!textField_12.getText().equals(""))
-			P1RollWeightSQL(textField_12);
+		if (!rollSevenField.getText().equals(""))
+			P1RollWeightSQL(rollSevenField);
 
-		if (!textField_24.getText().equals(""))
-			P1RollWeightSQL(textField_24);
+		if (!rollEightField.getText().equals(""))
+			P1RollWeightSQL(rollEightField);
 
-		if (!textField_13.getText().equals(""))
-			P1RollWeightSQL(textField_13);
+		if (!rollNineField.getText().equals(""))
+			P1RollWeightSQL(rollNineField);
 
-		if (!textField_25.getText().equals(""))
-			P1RollWeightSQL(textField_25);
+		if (!rollTenField.getText().equals(""))
+			P1RollWeightSQL(rollTenField);
 
-		if (!textField_14.getText().equals(""))
-			P1RollWeightSQL(textField_14);
+		if (!rollElevenField.getText().equals(""))
+			P1RollWeightSQL(rollElevenField);
 
-		if (!textField_26.getText().equals(""))
-			P1RollWeightSQL(textField_26);
+		if (!rollTwelveField.getText().equals(""))
+			P1RollWeightSQL(rollTwelveField);
 
 		// product 2 wts
 		p2InfoSet();
-		if (!textField_16.getText().equals(""))
-			P2RollWeightSQL(textField_16);
+		if (!setTwoRollOneField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollOneField);
 
-		if (!textField_28.getText().equals(""))
-			P2RollWeightSQL(textField_28);
+		if (!setTwoRollTwoField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollTwoField);
 
-		if (!textField_17.getText().equals(""))
-			P2RollWeightSQL(textField_17);
+		if (!setTwoRollThreeField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollThreeField);
 
-		if (!textField_29.getText().equals(""))
-			P2RollWeightSQL(textField_29);
+		if (!setTwoRollFourField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollFourField);
 
-		if (!textField_18.getText().equals(""))
-			P2RollWeightSQL(textField_18);
+		if (!setTwoRollFiveField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollFiveField);
 
-		if (!textField_30.getText().equals(""))
-			P2RollWeightSQL(textField_30);
+		if (!setTwoRollSixField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollSixField);
 
-		if (!textField_19.getText().equals(""))
-			P2RollWeightSQL(textField_19);
+		if (!setTwoRollSevenField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollSevenField);
 
-		if (!textField_31.getText().equals(""))
-			P2RollWeightSQL(textField_31);
+		if (!setTwoRollEightField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollEightField);
 
-		if (!textField_20.getText().equals(""))
-			P2RollWeightSQL(textField_20);
+		if (!setTwoRollNineField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollNineField);
 
-		if (!textField_32.getText().equals(""))
-			P2RollWeightSQL(textField_32);
+		if (!setTwoRollTenField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollTenField);
 
-		if (!textField_15.getText().equals(""))
-			P2RollWeightSQL(textField_15);
+		if (!setTwoRollElevenField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollElevenField);
 
-		if (!textField_27.getText().equals(""))
-			P2RollWeightSQL(textField_27);
+		if (!setTwoRollTwelveField.getText().equals(""))
+			P2RollWeightSQL(setTwoRollTwelveField);
 
 	}
 
 	private void clearFields() {
-		textField_9.setText("");
-		textField_10.setText("");
-		textField_21.setText("");
-		textField_22.setText("");
-		textField_11.setText("");
-		textField_23.setText("");
-		textField_12.setText("");
-		textField_24.setText("");
-		textField_13.setText("");
-		textField_25.setText("");
-		textField_14.setText("");
-		textField_26.setText("");
-		textField_16.setText("");
-		textField_28.setText("");
-		textField_17.setText("");
-		textField_29.setText("");
-		textField_18.setText("");
-		textField_30.setText("");
-		textField_19.setText("");
-		textField_31.setText("");
-		textField_20.setText("");
-		textField_32.setText("");
-		textField_15.setText("");
-		textField_27.setText("");
+		rollOneField.setText("");
+		rollThreeField.setText("");
+		rollTwoField.setText("");
+		rollFourField.setText("");
+		rollFiveField.setText("");
+		rollSixField.setText("");
+		rollSevenField.setText("");
+		rollEightField.setText("");
+		rollNineField.setText("");
+		rollTenField.setText("");
+		rollElevenField.setText("");
+		rollTwelveField.setText("");
+		setTwoRollOneField.setText("");
+		setTwoRollTwoField.setText("");
+		setTwoRollThreeField.setText("");
+		setTwoRollFourField.setText("");
+		setTwoRollFiveField.setText("");
+		setTwoRollSixField.setText("");
+		setTwoRollSevenField.setText("");
+		setTwoRollEightField.setText("");
+		setTwoRollNineField.setText("");
+		setTwoRollTenField.setText("");
+		setTwoRollElevenField.setText("");
+		setTwoRollTwelveField.setText("");
 
 		// increment set number
-		String num = textField.getText();
+		String num = setNumberField.getText();
 		int num2 = Integer.valueOf(num);
 		num2++;
 		num = Integer.toString(num2);
-		textField.setText(num);
+		setNumberField.setText(num);
 	}
 
 	private void populateTable() {
-		if (!textField_9.getText().equals(""))
-			check(textField_9);
-		if (!textField_21.getText().equals(""))
-			check(textField_21);
-		if (!textField_10.getText().equals(""))
-			check(textField_10);
+		if (!rollOneField.getText().equals(""))
+			check(rollOneField, rollOneLabel);
+		if (!rollTwoField.getText().equals(""))
+			check(rollTwoField, rollTwoLabel);
+		if (!rollThreeField.getText().equals(""))
+			check(rollThreeField, rollThreeLabel);
 
-		if (!textField_22.getText().equals(""))
-			check(textField_22);
+		if (!rollFourField.getText().equals(""))
+			check(rollFourField, rollFourLabel);
 
-		if (!textField_11.getText().equals(""))
-			check(textField_11);
+		if (!rollFiveField.getText().equals(""))
+			check(rollFiveField, rollFiveLabel);
 
-		if (!textField_23.getText().equals(""))
-			check(textField_23);
+		if (!rollSixField.getText().equals(""))
+			check(rollSixField, rollSixLabel);
 
-		if (!textField_12.getText().equals(""))
-			check(textField_12);
+		if (!rollSevenField.getText().equals(""))
+			check(rollSevenField, rollSevenLabel);
 
-		if (!textField_24.getText().equals(""))
-			check(textField_24);
+		if (!rollEightField.getText().equals(""))
+			check(rollEightField, rollEightLabel);
 
-		if (!textField_13.getText().equals(""))
-			check(textField_13);
+		if (!rollNineField.getText().equals(""))
+			check(rollNineField, rollNineLabel);
 
-		if (!textField_25.getText().equals(""))
-			check(textField_25);
+		if (!rollTenField.getText().equals(""))
+			check(rollTenField, rollTenLabel);
 
-		if (!textField_14.getText().equals(""))
-			check(textField_14);
+		if (!rollElevenField.getText().equals(""))
+			check(rollElevenField, rollElevenLabel);
 
-		if (!textField_26.getText().equals(""))
-			check(textField_26);
+		if (!rollTwelveField.getText().equals(""))
+			check(rollTwelveField, rollTwelveLabel);
 
 		// product 2 wts
-		if (!textField_16.getText().equals(""))
-			check(textField_16);
+		if (!setTwoRollOneField.getText().equals(""))
+			check(setTwoRollOneField, setTwoRollOneLabel);
 
-		if (!textField_28.getText().equals(""))
-			check(textField_28);
+		if (!setTwoRollTwoField.getText().equals(""))
+			check(setTwoRollTwoField, setTwoRollTwoLabel);
 
-		if (!textField_17.getText().equals(""))
-			check(textField_17);
+		if (!setTwoRollThreeField.getText().equals(""))
+			check(setTwoRollThreeField, setTwoRollThreeLabel);
 
-		if (!textField_29.getText().equals(""))
-			check(textField_29);
+		if (!setTwoRollFourField.getText().equals(""))
+			check(setTwoRollFourField, setTwoRollFourLabel);
 
-		if (!textField_18.getText().equals(""))
-			check(textField_18);
+		if (!setTwoRollFiveField.getText().equals(""))
+			check(setTwoRollFiveField, setTwoRollFiveLabel);
 
-		if (!textField_30.getText().equals(""))
-			check(textField_30);
+		if (!setTwoRollSixField.getText().equals(""))
+			check(setTwoRollSixField, setTwoRollSixLabel);
 
-		if (!textField_19.getText().equals(""))
-			check(textField_19);
+		if (!setTwoRollSevenField.getText().equals(""))
+			check(setTwoRollSevenField, setTwoRollSevenLabel);
 
-		if (!textField_31.getText().equals(""))
-			check(textField_31);
+		if (!setTwoRollEightField.getText().equals(""))
+			check(setTwoRollEightField, setTwoRollEightLabel);
 
-		if (!textField_20.getText().equals(""))
-			check(textField_20);
+		if (!setTwoRollNineField.getText().equals(""))
+			check(setTwoRollNineField, setTwoRollNineLabel);
 
-		if (!textField_32.getText().equals(""))
-			check(textField_32);
+		if (!setTwoRollTenField.getText().equals(""))
+			check(setTwoRollTenField, setTwoRollTenLabel);
 
-		if (!textField_15.getText().equals(""))
-			check(textField_15);
+		if (!setTwoRollElevenField.getText().equals(""))
+			check(setTwoRollElevenField, setTwoRollElevenLabel);
 
-		if (!textField_27.getText().equals(""))
-			check(textField_27);
+		if (!setTwoRollTwelveField.getText().equals(""))
+			check(setTwoRollTwelveField, setTwoRollTwelveLabel);
 
-		String setNum = textField.getText();
+		String setNum = setNumberField.getText();
 		String percentTarg = textField_37.getText();
 		String actualPounds = textField_6.getText();
 		model2.addRow(new Object[] { setNum, percentTarg, actualPounds });
 	}
 
-	private void check(JTextField field) {
+	private void check(JTextField field, JLabel label) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		dateTime = dateFormat.format(cal.getTime());
@@ -1585,12 +1585,13 @@ public class weights {
 		dateStamp = parts[0];
 		timeStamp = parts[1];
 		String shiftSelect = (String) comboBox_1.getSelectedItem();
-		String setSelect = textField.getText();
+		String setSelect = setNumberField.getText();
 		String rollWeight = field.getText().trim();
+		String rollNumber = label.getText();
 		if (rollWeight.length() > 5)
 			rollWeight = rollWeight.substring(0, 5);
-		model.addRow(new Object[] { dateStamp, timeStamp, shiftSelect,
-				setSelect, rollWeight });
+		model.addRow(new Object[] { dateStamp, timeStamp, setSelect,
+				rollNumber, rollWeight });
 	}
 
 	// re-calculates all fields by using current value from GUI-bottom button
