@@ -30,26 +30,26 @@ import java.util.Calendar;
 public class qaChecks {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JComboBox comboBox;
-	private JComboBox comboBox_2;
-	private JComboBox comboBox_3;
-	private JComboBox comboBox_4;
-	private JComboBox comboBox_5;
-	private JComboBox comboBox_6;
-	private JComboBox comboBox_7;
-	private JComboBox comboBox_8;
-	private JComboBox comboBox_9;
-	private JComboBox comboBox_10;
-	private JComboBox comboBox_1;
-	private JTextField textField_7;
-	private JTextArea textArea;
+	private JTextField actualWidthField;
+	private JTextField collapserTensionSettingsField;
+	private JTextField centerStandTensionSettingsField;
+	private JTextField winderTensionSettingsField;
+	private JTextField collapserTemperatureField;
+	private JTextField setNumberField;
+	private JTextField workOrder1Field;
+	private JComboBox rollEndsField;
+	private JComboBox coreQualityField;
+	private JComboBox wrinklesField;
+	private JComboBox dieLinesField;
+	private JComboBox dieLinesField_1;
+	private JComboBox holesField;
+	private JComboBox gelsParticlesField;
+	private JComboBox rollColorClarityField;
+	private JComboBox packagingField;
+	private JComboBox palletField;
+	private JComboBox coreCenteringField;
+	private JTextField workOrder2Field;
+	private JTextArea commentsField;
 
 	/**
 	 * Launch the application.
@@ -99,14 +99,14 @@ public class qaChecks {
 		gbc_lblSetNumber.gridy = 0;
 		frame.getContentPane().add(lblSetNumber, gbc_lblSetNumber);
 
-		textField_5 = new JTextField("1");
-		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-		gbc_textField_5.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_5.gridx = 1;
-		gbc_textField_5.gridy = 0;
-		frame.getContentPane().add(textField_5, gbc_textField_5);
-		textField_5.setColumns(10);
+		setNumberField = new JTextField("1");
+		GridBagConstraints gbc_setNumberField = new GridBagConstraints();
+		gbc_setNumberField.insets = new Insets(0, 0, 5, 0);
+		gbc_setNumberField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_setNumberField.gridx = 1;
+		gbc_setNumberField.gridy = 0;
+		frame.getContentPane().add(setNumberField, gbc_setNumberField);
+		setNumberField.setColumns(10);
 
 		JLabel lblWorkOrderNumber = new JLabel("Work Order 1");
 		GridBagConstraints gbc_lblWorkOrderNumber = new GridBagConstraints();
@@ -116,14 +116,16 @@ public class qaChecks {
 		gbc_lblWorkOrderNumber.gridy = 1;
 		frame.getContentPane().add(lblWorkOrderNumber, gbc_lblWorkOrderNumber);
 
-		textField_6 = new JTextField();
-		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-		gbc_textField_6.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_6.gridx = 1;
-		gbc_textField_6.gridy = 1;
-		frame.getContentPane().add(textField_6, gbc_textField_6);
-		textField_6.setColumns(10);
+		workOrder1Field = new JTextField();
+		if (!(weights.workOrderOneField == null))
+			workOrder1Field.setText(weights.workOrderOneField.getText());
+		GridBagConstraints gbc_workOrder1Field = new GridBagConstraints();
+		gbc_workOrder1Field.insets = new Insets(0, 0, 5, 0);
+		gbc_workOrder1Field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_workOrder1Field.gridx = 1;
+		gbc_workOrder1Field.gridy = 1;
+		frame.getContentPane().add(workOrder1Field, gbc_workOrder1Field);
+		workOrder1Field.setColumns(10);
 
 		JLabel lblWorkOrder = new JLabel("Work Order 2");
 		GridBagConstraints gbc_lblWorkOrder = new GridBagConstraints();
@@ -133,14 +135,16 @@ public class qaChecks {
 		gbc_lblWorkOrder.gridy = 2;
 		frame.getContentPane().add(lblWorkOrder, gbc_lblWorkOrder);
 
-		textField_7 = new JTextField();
-		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-		gbc_textField_7.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_7.gridx = 1;
-		gbc_textField_7.gridy = 2;
-		frame.getContentPane().add(textField_7, gbc_textField_7);
-		textField_7.setColumns(10);
+		workOrder2Field = new JTextField();
+		if (!(weights.workOrderTwoField == null))
+		workOrder2Field.setText(weights.workOrderTwoField.getText());
+		GridBagConstraints gbc_workOrder2Field = new GridBagConstraints();
+		gbc_workOrder2Field.insets = new Insets(0, 0, 5, 0);
+		gbc_workOrder2Field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_workOrder2Field.gridx = 1;
+		gbc_workOrder2Field.gridy = 2;
+		frame.getContentPane().add(workOrder2Field, gbc_workOrder2Field);
+		workOrder2Field.setColumns(10);
 
 		JLabel lblActualWidth = new JLabel("Actual Width");
 		GridBagConstraints gbc_lblActualWidth = new GridBagConstraints();
@@ -150,14 +154,14 @@ public class qaChecks {
 		gbc_lblActualWidth.gridy = 3;
 		getFrame().getContentPane().add(lblActualWidth, gbc_lblActualWidth);
 
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 0);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 1;
-		gbc_textField.gridy = 3;
-		getFrame().getContentPane().add(textField, gbc_textField);
-		textField.setColumns(10);
+		actualWidthField = new JTextField();
+		GridBagConstraints gbc_actualWidthField = new GridBagConstraints();
+		gbc_actualWidthField.insets = new Insets(0, 0, 5, 0);
+		gbc_actualWidthField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_actualWidthField.gridx = 1;
+		gbc_actualWidthField.gridy = 3;
+		getFrame().getContentPane().add(actualWidthField, gbc_actualWidthField);
+		actualWidthField.setColumns(10);
 		String[] ends = { "", "smooth", "fuzzy", "uneven", "beveled", "bulging" };
 		JLabel lblRollEnds = new JLabel("Roll Ends");
 		GridBagConstraints gbc_lblRollEnds = new GridBagConstraints();
@@ -167,14 +171,14 @@ public class qaChecks {
 		gbc_lblRollEnds.gridy = 4;
 		getFrame().getContentPane().add(lblRollEnds, gbc_lblRollEnds);
 
-		comboBox = new JComboBox(ends);
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 4;
-		getFrame().getContentPane().add(comboBox, gbc_comboBox);
-		comboBox.setEditable(true);
+		rollEndsField = new JComboBox(ends);
+		GridBagConstraints gbc_rollEndsField = new GridBagConstraints();
+		gbc_rollEndsField.insets = new Insets(0, 0, 5, 0);
+		gbc_rollEndsField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_rollEndsField.gridx = 1;
+		gbc_rollEndsField.gridy = 4;
+		getFrame().getContentPane().add(rollEndsField, gbc_rollEndsField);
+		rollEndsField.setEditable(true);
 
 		JLabel lblCoreCentering = new JLabel("Core Centering");
 		GridBagConstraints gbc_lblCoreCentering = new GridBagConstraints();
@@ -185,14 +189,15 @@ public class qaChecks {
 		getFrame().getContentPane().add(lblCoreCentering, gbc_lblCoreCentering);
 
 		String[] coreCentering = { "", "centered", "not centered" };
-		comboBox_1 = new JComboBox(coreCentering);
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 1;
-		gbc_comboBox_1.gridy = 5;
-		getFrame().getContentPane().add(comboBox_1, gbc_comboBox_1);
-		comboBox_1.setEditable(true);
+		coreCenteringField = new JComboBox(coreCentering);
+		GridBagConstraints gbc_coreCenteringField = new GridBagConstraints();
+		gbc_coreCenteringField.insets = new Insets(0, 0, 5, 0);
+		gbc_coreCenteringField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_coreCenteringField.gridx = 1;
+		gbc_coreCenteringField.gridy = 5;
+		getFrame().getContentPane().add(coreCenteringField,
+				gbc_coreCenteringField);
+		coreCenteringField.setEditable(true);
 
 		JLabel lblCoreQuality = new JLabel("Core Quality");
 		GridBagConstraints gbc_lblCoreQuality = new GridBagConstraints();
@@ -204,14 +209,14 @@ public class qaChecks {
 
 		String[] coreQuality = { "", "cores in spec", "length short",
 				"length long", "varying length", "uneven length" };
-		comboBox_2 = new JComboBox(coreQuality);
-		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_2.gridx = 1;
-		gbc_comboBox_2.gridy = 6;
-		getFrame().getContentPane().add(comboBox_2, gbc_comboBox_2);
-		comboBox_2.setEditable(true);
+		coreQualityField = new JComboBox(coreQuality);
+		GridBagConstraints gbc_coreQualityField = new GridBagConstraints();
+		gbc_coreQualityField.insets = new Insets(0, 0, 5, 0);
+		gbc_coreQualityField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_coreQualityField.gridx = 1;
+		gbc_coreQualityField.gridy = 6;
+		getFrame().getContentPane().add(coreQualityField, gbc_coreQualityField);
+		coreQualityField.setEditable(true);
 
 		JLabel lblWrinkles = new JLabel("Wrinkles");
 		GridBagConstraints gbc_lblWrinkles = new GridBagConstraints();
@@ -223,14 +228,14 @@ public class qaChecks {
 
 		String[] wrinkles = { "", "none", "few", "many", "near edge",
 				"warped roll" };
-		comboBox_3 = new JComboBox(wrinkles);
-		GridBagConstraints gbc_comboBox_3 = new GridBagConstraints();
-		gbc_comboBox_3.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_3.gridx = 1;
-		gbc_comboBox_3.gridy = 7;
-		getFrame().getContentPane().add(comboBox_3, gbc_comboBox_3);
-		comboBox_3.setEditable(true);
+		wrinklesField = new JComboBox(wrinkles);
+		GridBagConstraints gbc_wrinklesField = new GridBagConstraints();
+		gbc_wrinklesField.insets = new Insets(0, 0, 5, 0);
+		gbc_wrinklesField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_wrinklesField.gridx = 1;
+		gbc_wrinklesField.gridy = 7;
+		getFrame().getContentPane().add(wrinklesField, gbc_wrinklesField);
+		wrinklesField.setEditable(true);
 
 		JLabel lblDieLines = new JLabel("Die Lines");
 		GridBagConstraints gbc_lblDieLines = new GridBagConstraints();
@@ -241,14 +246,14 @@ public class qaChecks {
 		getFrame().getContentPane().add(lblDieLines, gbc_lblDieLines);
 
 		String[] dieLines = { "", "none", "yes-not splitting", "yes-splitting" };
-		comboBox_4 = new JComboBox(dieLines);
-		GridBagConstraints gbc_comboBox_4 = new GridBagConstraints();
-		gbc_comboBox_4.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_4.gridx = 1;
-		gbc_comboBox_4.gridy = 8;
-		getFrame().getContentPane().add(comboBox_4, gbc_comboBox_4);
-		comboBox_4.setEditable(true);
+		dieLinesField = new JComboBox(dieLines);
+		GridBagConstraints gbc_dieLinesField = new GridBagConstraints();
+		gbc_dieLinesField.insets = new Insets(0, 0, 5, 0);
+		gbc_dieLinesField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_dieLinesField.gridx = 1;
+		gbc_dieLinesField.gridy = 8;
+		getFrame().getContentPane().add(dieLinesField, gbc_dieLinesField);
+		dieLinesField.setEditable(true);
 
 		JLabel lblColdFlow = new JLabel("Cold Flow");
 		GridBagConstraints gbc_lblColdFlow = new GridBagConstraints();
@@ -259,14 +264,14 @@ public class qaChecks {
 		getFrame().getContentPane().add(lblColdFlow, gbc_lblColdFlow);
 
 		String[] coldFlow = { "", "yes", "no" };
-		comboBox_5 = new JComboBox(coldFlow);
-		GridBagConstraints gbc_comboBox_5 = new GridBagConstraints();
-		gbc_comboBox_5.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_5.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_5.gridx = 1;
-		gbc_comboBox_5.gridy = 9;
-		getFrame().getContentPane().add(comboBox_5, gbc_comboBox_5);
-		comboBox_5.setEditable(true);
+		dieLinesField_1 = new JComboBox(coldFlow);
+		GridBagConstraints gbc_dieLinesField_1 = new GridBagConstraints();
+		gbc_dieLinesField_1.insets = new Insets(0, 0, 5, 0);
+		gbc_dieLinesField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_dieLinesField_1.gridx = 1;
+		gbc_dieLinesField_1.gridy = 9;
+		getFrame().getContentPane().add(dieLinesField_1, gbc_dieLinesField_1);
+		dieLinesField_1.setEditable(true);
 
 		JLabel lblHoles = new JLabel("Holes");
 		GridBagConstraints gbc_lblHoles = new GridBagConstraints();
@@ -277,14 +282,14 @@ public class qaChecks {
 		getFrame().getContentPane().add(lblHoles, gbc_lblHoles);
 
 		String[] holes = { "", "none", "few", "many" };
-		comboBox_6 = new JComboBox(holes);
-		GridBagConstraints gbc_comboBox_6 = new GridBagConstraints();
-		gbc_comboBox_6.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_6.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_6.gridx = 1;
-		gbc_comboBox_6.gridy = 10;
-		getFrame().getContentPane().add(comboBox_6, gbc_comboBox_6);
-		comboBox_6.setEditable(true);
+		holesField = new JComboBox(holes);
+		GridBagConstraints gbc_holesField = new GridBagConstraints();
+		gbc_holesField.insets = new Insets(0, 0, 5, 0);
+		gbc_holesField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_holesField.gridx = 1;
+		gbc_holesField.gridy = 10;
+		getFrame().getContentPane().add(holesField, gbc_holesField);
+		holesField.setEditable(true);
 
 		JLabel lblGelsparticles = new JLabel("Gels/Particles");
 		GridBagConstraints gbc_lblGelsparticles = new GridBagConstraints();
@@ -294,14 +299,15 @@ public class qaChecks {
 		gbc_lblGelsparticles.gridy = 11;
 		getFrame().getContentPane().add(lblGelsparticles, gbc_lblGelsparticles);
 
-		comboBox_7 = new JComboBox(holes);
-		GridBagConstraints gbc_comboBox_7 = new GridBagConstraints();
-		gbc_comboBox_7.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_7.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_7.gridx = 1;
-		gbc_comboBox_7.gridy = 11;
-		getFrame().getContentPane().add(comboBox_7, gbc_comboBox_7);
-		comboBox_7.setEditable(true);
+		gelsParticlesField = new JComboBox(holes);
+		GridBagConstraints gbc_gelsParticlesField = new GridBagConstraints();
+		gbc_gelsParticlesField.insets = new Insets(0, 0, 5, 0);
+		gbc_gelsParticlesField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_gelsParticlesField.gridx = 1;
+		gbc_gelsParticlesField.gridy = 11;
+		getFrame().getContentPane().add(gelsParticlesField,
+				gbc_gelsParticlesField);
+		gelsParticlesField.setEditable(true);
 
 		JLabel lblRollColorclarity = new JLabel("Roll Color/Clarity");
 		GridBagConstraints gbc_lblRollColorclarity = new GridBagConstraints();
@@ -314,14 +320,15 @@ public class qaChecks {
 
 		String[] color = { "", "color in spec", "not in spec-green",
 				"not in spec-blue", "not in spec-metallic", "not in spec-clear" };
-		comboBox_8 = new JComboBox(color);
-		GridBagConstraints gbc_comboBox_8 = new GridBagConstraints();
-		gbc_comboBox_8.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_8.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_8.gridx = 1;
-		gbc_comboBox_8.gridy = 12;
-		getFrame().getContentPane().add(comboBox_8, gbc_comboBox_8);
-		comboBox_8.setEditable(true);
+		rollColorClarityField = new JComboBox(color);
+		GridBagConstraints gbc_rollColorClarityField = new GridBagConstraints();
+		gbc_rollColorClarityField.insets = new Insets(0, 0, 5, 0);
+		gbc_rollColorClarityField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_rollColorClarityField.gridx = 1;
+		gbc_rollColorClarityField.gridy = 12;
+		getFrame().getContentPane().add(rollColorClarityField,
+				gbc_rollColorClarityField);
+		rollColorClarityField.setEditable(true);
 
 		JLabel lblPackaging = new JLabel("Packaging");
 		GridBagConstraints gbc_lblPackaging = new GridBagConstraints();
@@ -334,14 +341,14 @@ public class qaChecks {
 		String[] packaging = { "", "packaging correct", "core tag wrong",
 				"box label wrong", "box label not square", "box label torn",
 				"box label print inconsistent" };
-		comboBox_9 = new JComboBox(packaging);
-		GridBagConstraints gbc_comboBox_9 = new GridBagConstraints();
-		gbc_comboBox_9.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_9.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_9.gridx = 1;
-		gbc_comboBox_9.gridy = 13;
-		getFrame().getContentPane().add(comboBox_9, gbc_comboBox_9);
-		comboBox_9.setEditable(true);
+		packagingField = new JComboBox(packaging);
+		GridBagConstraints gbc_packagingField = new GridBagConstraints();
+		gbc_packagingField.insets = new Insets(0, 0, 5, 0);
+		gbc_packagingField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_packagingField.gridx = 1;
+		gbc_packagingField.gridy = 13;
+		getFrame().getContentPane().add(packagingField, gbc_packagingField);
+		packagingField.setEditable(true);
 
 		JLabel lblPallet = new JLabel("Pallet");
 		GridBagConstraints gbc_lblPallet = new GridBagConstraints();
@@ -354,14 +361,14 @@ public class qaChecks {
 		String[] pallet = { "", "correct type, good condition",
 				"broken deck boards", "contamination: mold, dirt, pests",
 				"exposed nails", "missing nails" };
-		comboBox_10 = new JComboBox(pallet);
-		GridBagConstraints gbc_comboBox_10 = new GridBagConstraints();
-		gbc_comboBox_10.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_10.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_10.gridx = 1;
-		gbc_comboBox_10.gridy = 14;
-		getFrame().getContentPane().add(comboBox_10, gbc_comboBox_10);
-		comboBox_10.setEditable(true);
+		palletField = new JComboBox(pallet);
+		GridBagConstraints gbc_palletField = new GridBagConstraints();
+		gbc_palletField.insets = new Insets(0, 0, 5, 0);
+		gbc_palletField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_palletField.gridx = 1;
+		gbc_palletField.gridy = 14;
+		getFrame().getContentPane().add(palletField, gbc_palletField);
+		palletField.setEditable(true);
 
 		JLabel lblTensionSettings = new JLabel("Tension Settings:");
 		GridBagConstraints gbc_lblTensionSettings = new GridBagConstraints();
@@ -379,14 +386,15 @@ public class qaChecks {
 		gbc_lblCollapser.gridy = 16;
 		getFrame().getContentPane().add(lblCollapser, gbc_lblCollapser);
 
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 1;
-		gbc_textField_1.gridy = 16;
-		getFrame().getContentPane().add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		collapserTensionSettingsField = new JTextField();
+		GridBagConstraints gbc_collapserTensionSettingsField = new GridBagConstraints();
+		gbc_collapserTensionSettingsField.insets = new Insets(0, 0, 5, 0);
+		gbc_collapserTensionSettingsField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_collapserTensionSettingsField.gridx = 1;
+		gbc_collapserTensionSettingsField.gridy = 16;
+		getFrame().getContentPane().add(collapserTensionSettingsField,
+				gbc_collapserTensionSettingsField);
+		collapserTensionSettingsField.setColumns(10);
 
 		JLabel lblCenterStand = new JLabel("Center Stand");
 		GridBagConstraints gbc_lblCenterStand = new GridBagConstraints();
@@ -396,14 +404,15 @@ public class qaChecks {
 		gbc_lblCenterStand.gridy = 17;
 		getFrame().getContentPane().add(lblCenterStand, gbc_lblCenterStand);
 
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 1;
-		gbc_textField_2.gridy = 17;
-		getFrame().getContentPane().add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		centerStandTensionSettingsField = new JTextField();
+		GridBagConstraints gbc_centerStandTensionSettingsField = new GridBagConstraints();
+		gbc_centerStandTensionSettingsField.insets = new Insets(0, 0, 5, 0);
+		gbc_centerStandTensionSettingsField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_centerStandTensionSettingsField.gridx = 1;
+		gbc_centerStandTensionSettingsField.gridy = 17;
+		getFrame().getContentPane().add(centerStandTensionSettingsField,
+				gbc_centerStandTensionSettingsField);
+		centerStandTensionSettingsField.setColumns(10);
 
 		JLabel lblWinder = new JLabel("Winder");
 		GridBagConstraints gbc_lblWinder = new GridBagConstraints();
@@ -413,14 +422,15 @@ public class qaChecks {
 		gbc_lblWinder.gridy = 18;
 		getFrame().getContentPane().add(lblWinder, gbc_lblWinder);
 
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 1;
-		gbc_textField_3.gridy = 18;
-		getFrame().getContentPane().add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		winderTensionSettingsField = new JTextField();
+		GridBagConstraints gbc_winderTensionSettingsField = new GridBagConstraints();
+		gbc_winderTensionSettingsField.insets = new Insets(0, 0, 5, 0);
+		gbc_winderTensionSettingsField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_winderTensionSettingsField.gridx = 1;
+		gbc_winderTensionSettingsField.gridy = 18;
+		getFrame().getContentPane().add(winderTensionSettingsField,
+				gbc_winderTensionSettingsField);
+		winderTensionSettingsField.setColumns(10);
 
 		JLabel lblCollapserTemperature = new JLabel("Collapser Temperature");
 		GridBagConstraints gbc_lblCollapserTemperature = new GridBagConstraints();
@@ -431,14 +441,15 @@ public class qaChecks {
 		getFrame().getContentPane().add(lblCollapserTemperature,
 				gbc_lblCollapserTemperature);
 
-		textField_4 = new JTextField();
-		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_4.gridx = 1;
-		gbc_textField_4.gridy = 19;
-		getFrame().getContentPane().add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
+		collapserTemperatureField = new JTextField();
+		GridBagConstraints gbc_collapserTemperatureField = new GridBagConstraints();
+		gbc_collapserTemperatureField.insets = new Insets(0, 0, 5, 0);
+		gbc_collapserTemperatureField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_collapserTemperatureField.gridx = 1;
+		gbc_collapserTemperatureField.gridy = 19;
+		getFrame().getContentPane().add(collapserTemperatureField,
+				gbc_collapserTemperatureField);
+		collapserTemperatureField.setColumns(10);
 
 		JLabel lblComments = new JLabel("Comments");
 		GridBagConstraints gbc_lblComments = new GridBagConstraints();
@@ -447,13 +458,13 @@ public class qaChecks {
 		gbc_lblComments.gridy = 20;
 		getFrame().getContentPane().add(lblComments, gbc_lblComments);
 
-		textArea = new JTextArea();
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.insets = new Insets(0, 0, 5, 0);
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 1;
-		gbc_textArea.gridy = 20;
-		frame.getContentPane().add(textArea, gbc_textArea);
+		commentsField = new JTextArea();
+		GridBagConstraints gbc_commentsField = new GridBagConstraints();
+		gbc_commentsField.insets = new Insets(0, 0, 5, 0);
+		gbc_commentsField.fill = GridBagConstraints.BOTH;
+		gbc_commentsField.gridx = 1;
+		gbc_commentsField.gridy = 20;
+		frame.getContentPane().add(commentsField, gbc_commentsField);
 
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.addActionListener(new ActionListener() {
@@ -461,11 +472,11 @@ public class qaChecks {
 				try {
 					submitQASQL();
 					// increment set number
-					String num = textField_5.getText();
+					String num = setNumberField.getText();
 					int num2 = Integer.valueOf(num);
 					num2++;
 					num = Integer.toString(num2);
-					textField_5.setText(num);
+					setNumberField.setText(num);
 					JOptionPane.showMessageDialog(null, "QA Audit submitted");
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
@@ -497,29 +508,32 @@ public class qaChecks {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
-		String setNumber = textField_5.getText().trim();
+		String setNumber = setNumberField.getText().trim();
 		int setInt = convertToInt(setNumber);
-		String workOrder1 = textField_6.getText().trim();
-		String workOrder2 = textField_7.getText().trim();
+		String workOrder1 = workOrder1Field.getText().trim();
+		String workOrder2 = workOrder2Field.getText().trim();
 		int workInt1 = convertToInt(workOrder1);
 		int workInt2 = convertToInt(workOrder2);
-		String width = textField.getText();
-		String rollEnds = (String) comboBox.getSelectedItem();
-		String coreCentering = (String) comboBox_1.getSelectedItem();
-		String coreQuality = (String) comboBox_2.getSelectedItem();
-		String wrinkles = (String) comboBox_3.getSelectedItem();
-		String dieLines = (String) comboBox_4.getSelectedItem();
-		String coldFlow = (String) comboBox_5.getSelectedItem();
-		String holes = (String) comboBox_6.getSelectedItem();
-		String gels = (String) comboBox_7.getSelectedItem();
-		String rollColor = (String) comboBox_8.getSelectedItem();
-		String packaging = (String) comboBox_9.getSelectedItem();
-		String pallet = (String) comboBox_10.getSelectedItem();
-		String collapserTension = textField_1.getText().trim();
-		String centerStandTension = textField_2.getText().trim();
-		String winderTension = textField_3.getText().trim();
-		String collapserTemperature = textField_4.getText().trim();
-		String comments = textArea.getText().trim();
+		String width = actualWidthField.getText();
+		String rollEnds = (String) rollEndsField.getSelectedItem();
+		String coreCentering = (String) coreCenteringField.getSelectedItem();
+		String coreQuality = (String) coreQualityField.getSelectedItem();
+		String wrinkles = (String) wrinklesField.getSelectedItem();
+		String dieLines = (String) dieLinesField.getSelectedItem();
+		String coldFlow = (String) dieLinesField_1.getSelectedItem();
+		String holes = (String) holesField.getSelectedItem();
+		String gels = (String) gelsParticlesField.getSelectedItem();
+		String rollColor = (String) rollColorClarityField.getSelectedItem();
+		String packaging = (String) packagingField.getSelectedItem();
+		String pallet = (String) palletField.getSelectedItem();
+		String collapserTension = collapserTensionSettingsField.getText()
+				.trim();
+		String centerStandTension = centerStandTensionSettingsField.getText()
+				.trim();
+		String winderTension = winderTensionSettingsField.getText().trim();
+		String collapserTemperature = collapserTemperatureField.getText()
+				.trim();
+		String comments = commentsField.getText().trim();
 
 		weights.sqlConnection();
 		try {

@@ -159,9 +159,9 @@ public class weights {
 	private double poundsPerHour;
 	private double rollLength;
 	private double lineSpeed;
-	private JTextField workOrderOneField;
+	static JTextField workOrderOneField;
 	private JLabel lblProduct_2;
-	private JTextField textField_39;
+	static JTextField workOrderTwoField;
 	private JLabel lblProduct_3;
 	private JLabel lblLineNumber;
 	static JComboBox comboBox;
@@ -191,7 +191,6 @@ public class weights {
 	private JTable table;
 	private JTable table_1;
 	private JButton btnClearSets;
-	qaChecks window = new qaChecks();
 	private JButton btnRecalculateOf;
 
 	/**
@@ -541,9 +540,9 @@ public class weights {
 		lblProduct_1 = new JLabel("Work Order Number");
 		panel.add(lblProduct_1, "cell 1 18");
 
-		textField_39 = new JTextField();
-		panel.add(textField_39, "cell 2 18");
-		textField_39.setColumns(10);
+		workOrderTwoField = new JTextField();
+		panel.add(workOrderTwoField, "cell 2 18");
+		workOrderTwoField.setColumns(10);
 
 		lblRollsset_1 = new JLabel("Rolls/Set");
 		panel.add(lblRollsset_1, "cell 1 19");
@@ -821,6 +820,7 @@ public class weights {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
+							qaChecks window = new qaChecks();
 							window.getFrame().setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -1143,7 +1143,7 @@ public class weights {
 			s2 = Integer.valueOf(setNumber);
 		} else
 			s2 = 0;
-		workOrder = textField_39.getText().trim();
+		workOrder = workOrderTwoField.getText().trim();
 		if (!workOrder.equals("")) {
 			workOrderInt = Integer.valueOf(workOrder);
 		} else
@@ -1216,7 +1216,7 @@ public class weights {
 		double actual1Double = convertToDouble(actualSet1Wt);
 
 		// get product 2 work order number , change to int
-		String workOrder2 = textField_39.getText().trim();
+		String workOrder2 = workOrderTwoField.getText().trim();
 		Integer workOrder2Int = convertToInt(workOrder2);
 
 		// get product 2 rolls per set, change to decimal
