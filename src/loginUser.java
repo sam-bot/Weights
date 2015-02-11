@@ -6,6 +6,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -19,7 +20,7 @@ public class loginUser {
 
 	private JFrame frame;
 	private JTextField userNameField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
 	private JButton btnSubmit;
 
 	/**
@@ -65,7 +66,7 @@ public class loginUser {
 		JLabel lblPassword = new JLabel("Password");
 		frame.getContentPane().add(lblPassword, "cell 0 1,alignx trailing");
 
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
 		frame.getContentPane().add(passwordField, "cell 1 1,growx");
 		passwordField.setColumns(10);
 

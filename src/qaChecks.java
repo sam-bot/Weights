@@ -36,7 +36,7 @@ public class qaChecks {
 	private JTextField winderTensionSettingsField;
 	private JTextField collapserTemperatureField;
 	private JTextField setNumberField;
-	private JTextField workOrder1Field;
+	JTextField workOrder1Field;
 	private JComboBox rollEndsField;
 	private JComboBox coreQualityField;
 	private JComboBox wrinklesField;
@@ -48,7 +48,7 @@ public class qaChecks {
 	private JComboBox packagingField;
 	private JComboBox palletField;
 	private JComboBox coreCenteringField;
-	private JTextField workOrder2Field;
+	JTextField workOrder2Field;
 	private JTextArea commentsField;
 
 	/**
@@ -117,8 +117,6 @@ public class qaChecks {
 		frame.getContentPane().add(lblWorkOrderNumber, gbc_lblWorkOrderNumber);
 
 		workOrder1Field = new JTextField();
-		if (!(weights.workOrderOneField == null))
-			workOrder1Field.setText(weights.workOrderOneField.getText());
 		GridBagConstraints gbc_workOrder1Field = new GridBagConstraints();
 		gbc_workOrder1Field.insets = new Insets(0, 0, 5, 0);
 		gbc_workOrder1Field.fill = GridBagConstraints.HORIZONTAL;
@@ -136,8 +134,6 @@ public class qaChecks {
 		frame.getContentPane().add(lblWorkOrder, gbc_lblWorkOrder);
 
 		workOrder2Field = new JTextField();
-		if (!(weights.workOrderTwoField == null))
-		workOrder2Field.setText(weights.workOrderTwoField.getText());
 		GridBagConstraints gbc_workOrder2Field = new GridBagConstraints();
 		gbc_workOrder2Field.insets = new Insets(0, 0, 5, 0);
 		gbc_workOrder2Field.fill = GridBagConstraints.HORIZONTAL;

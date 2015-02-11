@@ -191,6 +191,7 @@ public class weights {
 	private JTable table;
 	private JTable table_1;
 	private JButton btnClearSets;
+	qaChecks window = new qaChecks();
 	private JButton btnRecalculateOf;
 
 	/**
@@ -259,7 +260,6 @@ public class weights {
 		panel.add(setNumberField, "cell 1 0,growx");
 		setNumberField.setFont(setNumberField.getFont().deriveFont(newSize2));
 		setNumberField.setText("1");
-
 		lblRollLength = new JLabel("Roll Length");
 		panel.add(lblRollLength, "flowx,cell 2 0");
 		lblRollLength.setFont(lblRollLength.getFont().deriveFont(newSize2));
@@ -820,7 +820,16 @@ public class weights {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							qaChecks window = new qaChecks();
+							// populate work order fields from weights
+							if (!(workOrderOneField == null))
+								window.workOrder1Field
+										.setText(weights.workOrderOneField
+												.getText());
+
+							if (!(weights.workOrderTwoField == null))
+								window.workOrder2Field
+										.setText(weights.workOrderTwoField
+												.getText());
 							window.getFrame().setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
