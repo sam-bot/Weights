@@ -1,5 +1,6 @@
 package Arr;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,11 +17,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.JButton;
 
 // view information from all production areas
-public class arrViewer {
+public class arrViewer extends JFrame {
 	JComboBox<String> departmentBox;
 	private JFrame frame;
 	private JPanel panel;
@@ -67,7 +72,6 @@ public class arrViewer {
 				new MigLayout("", "[grow][grow]", "[][grow]"));
 		String[] departments = { "", "Driller", "Trimmer", "Extrusion",
 				"SOC's", "Housekeeping Audits", "QA Audits" };
-
 		panel = new JPanel();
 		frame.getContentPane().add(panel, "cell 0 0 2 1,grow");
 		panel.setLayout(new MigLayout("", "[][grow][][grow]", "[][]"));
@@ -152,12 +156,13 @@ public class arrViewer {
 			public void actionPerformed(ActionEvent e) {
 				if (departmentBox.getSelectedItem() == "Driller") {
 					arrViewer.model4.setColumnCount(0);
-					arrViewer.model4.addColumn("Operator");
 					arrViewer.model4.addColumn("Work Order");
+					arrViewer.model4.addColumn("Operator");
 					arrViewer.model4.addColumn("Shift");
 					arrViewer.model4.addColumn("Date Time");
 					arrViewer.model4.addColumn("Extruded Item");
-					arrViewer.model4.addColumn("Trimmed Item");
+					arrViewer.model4.addColumn("Extruded Core Tag");
+					arrViewer.model4.addColumn("Drilled Core Tag Item");
 					arrViewer.model4.addColumn("Drilled Item");
 					arrViewer.model4.addColumn("Formula");
 					arrViewer.model4.addColumn("Gauge");
@@ -167,11 +172,50 @@ public class arrViewer {
 				} else if (departmentBox.getSelectedItem() == "Trimmer") {
 				} else if (departmentBox.getSelectedItem() == "Extrusion") {
 				} else if (departmentBox.getSelectedItem() == "SOC's") {
+
 				} else if (departmentBox.getSelectedItem() == "QA Audits") {
+					arrViewer.model4.setColumnCount(0);
+					arrViewer.model4.addColumn("Work Order");
+					arrViewer.model4.addColumn("User");
+					arrViewer.model4.addColumn("DateTime");
+					arrViewer.model4.addColumn("Shift");
+					arrViewer.model4.addColumn("Roll ID");
+					arrViewer.model4.addColumn("Knife Movement");
+					arrViewer.model4.addColumn("Core Centering");
+					arrViewer.model4.addColumn("Counter");
+					arrViewer.model4.addColumn("Wrinkles");
+					arrViewer.model4.addColumn("Packaging");
+					arrViewer.model4.addColumn("Die Lines");
+					arrViewer.model4.addColumn("Width");
+					arrViewer.model4.addColumn("Edge Quality");
+					arrViewer.model4.addColumn("Burn");
+					arrViewer.model4.addColumn("Weight");
+					arrViewer.model4.addColumn("Comments");
 				} else if (departmentBox.getSelectedItem() == "Housekeeping Audits") {
+					arrViewer.model4.setColumnCount(0);
+					arrViewer.model4.addColumn("WorkStation");
+					arrViewer.model4.addColumn("Shift");
+					arrViewer.model4.addColumn("DateTime");
+					arrViewer.model4.addColumn("Sweep Mixer");
+					arrViewer.model4.addColumn("Clean Trough");
+					arrViewer.model4.addColumn("Scrap Core Inspection");
+					arrViewer.model4.addColumn("Extruder Screens");
+					arrViewer.model4.addColumn("Scrap Usage");
+					arrViewer.model4.addColumn("Guard Hopper Lid");
+					arrViewer.model4.addColumn("Guard Extruder Right");
+					arrViewer.model4.addColumn("Guard Extruder Left");
+					arrViewer.model4.addColumn("Containment Doors");
+					arrViewer.model4.addColumn("Grinder Chute");
+					arrViewer.model4.addColumn("Grinder Latch");
+					arrViewer.model4.addColumn("Grinder Door");
+					arrViewer.model4.addColumn("Winder Right Front");
+					arrViewer.model4.addColumn("Winder Right Rear");
+					arrViewer.model4.addColumn("Winder Left Front");
+					arrViewer.model4.addColumn("Winder Left Rear");
 				} else if (departmentBox.getSelectedItem() == "") {
 					arrViewer.model4.setColumnCount(0);
 				}
+				columnWidth();
 			}
 		});
 		panel.add(btnSubmit, "cell 2 1");
@@ -179,8 +223,56 @@ public class arrViewer {
 		scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, "cell 0 1 2 1,grow");
 
-		table = new JTable(arrViewer.model4);
+		table = new JTable(arrViewer.model4) {
+			@Override
+			public boolean getScrollableTracksViewportWidth() {
+				return getPreferredSize().width < getParent().getWidth();
+			}
+
+			@Override
+			public void doLayout() {
+				TableColumn resizingColumn = null;
+				if (tableHeader != null)
+					resizingColumn = tableHeader.getResizingColumn();
+				// Viewport size changed. May need to increase columns widths
+				if (resizingColumn == null) {
+					setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+					super.doLayout();
+				}
+				// Specific column resized. Reset preferred widths
+				else {
+					TableColumnModel tcm = getColumnModel();
+					for (int i = 0; i < tcm.getColumnCount(); i++) {
+						TableColumn tc = tcm.getColumn(i);
+						tc.setPreferredWidth(tc.getWidth());
+					}
+					// Columns don't fill the viewport, invoke default layout
+					if (tcm.getTotalColumnWidth() < getParent().getWidth())
+						setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+					super.doLayout();
+				}
+				setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			}
+		};
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		scrollPane.setViewportView(table);
 	}
 
+	public void columnWidth() {
+		for (int i = 0; i < table.getColumnCount(); i++) {
+			DefaultTableColumnModel colModel = (DefaultTableColumnModel) table
+					.getColumnModel();
+			TableColumn col = colModel.getColumn(i);
+			int width = 0;
+
+			TableCellRenderer renderer = col.getHeaderRenderer();
+			if (renderer == null) {
+				renderer = table.getTableHeader().getDefaultRenderer();
+			}
+			Component comp = renderer.getTableCellRendererComponent(table,
+					col.getHeaderValue(), false, false, 0, 0);
+			width = comp.getPreferredSize().width;
+			col.setPreferredWidth(width + 2);
+		}
+	}
 }
