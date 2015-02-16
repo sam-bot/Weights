@@ -2,18 +2,13 @@ package Arr;
 
 import java.awt.Component;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
