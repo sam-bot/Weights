@@ -238,6 +238,7 @@ public class processConditions {
 	private JLabel label_36;
 	private JTextField workOrder4Field;
 	private JPanel panel_2;
+	private JButton btnHistorical;
 
 	/**
 	 * Launch the application.
@@ -268,7 +269,7 @@ public class processConditions {
 	private void initialize(String operator) {
 		setFrame(new JFrame("Standard Operating Conditions"));
 		getFrame().setBounds(100, 1, 1055, 855);
-		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame()
 				.getContentPane()
 				.setLayout(
@@ -786,6 +787,9 @@ public class processConditions {
 		panel_2.add(jNumberField, "cell 11 1");
 		jNumberField.setColumns(10);
 		list.add(jNumberField);
+		
+		btnHistorical = new JButton("Historical");
+		panel_2.add(btnHistorical, "cell 13 1");
 		label_4 = new JLabel("Table Speed");
 		getFrame().getContentPane()
 				.add(label_4, "cell 0 1,alignx center,growy");

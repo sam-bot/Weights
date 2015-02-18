@@ -1,4 +1,5 @@
 package Arr;
+
 import java.awt.EventQueue;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -21,6 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class arrExtrusion {
 
@@ -28,6 +31,7 @@ public class arrExtrusion {
 	private ArrayList<JTextField> fieldList;
 	private JComboBox<String> workStationBox;
 	private JTextField operatorField;
+	private String operator;
 	private JTextField workOrderField;
 	private JComboBox<String> shiftBox;
 	private JTextField dateTimeField;
@@ -64,6 +68,9 @@ public class arrExtrusion {
 	private JButton btnAudit;
 	private JButton btnSoc;
 	private JButton btnShiftChecklist;
+	private arrQaAudit qaWindow = new arrQaAudit();
+	private arrHousekeeping housekeepingWindow = new arrHousekeeping();
+	private processConditions socWindow;
 
 	/**
 	 * Launch the application.
@@ -155,16 +162,17 @@ public class arrExtrusion {
 
 		panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, "cell 0 1 3 1,growx");
-		panel_1.setLayout(new MigLayout("", "[grow][grow][grow][grow]", "[][][][][]"));
+		panel_1.setLayout(new MigLayout("", "[grow][grow][grow][grow]",
+				"[][][][][]"));
 
 		lblWorkOrder = new JLabel("Work Order");
 		panel_1.add(lblWorkOrder, "cell 1 0");
 
 		lblItemNumber_1 = new JLabel("Item Number");
 		panel_1.add(lblItemNumber_1, "cell 2 0");
-		
-				lblProductionWidth = new JLabel("Target Weight");
-				panel_1.add(lblProductionWidth, "cell 3 0");
+
+		lblProductionWidth = new JLabel("Target Weight");
+		panel_1.add(lblProductionWidth, "cell 3 0");
 
 		label = new JLabel("#1");
 		panel_1.add(label, "cell 0 1,alignx trailing");
@@ -176,7 +184,7 @@ public class arrExtrusion {
 		itemNumberOne = new JTextField();
 		panel_1.add(itemNumberOne, "cell 2 1");
 		itemNumberOne.setColumns(10);
-		
+
 		targetWeightOne = new JTextField();
 		targetWeightOne.setColumns(10);
 		panel_1.add(targetWeightOne, "cell 3 1");
@@ -191,7 +199,7 @@ public class arrExtrusion {
 		itemNumberTwo = new JTextField();
 		panel_1.add(itemNumberTwo, "cell 2 2");
 		itemNumberTwo.setColumns(10);
-		
+
 		targetWeightTwo = new JTextField();
 		targetWeightTwo.setColumns(10);
 		panel_1.add(targetWeightTwo, "cell 3 2");
@@ -206,7 +214,7 @@ public class arrExtrusion {
 		itemNumberThree = new JTextField();
 		panel_1.add(itemNumberThree, "cell 2 3");
 		itemNumberThree.setColumns(10);
-		
+
 		targetWeightThree = new JTextField();
 		targetWeightThree.setColumns(10);
 		panel_1.add(targetWeightThree, "cell 3 3");
@@ -221,30 +229,37 @@ public class arrExtrusion {
 		itemNumberFour = new JTextField();
 		panel_1.add(itemNumberFour, "cell 2 4");
 		itemNumberFour.setColumns(10);
-		
+
 		targetWeightFour = new JTextField();
 		targetWeightFour.setColumns(10);
 		panel_1.add(targetWeightFour, "cell 3 4");
-		
+
 		panel_2 = new JPanel();
 		panel_2.setBackground(Color.BLACK);
 		frame.getContentPane().add(panel_2, "cell 0 2,growx");
-		
+
 		label_4 = new JLabel("Extruded Roll");
 		label_4.setForeground(Color.WHITE);
 		panel_2.add(label_4);
-		
+
 		coreTagNumberField = new JTextField();
 		frame.getContentPane().add(coreTagNumberField, "flowx,cell 1 2,growx");
 		coreTagNumberField.setColumns(10);
-		
+
 		rollWeightField = new JTextField();
+		rollWeightField.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				
+				coreTagNumberField.requestFocus();
+			}
+		});
 		frame.getContentPane().add(rollWeightField, "cell 2 2,growx");
 		rollWeightField.setColumns(10);
-		
+
 		scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, "cell 0 3 3 1,grow");
-		
+
 		table = new JTable(arrExtrusion.model5);
 		arrExtrusion.model5.addColumn("Work Order#");
 		arrExtrusion.model5.addColumn("Set#");
@@ -253,18 +268,59 @@ public class arrExtrusion {
 		arrExtrusion.model5.addColumn("DateTime");
 		arrExtrusion.model5.addColumn("Film#s");
 		scrollPane.setViewportView(table);
-		
+
 		panel_3 = new JPanel();
 		frame.getContentPane().add(panel_3, "cell 0 4 3 1,grow");
 		panel_3.setLayout(new MigLayout("", "[grow][grow][grow]", "[][]"));
-		
+
 		btnAudit = new JButton("Audit");
+		btnAudit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							qaWindow.getFrame().setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+
 		panel_3.add(btnAudit, "cell 0 0,alignx center");
-		
+
 		btnSoc = new JButton("SOC");
+		btnSoc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							socWindow=new processConditions("placeholder");
+							socWindow.getFrame().setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		panel_3.add(btnSoc, "cell 1 0,alignx center");
-		
+
 		btnShiftChecklist = new JButton("Shift Checklist");
+		btnShiftChecklist.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							housekeepingWindow.getFrame().setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		panel_3.add(btnShiftChecklist, "cell 2 0,alignx center");
 	}
 

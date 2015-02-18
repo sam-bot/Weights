@@ -57,7 +57,7 @@ public class arrHousekeeping {
 			public void run() {
 				try {
 					arrHousekeeping window = new arrHousekeeping();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,15 +76,15 @@ public class arrHousekeeping {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Extrusion Checklist");
-		frame.setBounds(100, 100, 531, 444);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(
+		setFrame(new JFrame("Extrusion Checklist"));
+		getFrame().setBounds(100, 100, 531, 444);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getFrame().getContentPane().setLayout(
 				new MigLayout("", "[266.00,grow][grow]",
 						"[][][][][][][][][grow][]"));
 		list = new ArrayList<JCheckBox>();
 		JPanel panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2, "cell 0 0 2 1,growx");
+		getFrame().getContentPane().add(panel_2, "cell 0 0 2 1,growx");
 		panel_2.setLayout(new MigLayout("", "[][][][][][]", "[][]"));
 
 		JLabel lblWorkstation = new JLabel("Workstation");
@@ -109,7 +109,7 @@ public class arrHousekeeping {
 		dateField.setColumns(10);
 
 		JPanel housekeepingChecklistPanel = new JPanel();
-		frame.getContentPane().add(housekeepingChecklistPanel,
+		getFrame().getContentPane().add(housekeepingChecklistPanel,
 				"flowx,cell 0 1,growx");
 		JLabel lblhousekeepingChecklist = new JLabel(
 				"*** Housekeeping Checklist ***");
@@ -117,7 +117,7 @@ public class arrHousekeeping {
 		housekeepingChecklistPanel.setBackground(Color.BLACK);
 
 		JPanel dailyMachinePanel = new JPanel();
-		frame.getContentPane().add(dailyMachinePanel, "cell 1 1,growx");
+		getFrame().getContentPane().add(dailyMachinePanel, "cell 1 1,growx");
 
 		JLabel lblDailyMachine = new JLabel(
 				"*** Daily Machine Guarding Checklist ***");
@@ -127,11 +127,11 @@ public class arrHousekeeping {
 		 boxSweepTableFloor = new JCheckBox(
 				"Sweep Table Floor Around Mixer");
 		list.add(boxSweepTableFloor);
-		frame.getContentPane().add(boxSweepTableFloor, "cell 0 2");
+		getFrame().getContentPane().add(boxSweepTableFloor, "cell 0 2");
 		lblhousekeepingChecklist.setForeground(Color.WHITE);
 
 		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, "cell 1 2 1 8,grow");
+		getFrame().getContentPane().add(panel_1, "cell 1 2 1 8,grow");
 		panel_1.setLayout(new MigLayout("", "[]", "[][][][][][][][][][][]"));
 
 		boxGuardHopperLid = new JCheckBox("Guard Hopper Lid");
@@ -180,14 +180,14 @@ public class arrHousekeeping {
 		boxCleanTroughTake = new JCheckBox(
 				"Clean Trough Take Up Area with Air Nozzle");
 		list.add(boxCleanTroughTake);
-		frame.getContentPane().add(boxCleanTroughTake, "cell 0 3");
+		getFrame().getContentPane().add(boxCleanTroughTake, "cell 0 3");
 
 		boxScrapCoreInspection = new JCheckBox("Scrap Core Inspection");
 		list.add(boxScrapCoreInspection);
-		frame.getContentPane().add(boxScrapCoreInspection, "cell 0 4");
+		getFrame().getContentPane().add(boxScrapCoreInspection, "cell 0 4");
 
 		JPanel processChecklistPanel = new JPanel();
-		frame.getContentPane().add(processChecklistPanel,
+		getFrame().getContentPane().add(processChecklistPanel,
 				"flowx,cell 0 5,growx");
 		processChecklistPanel.setBackground(Color.BLACK);
 		JLabel lblProcessChecklist = new JLabel("*** Process Checklist ***");
@@ -196,11 +196,11 @@ public class arrHousekeeping {
 		extruderWaterScreensBox = new JCheckBox(
 				"Extruder Water Screens Cleaned");
 		list.add(extruderWaterScreensBox);
-		frame.getContentPane().add(extruderWaterScreensBox,
+		getFrame().getContentPane().add(extruderWaterScreensBox,
 				"cell 0 6,aligny top");
 
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "flowx,cell 0 7 1 2,aligny bottom");
+		getFrame().getContentPane().add(panel, "flowx,cell 0 7 1 2,aligny bottom");
 		panel.setLayout(new MigLayout("", "[][][]", "[][][]"));
 
 		JPanel scrapUsagePanel = new JPanel();
@@ -224,7 +224,7 @@ public class arrHousekeeping {
 		panel.add(boxYes, "cell 2 2");
 
 		JPanel panel_3 = new JPanel();
-		frame.getContentPane().add(panel_3, "cell 0 9");
+		getFrame().getContentPane().add(panel_3, "cell 0 9");
 
 		JButton btnAbortChanges = new JButton("Abort Changes");
 		btnAbortChanges.addActionListener(new ActionListener() {
@@ -314,5 +314,13 @@ public class arrHousekeeping {
 			return 1;
 		return 0;
 
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 }

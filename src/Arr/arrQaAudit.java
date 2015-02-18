@@ -56,7 +56,7 @@ public class arrQaAudit {
 			public void run() {
 				try {
 					arrQaAudit window = new arrQaAudit();
-					window.frame.setVisible(true);
+					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -75,10 +75,10 @@ public class arrQaAudit {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Product Quality Audit");
-		frame.setBounds(100, 100, 628, 384);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(
+		setFrame(new JFrame("Product Quality Audit"));
+		getFrame().setBounds(100, 100, 628, 384);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getFrame().getContentPane().setLayout(
 				new MigLayout("", "[][][][][]",
 						"[grow][][][][][][][][grow][grow][][]"));
 
@@ -96,24 +96,24 @@ public class arrQaAudit {
 		allButtons = new ArrayList<ButtonGroup>();
 
 		JLabel lblUsername = new JLabel("Username");
-		frame.getContentPane().add(lblUsername, "cell 0 0,alignx right");
+		getFrame().getContentPane().add(lblUsername, "cell 0 0,alignx right");
 
 		usernameField = new JTextField();
-		frame.getContentPane().add(usernameField, "cell 1 0 2 1,growx");
+		getFrame().getContentPane().add(usernameField, "cell 1 0 2 1,growx");
 		usernameField.setColumns(10);
 
 		JLabel lblWorkStation = new JLabel("Work Station");
-		frame.getContentPane().add(lblWorkStation, "cell 3 0,alignx right");
+		getFrame().getContentPane().add(lblWorkStation, "cell 3 0,alignx right");
 
 		workStationField = new JTextField();
-		frame.getContentPane().add(workStationField, "cell 4 0,growx");
+		getFrame().getContentPane().add(workStationField, "cell 4 0,growx");
 		workStationField.setColumns(10);
 
 		JLabel lblShiftDate = new JLabel("Date & Time");
-		frame.getContentPane().add(lblShiftDate, "cell 0 1,alignx trailing");
+		getFrame().getContentPane().add(lblShiftDate, "cell 0 1,alignx trailing");
 
 		shiftDateField = new JTextField();
-		frame.getContentPane().add(shiftDateField, "cell 1 1 2 1,growx");
+		getFrame().getContentPane().add(shiftDateField, "cell 1 1 2 1,growx");
 		shiftDateField.setColumns(10);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
@@ -122,119 +122,119 @@ public class arrQaAudit {
 		shiftDateField.setEditable(false);
 
 		JLabel lblShift = new JLabel("Shift");
-		frame.getContentPane().add(lblShift, "cell 3 1,alignx trailing");
+		getFrame().getContentPane().add(lblShift, "cell 3 1,alignx trailing");
 		String[] shifts = { "", "A", "B", "C", "D" };
 		shiftComboBox = new JComboBox(shifts);
-		frame.getContentPane().add(shiftComboBox, "cell 4 1,growx");
+		getFrame().getContentPane().add(shiftComboBox, "cell 4 1,growx");
 		JLabel lblKnifeMovement = new JLabel("Knife Movement");
-		frame.getContentPane().add(lblKnifeMovement, "cell 0 2,alignx right");
+		getFrame().getContentPane().add(lblKnifeMovement, "cell 0 2,alignx right");
 
 		JRadioButton knifeInSpec = new JRadioButton("In Spec");
 
-		frame.getContentPane().add(knifeInSpec, "flowx,cell 1 2");
+		getFrame().getContentPane().add(knifeInSpec, "flowx,cell 1 2");
 
 		JRadioButton knifeOutOfSpec = new JRadioButton("Out of Spec");
 
-		frame.getContentPane().add(knifeOutOfSpec, "cell 1 2");
+		getFrame().getContentPane().add(knifeOutOfSpec, "cell 1 2");
 
 		JLabel lblRollId = new JLabel("Roll ID");
-		frame.getContentPane().add(lblRollId, "cell 3 2,alignx right");
+		getFrame().getContentPane().add(lblRollId, "cell 3 2,alignx right");
 
 		rollIdField = new JTextField();
-		frame.getContentPane().add(rollIdField, "cell 4 2,growx");
+		getFrame().getContentPane().add(rollIdField, "cell 4 2,growx");
 		rollIdField.setColumns(10);
 
 		JLabel lblCenteredOnCore = new JLabel("Centered On Core");
-		frame.getContentPane().add(lblCenteredOnCore, "cell 0 3,alignx right");
+		getFrame().getContentPane().add(lblCenteredOnCore, "cell 0 3,alignx right");
 
 		JRadioButton centeredInSpec = new JRadioButton("In Spec");
 
-		frame.getContentPane().add(centeredInSpec, "flowx,cell 1 3");
+		getFrame().getContentPane().add(centeredInSpec, "flowx,cell 1 3");
 
 		JRadioButton centeredOutOfSpec = new JRadioButton("Out of Spec");
 
-		frame.getContentPane().add(centeredOutOfSpec, "cell 1 3");
+		getFrame().getContentPane().add(centeredOutOfSpec, "cell 1 3");
 
 		JLabel lblWidth = new JLabel("Width");
-		frame.getContentPane().add(lblWidth, "cell 3 3,alignx right");
+		getFrame().getContentPane().add(lblWidth, "cell 3 3,alignx right");
 
 		JRadioButton widthInSpec = new JRadioButton("In Spec");
-		frame.getContentPane().add(widthInSpec, "flowx,cell 4 3");
+		getFrame().getContentPane().add(widthInSpec, "flowx,cell 4 3");
 
 		JLabel lblCounter = new JLabel("Counter");
-		frame.getContentPane().add(lblCounter, "cell 0 4,alignx right");
+		getFrame().getContentPane().add(lblCounter, "cell 0 4,alignx right");
 
 		JRadioButton counterInSpec = new JRadioButton("In Spec");
-		frame.getContentPane().add(counterInSpec, "flowx,cell 1 4");
+		getFrame().getContentPane().add(counterInSpec, "flowx,cell 1 4");
 
 		JLabel lblEdgeQuality = new JLabel("Edge Quality");
-		frame.getContentPane().add(lblEdgeQuality, "cell 3 4,alignx right");
+		getFrame().getContentPane().add(lblEdgeQuality, "cell 3 4,alignx right");
 
 		JRadioButton edgeInSpec = new JRadioButton("In Spec");
-		frame.getContentPane().add(edgeInSpec, "flowx,cell 4 4");
+		getFrame().getContentPane().add(edgeInSpec, "flowx,cell 4 4");
 
 		JLabel lblHardWrinkles = new JLabel("Hard Wrinkles");
-		frame.getContentPane().add(lblHardWrinkles, "cell 0 5,alignx right");
+		getFrame().getContentPane().add(lblHardWrinkles, "cell 0 5,alignx right");
 
 		JRadioButton wrinklesInSpec = new JRadioButton("In Spec");
-		frame.getContentPane().add(wrinklesInSpec, "flowx,cell 1 5");
+		getFrame().getContentPane().add(wrinklesInSpec, "flowx,cell 1 5");
 
 		JLabel lblBurn = new JLabel("Burn");
-		frame.getContentPane().add(lblBurn, "cell 3 5,alignx right");
+		getFrame().getContentPane().add(lblBurn, "cell 3 5,alignx right");
 
 		JRadioButton burnInSpec = new JRadioButton("In Spec");
-		frame.getContentPane().add(burnInSpec, "flowx,cell 4 5");
+		getFrame().getContentPane().add(burnInSpec, "flowx,cell 4 5");
 
 		JLabel lblPackaging = new JLabel("Packaging");
-		frame.getContentPane().add(lblPackaging, "cell 0 6,alignx right");
+		getFrame().getContentPane().add(lblPackaging, "cell 0 6,alignx right");
 
 		JRadioButton packagingInSpec = new JRadioButton("In Spec");
-		frame.getContentPane().add(packagingInSpec, "flowx,cell 1 6");
+		getFrame().getContentPane().add(packagingInSpec, "flowx,cell 1 6");
 
 		JLabel lblWeight = new JLabel("Weight");
-		frame.getContentPane().add(lblWeight, "cell 3 6,alignx right");
+		getFrame().getContentPane().add(lblWeight, "cell 3 6,alignx right");
 
 		JRadioButton weightInSpec = new JRadioButton("In Spec");
-		frame.getContentPane().add(weightInSpec, "flowx,cell 4 6");
+		getFrame().getContentPane().add(weightInSpec, "flowx,cell 4 6");
 
 		JLabel lblDieLines = new JLabel("Die Lines");
-		frame.getContentPane().add(lblDieLines, "cell 0 7,alignx right");
+		getFrame().getContentPane().add(lblDieLines, "cell 0 7,alignx right");
 
 		JRadioButton dieLinesNo = new JRadioButton("No");
-		frame.getContentPane().add(dieLinesNo, "flowx,cell 1 7");
+		getFrame().getContentPane().add(dieLinesNo, "flowx,cell 1 7");
 
 		JLabel lblComments = new JLabel("Comments");
-		frame.getContentPane().add(lblComments, "cell 0 8,alignx right");
+		getFrame().getContentPane().add(lblComments, "cell 0 8,alignx right");
 
 		commentsArea = new JTextArea();
-		frame.getContentPane().add(commentsArea, "cell 1 8 2 3,grow");
+		getFrame().getContentPane().add(commentsArea, "cell 1 8 2 3,grow");
 
 		JRadioButton widthOutOfSpec = new JRadioButton("Out of Spec");
-		frame.getContentPane().add(widthOutOfSpec, "cell 4 3");
+		getFrame().getContentPane().add(widthOutOfSpec, "cell 4 3");
 
 		JRadioButton edgeOutOfSpec = new JRadioButton("Out of Spec");
-		frame.getContentPane().add(edgeOutOfSpec, "cell 4 4");
+		getFrame().getContentPane().add(edgeOutOfSpec, "cell 4 4");
 
 		JRadioButton burnOutOfSpec = new JRadioButton("Out of Spec");
-		frame.getContentPane().add(burnOutOfSpec, "cell 4 5");
+		getFrame().getContentPane().add(burnOutOfSpec, "cell 4 5");
 
 		JRadioButton weightUnder = new JRadioButton("Under");
-		frame.getContentPane().add(weightUnder, "cell 4 6");
+		getFrame().getContentPane().add(weightUnder, "cell 4 6");
 
 		JRadioButton counterOutOfSpec = new JRadioButton("Out of Spec");
-		frame.getContentPane().add(counterOutOfSpec, "cell 1 4");
+		getFrame().getContentPane().add(counterOutOfSpec, "cell 1 4");
 
 		JRadioButton wrinklesOutOfSpec = new JRadioButton("Out of Spec");
-		frame.getContentPane().add(wrinklesOutOfSpec, "cell 1 5");
+		getFrame().getContentPane().add(wrinklesOutOfSpec, "cell 1 5");
 
 		JRadioButton packagingOutOfSpec = new JRadioButton("Out of Spec");
-		frame.getContentPane().add(packagingOutOfSpec, "cell 1 6");
+		getFrame().getContentPane().add(packagingOutOfSpec, "cell 1 6");
 
 		JRadioButton dieLinesYes = new JRadioButton("Yes");
-		frame.getContentPane().add(dieLinesYes, "cell 1 7");
+		getFrame().getContentPane().add(dieLinesYes, "cell 1 7");
 
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "cell 0 11 4 1,grow");
+		getFrame().getContentPane().add(panel, "cell 0 11 4 1,grow");
 		panel.setLayout(new MigLayout("", "[][][][][][][]", "[]"));
 
 		JButton btnSaveAudit = new JButton("Save Audit");
@@ -288,7 +288,7 @@ public class arrQaAudit {
 		weightGroup.add(weightInSpec);
 		weightGroup.add(weightUnder);
 		JRadioButton weightOver = new JRadioButton("Over");
-		frame.getContentPane().add(weightOver, "cell 4 6");
+		getFrame().getContentPane().add(weightOver, "cell 4 6");
 		weightGroup.add(weightOver);
 		// add all buttonGroups to an ArrayList for manipulation purposes
 		allButtons.add(knifeGroup);
@@ -384,4 +384,13 @@ public class arrQaAudit {
 			return false;
 		return true;
 	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+	
 }
