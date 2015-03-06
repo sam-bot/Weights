@@ -1,4 +1,5 @@
 package Cal;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -51,6 +52,9 @@ public class qaChecks {
 	private JComboBox coreCenteringField;
 	JTextField workOrder2Field;
 	private JTextArea commentsField;
+	String lineNumber = "";
+	String compound = "";
+	String shift = "";
 
 	/**
 	 * Launch the application.
@@ -531,12 +535,13 @@ public class qaChecks {
 		String collapserTemperature = collapserTemperatureField.getText()
 				.trim();
 		String comments = commentsField.getText().trim();
-
+		int lineNumberInt = Integer.valueOf(lineNumber);
+		int shiftInt = Integer.valueOf(shift);
 		weights.sqlConnection();
 		try {
 			CallableStatement cs = null;
 			cs = weights.conn
-					.prepareCall("{call InsertCalQaAudit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertCalQaAudit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setInt(2, setInt);
 			cs.setInt(3, workInt1);
@@ -558,6 +563,9 @@ public class qaChecks {
 			cs.setString(19, winderTension);
 			cs.setString(20, collapserTemperature);
 			cs.setString(21, comments);
+			cs.setInt(22, lineNumberInt);
+			cs.setString(23, compound);
+			cs.setInt(24, shiftInt);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {

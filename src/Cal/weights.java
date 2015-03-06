@@ -1,4 +1,5 @@
 package Cal;
+
 import java.awt.EventQueue;
 
 import javax.swing.JComboBox;
@@ -48,7 +49,7 @@ public class weights {
 
 	private JFrame frame;
 	private JTextField setNumberField;
-	private JComboBox textField_1;
+	private static JComboBox compoundBox;
 	private JTextField lineSpeedField;
 	private JLabel lblTargetWt;
 	private JTextField targetWeightOneField;
@@ -165,12 +166,12 @@ public class weights {
 	static JTextField workOrderTwoField;
 	private JLabel lblProduct_3;
 	private JLabel lblLineNumber;
-	static JComboBox comboBox;
+	static JComboBox lineNumberBox;
 	static Connection conn;
 	private JLabel lblCompound;
 	private JLabel label_24;
 	private JLabel lblShift;
-	private JComboBox comboBox_1;
+	private static JComboBox shiftBox;
 	DecimalFormat df = new DecimalFormat("###0.00");
 	String dateTime = "";
 	String[] parts = dateTime.split(" ");
@@ -194,6 +195,7 @@ public class weights {
 	private JButton btnClearSets;
 	qaChecks window = new qaChecks();
 	private JButton btnRecalculateOf;
+	String compound = "";
 
 	/**
 	 * Launch the application.
@@ -295,21 +297,21 @@ public class weights {
 		String[] lines = { "", "21", "22", "23", "24", "25" };
 		lblLineNumber = new JLabel("Line Number");
 		panel.add(lblLineNumber, "cell 2 3");
-		comboBox = new JComboBox(lines);
-		panel.add(comboBox, "cell 3 3,growx");
+		lineNumberBox = new JComboBox(lines);
+		panel.add(lineNumberBox, "cell 3 3,growx");
 		String[] poundsPerHour = { "", "CRMF", "Omni", "PWGS", "PS", "SB",
 				"SBT", "HT", "HWR", "LWJ", "BLG", "LGK", "Vitawrap F",
 				"Omni MT", "PWMF", "MTR", "DS", "RCR", "RLGK", "SBX" };
 		lblCompound = new JLabel("Compound");
 		panel.add(lblCompound, "cell 0 4");
-		textField_1 = new JComboBox(poundsPerHour);
-		panel.add(textField_1, "cell 1 4");
+		compoundBox = new JComboBox(poundsPerHour);
+		panel.add(compoundBox, "cell 1 4");
 
 		String[] shifts = { "", "1", "2" };
 		lblShift = new JLabel("Shift");
 		panel.add(lblShift, "cell 2 4");
-		comboBox_1 = new JComboBox(shifts);
-		panel.add(comboBox_1, "cell 3 4,growx");
+		shiftBox = new JComboBox(shifts);
+		panel.add(shiftBox, "cell 3 4,growx");
 
 		lblProduct_2 = new JLabel("Product 1 Weights");
 		panel.add(lblProduct_2, "cell 0 5 5 1,alignx center");
@@ -831,6 +833,15 @@ public class weights {
 								window.workOrder2Field
 										.setText(weights.workOrderTwoField
 												.getText());
+							if (!(weights.lineNumberBox == null))
+								window.lineNumber = (String) weights.lineNumberBox
+										.getSelectedItem();
+							if (!(weights.compoundBox == null))
+								window.compound = (String) weights.compoundBox
+										.getSelectedItem();
+							if (!(weights.shiftBox == null))
+								window.shift = (String) weights.shiftBox
+										.getSelectedItem();
 							window.getFrame().setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -839,7 +850,7 @@ public class weights {
 				});
 			}
 		});
-		textField_1.addFocusListener(new FocusAdapter() {
+		compoundBox.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
 				printTargetLB();
@@ -1107,11 +1118,12 @@ public class weights {
 			workOrderInt = Integer.valueOf(workOrder);
 		} else
 			workOrderInt = 0;
-		shift = (String) comboBox_1.getSelectedItem();
+		shift = (String) shiftBox.getSelectedItem();
 		shiftInt = convertToInt(shift);
 
-		lineNumber = (String) comboBox.getSelectedItem();
+		lineNumber = (String) lineNumberBox.getSelectedItem();
 		lineNumberInt = convertToInt(lineNumber);
+		compound = (String) compoundBox.getSelectedItem();
 	}
 
 	private void P1RollWeightSQL(JTextField field)
@@ -1125,7 +1137,8 @@ public class weights {
 			w2 = 0;
 		try {
 			CallableStatement cs = null;
-			cs = conn.prepareCall("{call CalRollWeightInsert(?,?,?,?,?,?,?)}");
+			cs = conn
+					.prepareCall("{call CalRollWeightInsert(?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, timeStamp);
 			cs.setInt(3, shiftInt);
@@ -1133,6 +1146,7 @@ public class weights {
 			cs.setInt(5, s2);
 			cs.setDouble(6, w2);
 			cs.setInt(7, lineNumberInt);
+			cs.setString(8, compound);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -1158,11 +1172,12 @@ public class weights {
 			workOrderInt = Integer.valueOf(workOrder);
 		} else
 			workOrderInt = 0;
-		shift = (String) comboBox_1.getSelectedItem();
+		shift = (String) shiftBox.getSelectedItem();
 		shiftInt = convertToInt(shift);
 
-		lineNumber = (String) comboBox.getSelectedItem();
+		lineNumber = (String) lineNumberBox.getSelectedItem();
 		lineNumberInt = convertToInt(lineNumber);
+		compound = (String) compoundBox.getSelectedItem();
 	}
 
 	private void P2RollWeightSQL(JTextField field)
@@ -1177,7 +1192,8 @@ public class weights {
 
 		try {
 			CallableStatement cs = null;
-			cs = conn.prepareCall("{call CalRollWeightInsert(?,?,?,?,?,?,?)}");
+			cs = conn
+					.prepareCall("{call CalRollWeightInsert(?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, timeStamp);
 			cs.setInt(3, shiftInt);
@@ -1185,6 +1201,7 @@ public class weights {
 			cs.setInt(5, s2);
 			cs.setDouble(6, w2);
 			cs.setInt(7, lineNumberInt);
+			cs.setString(8, compound);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -1246,7 +1263,7 @@ public class weights {
 		double percentOfTargetDouble = convertToDouble(percentOfTarget);
 
 		// get compound, change to decimal
-		String compound = (String) textField_1.getSelectedItem();
+		String compound = (String) compoundBox.getSelectedItem();
 
 		// get target pounds per hour, change to int
 		String targetlbsHr = label_24.getText().trim();
@@ -1262,10 +1279,10 @@ public class weights {
 		int lineInt = convertToInt(lineSpeed);
 
 		// get line number
-		String lineNumber = (String) comboBox.getSelectedItem();
+		String lineNumber = (String) lineNumberBox.getSelectedItem();
 		int lineNumberInt = convertToInt(lineNumber);
 
-		String shift = (String) comboBox_1.getSelectedItem();
+		String shift = (String) shiftBox.getSelectedItem();
 		int shiftInt = convertToInt(shift);
 		try {
 			CallableStatement cs = null;
@@ -1299,7 +1316,7 @@ public class weights {
 	}
 
 	public void printTargetLB() {
-		String value = (String) textField_1.getSelectedItem();
+		String value = (String) compoundBox.getSelectedItem();
 		switch (value) {
 		case "":
 			label_24.setText("");
@@ -1594,7 +1611,7 @@ public class weights {
 		parts = dateTime.split(" ");
 		dateStamp = parts[0];
 		timeStamp = parts[1];
-		String shiftSelect = (String) comboBox_1.getSelectedItem();
+		String shiftSelect = (String) shiftBox.getSelectedItem();
 		String setSelect = setNumberField.getText();
 		String rollWeight = field.getText().trim();
 		String rollNumber = label.getText();

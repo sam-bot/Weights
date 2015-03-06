@@ -369,8 +369,8 @@ public class housekeeping {
 		int suspensionLug = setChecked(chckbxSuspensionLugNo);
 		int chain = setChecked(chckbxChainAdeqauteLubrication);
 		int lineNumber = 0;
-		if (!weights.comboBox.getSelectedItem().equals("")) {
-			String ln = (String) weights.comboBox.getSelectedItem();
+		if (!weights.lineNumberBox.getSelectedItem().equals("")) {
+			String ln = (String) weights.lineNumberBox.getSelectedItem();
 			ln = ln.trim();
 			lineNumber = Integer.valueOf(ln);
 		}

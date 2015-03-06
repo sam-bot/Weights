@@ -45,7 +45,6 @@ public class arrHousekeeping {
 	private JCheckBox boxWinderLeftRear;
 	private JCheckBox boxCleanTroughTake;
 	private JCheckBox boxScrapCoreInspection;
-	private JCheckBox extruderWaterScreensBox;
 	private JCheckBox boxNo;
 	private JCheckBox boxYes;
 
@@ -124,8 +123,7 @@ public class arrHousekeeping {
 		dailyMachinePanel.add(lblDailyMachine);
 		dailyMachinePanel.setBackground(Color.BLACK);
 		lblDailyMachine.setForeground(Color.WHITE);
-		 boxSweepTableFloor = new JCheckBox(
-				"Sweep Table Floor Around Mixer");
+		boxSweepTableFloor = new JCheckBox("Sweep Table Floor Around Mixer");
 		list.add(boxSweepTableFloor);
 		getFrame().getContentPane().add(boxSweepTableFloor, "cell 0 2");
 		lblhousekeepingChecklist.setForeground(Color.WHITE);
@@ -186,21 +184,8 @@ public class arrHousekeeping {
 		list.add(boxScrapCoreInspection);
 		getFrame().getContentPane().add(boxScrapCoreInspection, "cell 0 4");
 
-		JPanel processChecklistPanel = new JPanel();
-		getFrame().getContentPane().add(processChecklistPanel,
-				"flowx,cell 0 5,growx");
-		processChecklistPanel.setBackground(Color.BLACK);
-		JLabel lblProcessChecklist = new JLabel("*** Process Checklist ***");
-		lblProcessChecklist.setForeground(Color.WHITE);
-		processChecklistPanel.add(lblProcessChecklist);
-		extruderWaterScreensBox = new JCheckBox(
-				"Extruder Water Screens Cleaned");
-		list.add(extruderWaterScreensBox);
-		getFrame().getContentPane().add(extruderWaterScreensBox,
-				"cell 0 6,aligny top");
-
 		JPanel panel = new JPanel();
-		getFrame().getContentPane().add(panel, "flowx,cell 0 7 1 2,aligny bottom");
+		getFrame().getContentPane().add(panel, "flowx,cell 0 5 1 4,growy");
 		panel.setLayout(new MigLayout("", "[][][]", "[][][]"));
 
 		JPanel scrapUsagePanel = new JPanel();
@@ -254,7 +239,6 @@ public class arrHousekeeping {
 		int sweepMixer = isChecked(boxSweepTableFloor);
 		int cleanTrough = isChecked(boxCleanTroughTake);
 		int scrapCoreInspection = isChecked(boxScrapCoreInspection);
-		int extruderScreensCleaned = isChecked(extruderWaterScreensBox);
 		int scrapUsageVerify = 0;
 		if (isChecked(boxYes) == 1)
 			scrapUsageVerify = 1;
@@ -274,26 +258,25 @@ public class arrHousekeeping {
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrHousekeeping(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrHousekeeping(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, workStation);
 			cs.setString(2, shift);
 			cs.setString(3, dateTime);
 			cs.setInt(4, sweepMixer);
 			cs.setInt(5, cleanTrough);
 			cs.setInt(6, scrapCoreInspection);
-			cs.setInt(7, extruderScreensCleaned);
-			cs.setInt(8, scrapUsageVerify);
-			cs.setInt(9, guardHopperLid);
-			cs.setInt(10, guardExtruderRight);
-			cs.setInt(11, guardExtruderLeft);
-			cs.setInt(12, containmentDoors);
-			cs.setInt(13, grinderChute);
-			cs.setInt(14, grinderLatch);
-			cs.setInt(15, grinderDoor);
-			cs.setInt(16, winderRightFront);
-			cs.setInt(17, winderRightRear);
-			cs.setInt(18, winderLeftFront);
-			cs.setInt(19, winderLeftRear);
+			cs.setInt(7, scrapUsageVerify);
+			cs.setInt(8, guardHopperLid);
+			cs.setInt(9, guardExtruderRight);
+			cs.setInt(10, guardExtruderLeft);
+			cs.setInt(11, containmentDoors);
+			cs.setInt(12, grinderChute);
+			cs.setInt(13, grinderLatch);
+			cs.setInt(14, grinderDoor);
+			cs.setInt(15, winderRightFront);
+			cs.setInt(16, winderRightRear);
+			cs.setInt(17, winderLeftFront);
+			cs.setInt(18, winderLeftRear);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {

@@ -2574,3 +2574,35 @@ SET ANSI_PADDING OFF
 GO
 
 
+USE [CAL_QA]
+GO
+/****** Object:  StoredProcedure [dbo].[SelectCalWeightTotal]    Script Date: 02/27/2015 13:31:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Sam Renick
+-- Create date: 05/29/2014
+-- Description:	Select Previous Sets
+-- =============================================
+ALTER PROCEDURE [dbo].[SelectCalWeightTotal] 
+	-- Add the parameters for the stored procedure here
+	@dateStamp dateTime = NULL, 
+	@setNumber int = 0,
+	@shift int =0,
+	@lineNumber int = 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT percentOfTarget, targetPoundsHour, actualPoundsHour, lineSpeed
+	FROM CalWeightTotal 
+	WHERE dateStamp = @dateStamp
+	AND setNumber = @setNumber
+	AND shift = @shift
+	AND lineNumber = @lineNumber
+END
