@@ -238,9 +238,6 @@ public class processConditions {
 	private JTabbedPane tabbedPane;
 	private JPanel panel_3;
 	private JPanel panel_4;
-	private JPanel panel;
-	private JLabel label_38;
-	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -270,7 +267,7 @@ public class processConditions {
 	 */
 	private void initialize(String operator) {
 		setFrame(new JFrame("Standard Operating Conditions"));
-		getFrame().setBounds(100, 1, 1014, 742);
+		getFrame().setBounds(100, 1, 1060, 742);
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame()
 				.getContentPane()
@@ -289,7 +286,11 @@ public class processConditions {
 		label = new JLabel("Shift Date");
 		panel_2.add(label, "cell 0 0,alignx right");
 		shiftDateField = new JTextField();
-		panel_2.add(shiftDateField, "cell 1 0");
+		DateFormat dateFormat = new SimpleDateFormat("YYYY/MM/dd");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
+		shiftDateField.setText(dateTime);
+		panel_2.add(shiftDateField, "cell 1 0,growx");
 		shiftDateField.setColumns(10);
 		list.add(shiftDateField);
 
@@ -325,7 +326,6 @@ public class processConditions {
 					secondWinderSpeedField.setVisible(false);
 					drumTempField.setVisible(false);
 					pinchRollTempField.setVisible(false);
-					mixDropTempField.setVisible(false);
 					plenumSpeedField.setVisible(false);
 					trimLeftMeasureField.setVisible(false);
 					trimRightMeasureField.setVisible(false);
@@ -379,7 +379,6 @@ public class processConditions {
 					threePField.setVisible(false);
 					horizontalApplyField.setVisible(false);
 					inflateAirShaftField.setVisible(false);
-					mixDropTempField.setVisible(false);
 					plenumSpeedField.setVisible(false);
 					trimLeftMeasureField.setVisible(false);
 					trimRightMeasureField.setVisible(false);
@@ -427,7 +426,6 @@ public class processConditions {
 					threePField.setVisible(false);
 					horizontalApplyField.setVisible(false);
 					inflateAirShaftField.setVisible(false);
-					mixDropTempField.setVisible(false);
 					plenumSpeedField.setVisible(false);
 					curtainLinksField.setVisible(false);
 					feedValvesOpenPercentField.setVisible(false);
@@ -489,7 +487,6 @@ public class processConditions {
 					threePField.setVisible(false);
 					horizontalApplyField.setVisible(false);
 					inflateAirShaftField.setVisible(false);
-					mixDropTempField.setVisible(false);
 					plenumSpeedField.setVisible(false);
 					curtainLinksField.setVisible(false);
 					feedValvesOpenPercentField.setVisible(false);
@@ -596,7 +593,6 @@ public class processConditions {
 					horizontalApplyField.setVisible(false);
 					inflateAirShaftField.setVisible(false);
 					winderNipRollField.setVisible(false);
-					mixDropTempField.setVisible(false);
 					winderNipSpeedField.setVisible(false);
 					collapsingShieldSpeedField.setVisible(false);
 					plenumTempField.setVisible(false);
@@ -649,7 +645,6 @@ public class processConditions {
 					horizontalApplyField.setVisible(false);
 					inflateAirShaftField.setVisible(false);
 					winderNipRollField.setVisible(false);
-					mixDropTempField.setVisible(false);
 					winderNipSpeedField.setVisible(false);
 					collapsingShieldSpeedField.setVisible(false);
 					plenumTempField.setVisible(false);
@@ -792,7 +787,8 @@ public class processConditions {
 
 		panel_3 = new JPanel();
 		tabbedPane.addTab("Page 1", null, panel_3, null);
-		panel_3.setLayout(new MigLayout("", "[][grow][][grow][][grow][grow]", "[][][][][][][][][][][][][][][][][][][][][][][]"));
+		panel_3.setLayout(new MigLayout("", "[][grow][][grow][][grow][grow]",
+				"[][][][][][][][][][][][][][][][][][][][][][][]"));
 		label_4 = new JLabel("Table Speed");
 		panel_3.add(label_4, "cell 0 0");
 
@@ -808,12 +804,12 @@ public class processConditions {
 		panel_3.add(mixDropTempField, "cell 3 0");
 		mixDropTempField.setColumns(10);
 		list.add(mixDropTempField);
-		
-				lblSetting = new JLabel("Setting");
-				panel_3.add(lblSetting, "cell 5 0,alignx center");
-		
-				lblActual = new JLabel("Actual");
-				panel_3.add(lblActual, "cell 6 0,alignx center");
+
+		lblSetting = new JLabel("Setting");
+		panel_3.add(lblSetting, "cell 5 0,alignx center");
+
+		lblActual = new JLabel("Actual");
+		panel_3.add(lblActual, "cell 6 0,alignx center");
 
 		lblPrimeNipSpeed = new JLabel("Prime Nip Speed");
 		panel_3.add(lblPrimeNipSpeed, "cell 0 1");
@@ -830,19 +826,19 @@ public class processConditions {
 		panel_3.add(winderNipSpeedField, "cell 3 1");
 		winderNipSpeedField.setColumns(10);
 		list.add(winderNipSpeedField);
-		
-				label_22 = new JLabel("Zone 0");
-				panel_3.add(label_22, "cell 4 1");
-		
-				zone0SetField = new JTextField();
-				panel_3.add(zone0SetField, "cell 5 1,alignx center");
-				zone0SetField.setColumns(10);
-				list.add(zone0SetField);
-		
-				zone0ActField = new JTextField();
-				panel_3.add(zone0ActField, "cell 6 1,alignx center");
-				zone0ActField.setColumns(10);
-				list.add(zone0ActField);
+
+		label_22 = new JLabel("Zone 0");
+		panel_3.add(label_22, "cell 4 1");
+
+		zone0SetField = new JTextField();
+		panel_3.add(zone0SetField, "cell 5 1,alignx center");
+		zone0SetField.setColumns(10);
+		list.add(zone0SetField);
+
+		zone0ActField = new JTextField();
+		panel_3.add(zone0ActField, "cell 6 1,alignx center");
+		zone0ActField.setColumns(10);
+		list.add(zone0ActField);
 
 		lblndNipSpeed = new JLabel("2nd Nip Speed");
 		panel_3.add(lblndNipSpeed, "cell 0 2");
@@ -859,19 +855,19 @@ public class processConditions {
 		panel_3.add(collapsingShieldSpeedField, "cell 3 2");
 		collapsingShieldSpeedField.setColumns(10);
 		list.add(collapsingShieldSpeedField);
-		
-				lblZone = new JLabel("Zone 1");
-				panel_3.add(lblZone, "cell 4 2");
-		
-				zone1SetField = new JTextField();
-				panel_3.add(zone1SetField, "cell 5 2,alignx center");
-				zone1SetField.setColumns(10);
-				list.add(zone1SetField);
-		
-				zone1ActField = new JTextField();
-				panel_3.add(zone1ActField, "cell 6 2,alignx center");
-				zone1ActField.setColumns(10);
-				list.add(zone1ActField);
+
+		lblZone = new JLabel("Zone 1");
+		panel_3.add(lblZone, "cell 4 2");
+
+		zone1SetField = new JTextField();
+		panel_3.add(zone1SetField, "cell 5 2,alignx center");
+		zone1SetField.setColumns(10);
+		list.add(zone1SetField);
+
+		zone1ActField = new JTextField();
+		panel_3.add(zone1ActField, "cell 6 2,alignx center");
+		zone1ActField.setColumns(10);
+		list.add(zone1ActField);
 
 		lblPrimeWinderSpeed = new JLabel("Prime Winder Speed");
 		panel_3.add(lblPrimeWinderSpeed, "cell 0 3");
@@ -888,19 +884,19 @@ public class processConditions {
 		panel_3.add(collapsingShieldTempField, "cell 3 3");
 		list.add(collapsingShieldTempField);
 		collapsingShieldTempField.setColumns(10);
-		
-				lblZone_1 = new JLabel("Zone 2");
-				panel_3.add(lblZone_1, "cell 4 3");
-		
-				zone2SetField = new JTextField();
-				panel_3.add(zone2SetField, "cell 5 3,alignx center");
-				zone2SetField.setColumns(10);
-				list.add(zone2SetField);
-		
-				zone2ActField = new JTextField();
-				panel_3.add(zone2ActField, "cell 6 3,alignx center");
-				zone2ActField.setColumns(10);
-				list.add(zone2ActField);
+
+		lblZone_1 = new JLabel("Zone 2");
+		panel_3.add(lblZone_1, "cell 4 3");
+
+		zone2SetField = new JTextField();
+		panel_3.add(zone2SetField, "cell 5 3,alignx center");
+		zone2SetField.setColumns(10);
+		list.add(zone2SetField);
+
+		zone2ActField = new JTextField();
+		panel_3.add(zone2ActField, "cell 6 3,alignx center");
+		zone2ActField.setColumns(10);
+		list.add(zone2ActField);
 
 		lblndWinderSpeed = new JLabel("2nd Winder Speed");
 		panel_3.add(lblndWinderSpeed, "cell 0 4");
@@ -917,19 +913,19 @@ public class processConditions {
 		panel_3.add(plenumTempField, "cell 3 4");
 		plenumTempField.setColumns(10);
 		list.add(plenumTempField);
-		
-				lblZone_2 = new JLabel("Zone 3");
-				panel_3.add(lblZone_2, "cell 4 4");
-		
-				zone3SetField = new JTextField();
-				panel_3.add(zone3SetField, "cell 5 4,alignx center");
-				zone3SetField.setColumns(10);
-				list.add(zone3SetField);
-		
-				zone3ActField = new JTextField();
-				panel_3.add(zone3ActField, "cell 6 4,alignx center");
-				zone3ActField.setColumns(10);
-				list.add(zone3ActField);
+
+		lblZone_2 = new JLabel("Zone 3");
+		panel_3.add(lblZone_2, "cell 4 4");
+
+		zone3SetField = new JTextField();
+		panel_3.add(zone3SetField, "cell 5 4,alignx center");
+		zone3SetField.setColumns(10);
+		list.add(zone3SetField);
+
+		zone3ActField = new JTextField();
+		panel_3.add(zone3ActField, "cell 6 4,alignx center");
+		zone3ActField.setColumns(10);
+		list.add(zone3ActField);
 
 		lblScrewSpeed = new JLabel("Screw Speed");
 		panel_3.add(lblScrewSpeed, "cell 0 5");
@@ -946,19 +942,19 @@ public class processConditions {
 		panel_3.add(plenumSpeedField, "cell 3 5");
 		plenumSpeedField.setColumns(10);
 		list.add(plenumSpeedField);
-		
-				lblZone_3 = new JLabel("Zone 4");
-				panel_3.add(lblZone_3, "cell 4 5");
-		
-				zone4SetField = new JTextField();
-				panel_3.add(zone4SetField, "cell 5 5,alignx center");
-				list.add(zone4SetField);
-				zone4SetField.setColumns(10);
-		
-				zone4ActField = new JTextField();
-				panel_3.add(zone4ActField, "cell 6 5,alignx center");
-				list.add(zone4ActField);
-				zone4ActField.setColumns(10);
+
+		lblZone_3 = new JLabel("Zone 4");
+		panel_3.add(lblZone_3, "cell 4 5");
+
+		zone4SetField = new JTextField();
+		panel_3.add(zone4SetField, "cell 5 5,alignx center");
+		list.add(zone4SetField);
+		zone4SetField.setColumns(10);
+
+		zone4ActField = new JTextField();
+		panel_3.add(zone4ActField, "cell 6 5,alignx center");
+		list.add(zone4ActField);
+		zone4ActField.setColumns(10);
 
 		label_5 = new JLabel("Die Number");
 		panel_3.add(label_5, "cell 0 6");
@@ -975,19 +971,19 @@ public class processConditions {
 		panel_3.add(trimLeftMeasureField, "cell 3 6");
 		trimLeftMeasureField.setColumns(10);
 		list.add(trimLeftMeasureField);
-		
-				lblZone_4 = new JLabel("Zone 5");
-				panel_3.add(lblZone_4, "cell 4 6");
-		
-				zone5SetField = new JTextField();
-				panel_3.add(zone5SetField, "cell 5 6,alignx center");
-				list.add(zone5SetField);
-				zone5SetField.setColumns(10);
-		
-				zone5ActField = new JTextField();
-				panel_3.add(zone5ActField, "cell 6 6,alignx center");
-				list.add(zone5ActField);
-				zone5ActField.setColumns(10);
+
+		lblZone_4 = new JLabel("Zone 5");
+		panel_3.add(lblZone_4, "cell 4 6");
+
+		zone5SetField = new JTextField();
+		panel_3.add(zone5SetField, "cell 5 6,alignx center");
+		list.add(zone5SetField);
+		zone5SetField.setColumns(10);
+
+		zone5ActField = new JTextField();
+		panel_3.add(zone5ActField, "cell 6 6,alignx center");
+		list.add(zone5ActField);
+		zone5ActField.setColumns(10);
 
 		lblRbTemp = new JLabel("RB Temp");
 		panel_3.add(lblRbTemp, "cell 0 7");
@@ -1004,19 +1000,19 @@ public class processConditions {
 		panel_3.add(trimRightMeasureField, "cell 3 7");
 		list.add(trimRightMeasureField);
 		trimRightMeasureField.setColumns(10);
-		
-				lblZone_5 = new JLabel("Zone 6");
-				panel_3.add(lblZone_5, "cell 4 7");
-		
-				zone6SetField = new JTextField();
-				panel_3.add(zone6SetField, "cell 5 7,alignx center");
-				list.add(zone6SetField);
-				zone6SetField.setColumns(10);
-		
-				zone6ActField = new JTextField();
-				panel_3.add(zone6ActField, "cell 6 7,alignx center");
-				list.add(zone6ActField);
-				zone6ActField.setColumns(10);
+
+		lblZone_5 = new JLabel("Zone 6");
+		panel_3.add(lblZone_5, "cell 4 7");
+
+		zone6SetField = new JTextField();
+		panel_3.add(zone6SetField, "cell 5 7,alignx center");
+		list.add(zone6SetField);
+		zone6SetField.setColumns(10);
+
+		zone6ActField = new JTextField();
+		panel_3.add(zone6ActField, "cell 6 7,alignx center");
+		list.add(zone6ActField);
+		zone6ActField.setColumns(10);
 
 		lblScreenPack = new JLabel("Screen Pack");
 		panel_3.add(lblScreenPack, "cell 0 8");
@@ -1033,19 +1029,19 @@ public class processConditions {
 		panel_3.add(airRingGapField, "cell 3 8");
 		list.add(airRingGapField);
 		airRingGapField.setColumns(10);
-		
-				label_31 = new JLabel("Zone 7");
-				panel_3.add(label_31, "cell 4 8");
-		
-				zone7SetField = new JTextField();
-				panel_3.add(zone7SetField, "cell 5 8,alignx center");
-				list.add(zone7SetField);
-				zone7SetField.setColumns(10);
-		
-				zone7ActField = new JTextField();
-				panel_3.add(zone7ActField, "cell 6 8,alignx center");
-				list.add(zone7ActField);
-				zone7ActField.setColumns(10);
+
+		label_31 = new JLabel("Zone 7");
+		panel_3.add(label_31, "cell 4 8");
+
+		zone7SetField = new JTextField();
+		panel_3.add(zone7SetField, "cell 5 8,alignx center");
+		list.add(zone7SetField);
+		zone7SetField.setColumns(10);
+
+		zone7ActField = new JTextField();
+		panel_3.add(zone7ActField, "cell 6 8,alignx center");
+		list.add(zone7ActField);
+		zone7ActField.setColumns(10);
 
 		lblExtruderAmps = new JLabel("Extruder Amps");
 		panel_3.add(lblExtruderAmps, "cell 0 9");
@@ -1062,19 +1058,19 @@ public class processConditions {
 		panel_3.add(curtainLinksField, "cell 3 9");
 		list.add(curtainLinksField);
 		curtainLinksField.setColumns(10);
-		
-				lblZonea = new JLabel("Zone 7-A");
-				panel_3.add(lblZonea, "cell 4 9");
-		
-				zone7ASetField = new JTextField();
-				panel_3.add(zone7ASetField, "cell 5 9,alignx center");
-				list.add(zone7ASetField);
-				zone7ASetField.setColumns(10);
-		
-				zone7AActField = new JTextField();
-				panel_3.add(zone7AActField, "cell 6 9,alignx center");
-				list.add(zone7AActField);
-				zone7AActField.setColumns(10);
+
+		lblZonea = new JLabel("Zone 7-A");
+		panel_3.add(lblZonea, "cell 4 9");
+
+		zone7ASetField = new JTextField();
+		panel_3.add(zone7ASetField, "cell 5 9,alignx center");
+		list.add(zone7ASetField);
+		zone7ASetField.setColumns(10);
+
+		zone7AActField = new JTextField();
+		panel_3.add(zone7AActField, "cell 6 9,alignx center");
+		list.add(zone7AActField);
+		zone7AActField.setColumns(10);
 
 		lblExtruderPsi = new JLabel("Extruder PSI");
 		panel_3.add(lblExtruderPsi, "cell 0 10");
@@ -1091,19 +1087,19 @@ public class processConditions {
 		panel_3.add(fingerAdjustLeftField, "cell 3 10");
 		list.add(fingerAdjustLeftField);
 		fingerAdjustLeftField.setColumns(10);
-		
-				lblZoneb = new JLabel("Zone 7-B");
-				panel_3.add(lblZoneb, "cell 4 10");
-		
-				zone7BSetField = new JTextField();
-				panel_3.add(zone7BSetField, "cell 5 10,alignx center");
-				list.add(zone7BSetField);
-				zone7BSetField.setColumns(10);
-		
-				zone7BActField = new JTextField();
-				panel_3.add(zone7BActField, "cell 6 10,alignx center");
-				list.add(zone7BActField);
-				zone7BActField.setColumns(10);
+
+		lblZoneb = new JLabel("Zone 7-B");
+		panel_3.add(lblZoneb, "cell 4 10");
+
+		zone7BSetField = new JTextField();
+		panel_3.add(zone7BSetField, "cell 5 10,alignx center");
+		list.add(zone7BSetField);
+		zone7BSetField.setColumns(10);
+
+		zone7BActField = new JTextField();
+		panel_3.add(zone7BActField, "cell 6 10,alignx center");
+		list.add(zone7BActField);
+		zone7BActField.setColumns(10);
 
 		label_6 = new JLabel("Stretch");
 		panel_3.add(label_6, "cell 0 11");
@@ -1120,19 +1116,19 @@ public class processConditions {
 		panel_3.add(fingerAdjustRightField, "cell 3 11");
 		list.add(fingerAdjustRightField);
 		fingerAdjustRightField.setColumns(10);
-		
-				lblZonec = new JLabel("Zone 7-C");
-				panel_3.add(lblZonec, "cell 4 11");
-		
-				zone7CSetField = new JTextField();
-				panel_3.add(zone7CSetField, "cell 5 11,alignx center");
-				list.add(zone7CSetField);
-				zone7CSetField.setColumns(10);
-		
-				zone7CActField = new JTextField();
-				panel_3.add(zone7CActField, "cell 6 11,alignx center");
-				list.add(zone7CActField);
-				zone7CActField.setColumns(10);
+
+		lblZonec = new JLabel("Zone 7-C");
+		panel_3.add(lblZonec, "cell 4 11");
+
+		zone7CSetField = new JTextField();
+		panel_3.add(zone7CSetField, "cell 5 11,alignx center");
+		list.add(zone7CSetField);
+		zone7CSetField.setColumns(10);
+
+		zone7CActField = new JTextField();
+		panel_3.add(zone7CActField, "cell 6 11,alignx center");
+		list.add(zone7CActField);
+		zone7CActField.setColumns(10);
 
 		lblScrap = new JLabel("Scrap");
 		panel_3.add(lblScrap, "cell 0 12");
@@ -1149,19 +1145,19 @@ public class processConditions {
 		panel_3.add(trimPullerSpeedField, "cell 3 12");
 		list.add(trimPullerSpeedField);
 		trimPullerSpeedField.setColumns(10);
-		
-				lblZone_6 = new JLabel("Zone 8");
-				panel_3.add(lblZone_6, "cell 4 12");
-		
-				zone8SetField = new JTextField();
-				panel_3.add(zone8SetField, "cell 5 12,alignx center");
-				list.add(zone8SetField);
-				zone8SetField.setColumns(10);
-		
-				zone8ActField = new JTextField();
-				panel_3.add(zone8ActField, "cell 6 12,alignx center");
-				list.add(zone8ActField);
-				zone8ActField.setColumns(10);
+
+		lblZone_6 = new JLabel("Zone 8");
+		panel_3.add(lblZone_6, "cell 4 12");
+
+		zone8SetField = new JTextField();
+		panel_3.add(zone8SetField, "cell 5 12,alignx center");
+		list.add(zone8SetField);
+		zone8SetField.setColumns(10);
+
+		zone8ActField = new JTextField();
+		panel_3.add(zone8ActField, "cell 6 12,alignx center");
+		list.add(zone8ActField);
+		zone8ActField.setColumns(10);
 
 		label_7 = new JLabel("Drum Temp");
 		panel_3.add(label_7, "cell 0 13");
@@ -1178,19 +1174,19 @@ public class processConditions {
 		panel_3.add(mandrelAirPressureField, "cell 3 13");
 		list.add(mandrelAirPressureField);
 		mandrelAirPressureField.setColumns(10);
-		
-				lblZone_7 = new JLabel("Zone 9");
-				panel_3.add(lblZone_7, "cell 4 13");
-		
-				zone9SetField = new JTextField();
-				panel_3.add(zone9SetField, "cell 5 13,alignx center");
-				list.add(zone9SetField);
-				zone9SetField.setColumns(10);
-		
-				zone9ActField = new JTextField();
-				panel_3.add(zone9ActField, "cell 6 13,alignx center");
-				list.add(zone9ActField);
-				zone9ActField.setColumns(10);
+
+		lblZone_7 = new JLabel("Zone 9");
+		panel_3.add(lblZone_7, "cell 4 13");
+
+		zone9SetField = new JTextField();
+		panel_3.add(zone9SetField, "cell 5 13,alignx center");
+		list.add(zone9SetField);
+		zone9SetField.setColumns(10);
+
+		zone9ActField = new JTextField();
+		panel_3.add(zone9ActField, "cell 6 13,alignx center");
+		list.add(zone9ActField);
+		zone9ActField.setColumns(10);
 
 		label_8 = new JLabel("Pinch Roll Temp");
 		panel_3.add(label_8, "cell 0 14");
@@ -1207,19 +1203,19 @@ public class processConditions {
 		panel_3.add(feedValvesField, "cell 3 14");
 		list.add(feedValvesField);
 		feedValvesField.setColumns(10);
-		
-				label_30 = new JLabel("Zone 10");
-				panel_3.add(label_30, "cell 4 14");
-		
-				zone10SetField = new JTextField();
-				panel_3.add(zone10SetField, "cell 5 14,alignx center");
-				list.add(zone10SetField);
-				zone10SetField.setColumns(10);
-		
-				zone10ActField = new JTextField();
-				panel_3.add(zone10ActField, "cell 6 14,alignx center");
-				list.add(zone10ActField);
-				zone10ActField.setColumns(10);
+
+		label_30 = new JLabel("Zone 10");
+		panel_3.add(label_30, "cell 4 14");
+
+		zone10SetField = new JTextField();
+		panel_3.add(zone10SetField, "cell 5 14,alignx center");
+		list.add(zone10SetField);
+		zone10SetField.setColumns(10);
+
+		zone10ActField = new JTextField();
+		panel_3.add(zone10ActField, "cell 6 14,alignx center");
+		list.add(zone10ActField);
+		zone10ActField.setColumns(10);
 
 		lblAirRingSpeed = new JLabel("Air Ring Speed");
 		panel_3.add(lblAirRingSpeed, "cell 0 15");
@@ -1236,19 +1232,19 @@ public class processConditions {
 		panel_3.add(doorsField, "cell 3 15");
 		list.add(doorsField);
 		doorsField.setColumns(10);
-		
-				lblZone_8 = new JLabel("Zone 11");
-				panel_3.add(lblZone_8, "cell 4 15");
-		
-				zone11SetField = new JTextField();
-				panel_3.add(zone11SetField, "cell 5 15,alignx center");
-				list.add(zone11SetField);
-				zone11SetField.setColumns(10);
-		
-				zone11ActField = new JTextField();
-				panel_3.add(zone11ActField, "cell 6 15,alignx center");
-				list.add(zone11ActField);
-				zone11ActField.setColumns(10);
+
+		lblZone_8 = new JLabel("Zone 11");
+		panel_3.add(lblZone_8, "cell 4 15");
+
+		zone11SetField = new JTextField();
+		panel_3.add(zone11SetField, "cell 5 15,alignx center");
+		list.add(zone11SetField);
+		zone11SetField.setColumns(10);
+
+		zone11ActField = new JTextField();
+		panel_3.add(zone11ActField, "cell 6 15,alignx center");
+		list.add(zone11ActField);
+		zone11ActField.setColumns(10);
 
 		lblAirRingTemp = new JLabel("Air Ring Temp");
 		panel_3.add(lblAirRingTemp, "cell 0 16");
@@ -1265,19 +1261,19 @@ public class processConditions {
 		panel_3.add(feedValvesOpenPercentField, "cell 3 16");
 		list.add(feedValvesOpenPercentField);
 		feedValvesOpenPercentField.setColumns(10);
-		
-				label_23 = new JLabel("Zone 12");
-				panel_3.add(label_23, "cell 4 16");
-		
-				zone12SetField = new JTextField();
-				panel_3.add(zone12SetField, "cell 5 16,alignx center");
-				list.add(zone12SetField);
-				zone12SetField.setColumns(10);
-		
-				zone12ActField = new JTextField();
-				panel_3.add(zone12ActField, "cell 6 16,alignx center");
-				list.add(zone12ActField);
-				zone12ActField.setColumns(10);
+
+		label_23 = new JLabel("Zone 12");
+		panel_3.add(label_23, "cell 4 16");
+
+		zone12SetField = new JTextField();
+		panel_3.add(zone12SetField, "cell 5 16,alignx center");
+		list.add(zone12SetField);
+		zone12SetField.setColumns(10);
+
+		zone12ActField = new JTextField();
+		panel_3.add(zone12ActField, "cell 6 16,alignx center");
+		list.add(zone12ActField);
+		zone12ActField.setColumns(10);
 
 		label_9 = new JLabel("Tempo");
 		panel_3.add(label_9, "cell 0 17");
@@ -1286,19 +1282,19 @@ public class processConditions {
 		panel_3.add(tempoField, "cell 1 17");
 		list.add(tempoField);
 		tempoField.setColumns(10);
-		
-				label_24 = new JLabel("Zone 13");
-				panel_3.add(label_24, "cell 4 17");
-		
-				zone13SetField = new JTextField();
-				panel_3.add(zone13SetField, "cell 5 17,alignx center");
-				list.add(zone13SetField);
-				zone13SetField.setColumns(10);
-		
-				zone13ActField = new JTextField();
-				panel_3.add(zone13ActField, "cell 6 17,alignx center");
-				list.add(zone13ActField);
-				zone13ActField.setColumns(10);
+
+		label_24 = new JLabel("Zone 13");
+		panel_3.add(label_24, "cell 4 17");
+
+		zone13SetField = new JTextField();
+		panel_3.add(zone13SetField, "cell 5 17,alignx center");
+		list.add(zone13SetField);
+		zone13SetField.setColumns(10);
+
+		zone13ActField = new JTextField();
+		panel_3.add(zone13ActField, "cell 6 17,alignx center");
+		list.add(zone13ActField);
+		zone13ActField.setColumns(10);
 
 		label_10 = new JLabel("Three P");
 		panel_3.add(label_10, "cell 0 18");
@@ -1307,19 +1303,19 @@ public class processConditions {
 		panel_3.add(threePField, "cell 1 18");
 		list.add(threePField);
 		threePField.setColumns(10);
-		
-				label_25 = new JLabel("Zone B1");
-				panel_3.add(label_25, "cell 4 18");
-		
-				zoneB1SetField = new JTextField();
-				panel_3.add(zoneB1SetField, "cell 5 18,alignx center");
-				zoneB1SetField.setColumns(10);
-				list.add(zoneB1SetField);
-		
-				zoneB1ActField = new JTextField();
-				panel_3.add(zoneB1ActField, "cell 6 18,alignx center");
-				list.add(zoneB1ActField);
-				zoneB1ActField.setColumns(10);
+
+		label_25 = new JLabel("Zone B1");
+		panel_3.add(label_25, "cell 4 18");
+
+		zoneB1SetField = new JTextField();
+		panel_3.add(zoneB1SetField, "cell 5 18,alignx center");
+		zoneB1SetField.setColumns(10);
+		list.add(zoneB1SetField);
+
+		zoneB1ActField = new JTextField();
+		panel_3.add(zoneB1ActField, "cell 6 18,alignx center");
+		list.add(zoneB1ActField);
+		zoneB1ActField.setColumns(10);
 
 		label_11 = new JLabel("Drum NIP");
 		panel_3.add(label_11, "cell 0 19");
@@ -1328,19 +1324,19 @@ public class processConditions {
 		panel_3.add(drumNipField, "cell 1 19");
 		list.add(drumNipField);
 		drumNipField.setColumns(10);
-		
-				label_26 = new JLabel("Zone B2");
-				panel_3.add(label_26, "cell 4 19");
-		
-				zoneB2SetField = new JTextField();
-				panel_3.add(zoneB2SetField, "cell 5 19,alignx center");
-				list.add(zoneB2SetField);
-				zoneB2SetField.setColumns(10);
-		
-				zoneB2ActField = new JTextField();
-				panel_3.add(zoneB2ActField, "cell 6 19,alignx center");
-				list.add(zoneB2ActField);
-				zoneB2ActField.setColumns(10);
+
+		label_26 = new JLabel("Zone B2");
+		panel_3.add(label_26, "cell 4 19");
+
+		zoneB2SetField = new JTextField();
+		panel_3.add(zoneB2SetField, "cell 5 19,alignx center");
+		list.add(zoneB2SetField);
+		zoneB2SetField.setColumns(10);
+
+		zoneB2ActField = new JTextField();
+		panel_3.add(zoneB2ActField, "cell 6 19,alignx center");
+		list.add(zoneB2ActField);
+		zoneB2ActField.setColumns(10);
 
 		label_12 = new JLabel("Horizontal Apply");
 		panel_3.add(label_12, "cell 0 20");
@@ -1349,19 +1345,19 @@ public class processConditions {
 		panel_3.add(horizontalApplyField, "cell 1 20");
 		list.add(horizontalApplyField);
 		horizontalApplyField.setColumns(10);
-		
-				label_27 = new JLabel("Hot Roll 1");
-				panel_3.add(label_27, "cell 4 20");
-		
-				hotRoll1SetField = new JTextField();
-				panel_3.add(hotRoll1SetField, "cell 5 20,alignx center");
-				list.add(hotRoll1SetField);
-				hotRoll1SetField.setColumns(10);
-		
-				hotRoll1ActField = new JTextField();
-				panel_3.add(hotRoll1ActField, "cell 6 20,alignx center");
-				list.add(hotRoll1ActField);
-				hotRoll1ActField.setColumns(10);
+
+		label_27 = new JLabel("Hot Roll 1");
+		panel_3.add(label_27, "cell 4 20");
+
+		hotRoll1SetField = new JTextField();
+		panel_3.add(hotRoll1SetField, "cell 5 20,alignx center");
+		list.add(hotRoll1SetField);
+		hotRoll1SetField.setColumns(10);
+
+		hotRoll1ActField = new JTextField();
+		panel_3.add(hotRoll1ActField, "cell 6 20,alignx center");
+		list.add(hotRoll1ActField);
+		hotRoll1ActField.setColumns(10);
 
 		label_13 = new JLabel("Inflate Air Shaft");
 		panel_3.add(label_13, "cell 0 21");
@@ -1370,19 +1366,19 @@ public class processConditions {
 		panel_3.add(inflateAirShaftField, "cell 1 21");
 		list.add(inflateAirShaftField);
 		inflateAirShaftField.setColumns(10);
-		
-				label_28 = new JLabel("Hot Roll 2");
-				panel_3.add(label_28, "cell 4 21");
-		
-				hotRoll2SetField = new JTextField();
-				panel_3.add(hotRoll2SetField, "cell 5 21,alignx center");
-				list.add(hotRoll2SetField);
-				hotRoll2SetField.setColumns(10);
-		
-				hotRoll2ActField = new JTextField();
-				panel_3.add(hotRoll2ActField, "cell 6 21,alignx center");
-				list.add(hotRoll2ActField);
-				hotRoll2ActField.setColumns(10);
+
+		label_28 = new JLabel("Hot Roll 2");
+		panel_3.add(label_28, "cell 4 21");
+
+		hotRoll2SetField = new JTextField();
+		panel_3.add(hotRoll2SetField, "cell 5 21,alignx center");
+		list.add(hotRoll2SetField);
+		hotRoll2SetField.setColumns(10);
+
+		hotRoll2ActField = new JTextField();
+		panel_3.add(hotRoll2ActField, "cell 6 21,alignx center");
+		list.add(hotRoll2ActField);
+		hotRoll2ActField.setColumns(10);
 
 		lblWinderNipRoll = new JLabel("Winder Nip Roll");
 		panel_3.add(lblWinderNipRoll, "cell 0 22");
@@ -1391,19 +1387,19 @@ public class processConditions {
 		panel_3.add(winderNipRollField, "cell 1 22");
 		list.add(winderNipRollField);
 		winderNipRollField.setColumns(10);
-		
-				label_29 = new JLabel("Chill Roll");
-				panel_3.add(label_29, "cell 4 22");
-				
-						chillRollSetField = new JTextField();
-						panel_3.add(chillRollSetField, "cell 5 22,alignx center");
-						list.add(chillRollSetField);
-						chillRollSetField.setColumns(10);
-						
-								chillRollActField = new JTextField();
-								panel_3.add(chillRollActField, "cell 6 22,alignx center");
-								list.add(chillRollActField);
-								chillRollActField.setColumns(10);
+
+		label_29 = new JLabel("Chill Roll");
+		panel_3.add(label_29, "cell 4 22");
+
+		chillRollSetField = new JTextField();
+		panel_3.add(chillRollSetField, "cell 5 22,alignx center");
+		list.add(chillRollSetField);
+		chillRollSetField.setColumns(10);
+
+		chillRollActField = new JTextField();
+		panel_3.add(chillRollActField, "cell 6 22,alignx center");
+		list.add(chillRollActField);
+		chillRollActField.setColumns(10);
 
 		panel_1 = new JPanel();
 		tabbedPane.addTab("Page 2", null, panel_1, null);
@@ -1505,96 +1501,76 @@ public class processConditions {
 		list.add(drumToNipTrimSecondaryField);
 		panel_1.add(drumToNipTrimSecondaryField, "cell 6 5");
 		drumToNipTrimSecondaryField.setColumns(10);
-		
-		panel = new JPanel();
-		frame.getContentPane().add(panel, "cell 7 15,growx");
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
-		
-		label_38 = new JLabel("Comments");
-		GridBagConstraints gbc_label_38 = new GridBagConstraints();
-		gbc_label_38.insets = new Insets(0, 0, 5, 0);
-		gbc_label_38.gridx = 0;
-		gbc_label_38.gridy = 0;
-		panel.add(label_38, gbc_label_38);
-		
-		textArea = new JTextArea();
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 0;
-		gbc_textArea.gridy = 1;
-		panel.add(textArea, gbc_textArea);
-		
-				btnSubmit = new JButton("Submit");
-				btnSubmit.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						try {
-							if (allFieldsFilled()) {
-								if (workStationComboBox.getSelectedItem().equals(
-										"FEX340001")) {
-									submitProcessLine1();
-									JOptionPane.showMessageDialog(null,
-											"SOC submitted for Line 1");
-								} else if (workStationComboBox.getSelectedItem()
-										.equals("FEX340002")) {
-									submitProcessLine2();
-									JOptionPane.showMessageDialog(null,
-											"SOC submitted for Line 2");
-								}
 
-								else if (workStationComboBox.getSelectedItem().equals(
-										"FEX340003")) {
-									submitProcessLine3();
-									JOptionPane.showMessageDialog(null,
-											"SOC submitted for Line 3");
-								} else if (workStationComboBox.getSelectedItem()
-										.equals("FEX340004")) {
-									submitProcessLine4();
-									JOptionPane.showMessageDialog(null,
-											"SOC submitted for Line 4");
-								}
-
-								else if (workStationComboBox.getSelectedItem().equals(
-										"FEX340006")) {
-									submitProcessLine6();
-									JOptionPane.showMessageDialog(null,
-											"SOC submitted for Line 6");
-								}
-
-								else if (workStationComboBox.getSelectedItem().equals(
-										"FEX340007")) {
-									submitProcessLine7();
-									JOptionPane.showMessageDialog(null,
-											"SOC submitted for Line 7");
-								}
-
-								else if (workStationComboBox.getSelectedItem().equals(
-										"FEX340008")) {
-									submitProcessLine8();
-									JOptionPane.showMessageDialog(null,
-											"SOC submitted for Line 8");
-								}
-								clearFields();
-							} else {
-								JOptionPane
-										.showMessageDialog(null,
-												"All fields must be filled before SOC can be submitted");
-							}
-						} catch (ClassNotFoundException e) {
-							e.printStackTrace();
-						} catch (SQLException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
+		btnSubmit = new JButton("Submit");
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					if (allFieldsFilled()) {
+						if (workStationComboBox.getSelectedItem().equals(
+								"FEX340001")) {
+							submitProcessLine1();
+							JOptionPane.showMessageDialog(null,
+									"SOC submitted for Line 1");
+						} else if (workStationComboBox.getSelectedItem()
+								.equals("FEX340002")) {
+							submitProcessLine2();
+							JOptionPane.showMessageDialog(null,
+									"SOC submitted for Line 2");
 						}
+
+						else if (workStationComboBox.getSelectedItem().equals(
+								"FEX340003")) {
+							submitProcessLine3();
+							JOptionPane.showMessageDialog(null,
+									"SOC submitted for Line 3");
+						} else if (workStationComboBox.getSelectedItem()
+								.equals("FEX340004")) {
+							submitProcessLine4();
+							JOptionPane.showMessageDialog(null,
+									"SOC submitted for Line 4");
+						}
+
+						else if (workStationComboBox.getSelectedItem().equals(
+								"FEX340006")) {
+							submitProcessLine6();
+							JOptionPane.showMessageDialog(null,
+									"SOC submitted for Line 6");
+						}
+
+						else if (workStationComboBox.getSelectedItem().equals(
+								"FEX340007")) {
+							submitProcessLine7();
+							JOptionPane.showMessageDialog(null,
+									"SOC submitted for Line 7");
+						}
+
+						else if (workStationComboBox.getSelectedItem().equals(
+								"FEX340008")) {
+							submitProcessLine8();
+							JOptionPane.showMessageDialog(null,
+									"SOC submitted for Line 8");
+						}
+						clearFields();
+					} else {
+						JOptionPane
+								.showMessageDialog(null,
+										"All fields must be filled before SOC can be submitted");
 					}
-				});
-				getFrame().getContentPane().add(btnSubmit,
-						"cell 11 15,alignx center");
+				} catch (ClassNotFoundException e) {
+					e.printStackTrace();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				DateFormat dateFormat = new SimpleDateFormat("YYYY/MM/dd");
+				Calendar cal = Calendar.getInstance();
+				String dateTime = dateFormat.format(cal.getTime());
+				shiftDateField.setText(dateTime);
+			}
+		});
+		getFrame().getContentPane().add(btnSubmit, "cell 11 15,alignx center");
 	}
 
 	public void submitProcessLine1() throws ClassNotFoundException,
@@ -1718,11 +1694,13 @@ public class processConditions {
 		double zoneB2SetDouble = convertToDouble(zoneB2Set);
 		String zoneB2Act = zoneB2ActField.getText();
 		double zoneB2ActDouble = convertToDouble(zoneB2Act);
+		String mixDropTemp = mixDropTempField.getText();
+		double mixDropTempDouble = convertToDouble(mixDropTemp);
 
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrProcessLine1(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrProcessLine1(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, shift);
 			cs.setString(3, workStation);
@@ -1753,36 +1731,37 @@ public class processConditions {
 			cs.setDouble(28, horizontalApplyDouble);
 			cs.setDouble(29, inflateAirShaftDouble);
 			cs.setDouble(30, winderNipRollDouble);
-			cs.setDouble(31, winderNipSpeedDouble);
-			cs.setDouble(32, collapsingShieldSpeedDouble);
-			cs.setDouble(33, collapsingShieldTempField);
-			cs.setDouble(34, plenumTempDouble);
-			cs.setDouble(35, airRingGapDouble);
-			cs.setDouble(36, trimPullerSpeedDouble);
-			cs.setDouble(37, zone0SetDouble);
-			cs.setDouble(38, zone0ActDouble);
-			cs.setDouble(39, zone1SetDouble);
-			cs.setDouble(40, zone1ActDouble);
-			cs.setDouble(41, zone2SetDouble);
-			cs.setDouble(42, zone2ActDouble);
-			cs.setDouble(43, zone3SetDouble);
-			cs.setDouble(44, zone3ActDouble);
-			cs.setDouble(45, zone4SetDouble);
-			cs.setDouble(46, zone4ActDouble);
-			cs.setDouble(47, zone5SetDouble);
-			cs.setDouble(48, zone5ActDouble);
-			cs.setDouble(49, zone6SetDouble);
-			cs.setDouble(50, zone6ActDouble);
-			cs.setDouble(51, zone7SetDouble);
-			cs.setDouble(52, zone7ActDouble);
-			cs.setDouble(53, zone8SetDouble);
-			cs.setDouble(54, zone8ActDouble);
-			cs.setDouble(55, zone9SetDouble);
-			cs.setDouble(56, zone9ActDouble);
-			cs.setDouble(57, zoneB1SetDouble);
-			cs.setDouble(58, zoneB1ActDouble);
-			cs.setDouble(59, zoneB2SetDouble);
-			cs.setDouble(60, zoneB2ActDouble);
+			cs.setDouble(31, mixDropTempDouble);
+			cs.setDouble(32, winderNipSpeedDouble);
+			cs.setDouble(33, collapsingShieldSpeedDouble);
+			cs.setDouble(34, collapsingShieldTempField);
+			cs.setDouble(35, plenumTempDouble);
+			cs.setDouble(36, airRingGapDouble);
+			cs.setDouble(37, trimPullerSpeedDouble);
+			cs.setDouble(38, zone0SetDouble);
+			cs.setDouble(39, zone0ActDouble);
+			cs.setDouble(40, zone1SetDouble);
+			cs.setDouble(41, zone1ActDouble);
+			cs.setDouble(42, zone2SetDouble);
+			cs.setDouble(43, zone2ActDouble);
+			cs.setDouble(44, zone3SetDouble);
+			cs.setDouble(45, zone3ActDouble);
+			cs.setDouble(46, zone4SetDouble);
+			cs.setDouble(47, zone4ActDouble);
+			cs.setDouble(48, zone5SetDouble);
+			cs.setDouble(49, zone5ActDouble);
+			cs.setDouble(50, zone6SetDouble);
+			cs.setDouble(51, zone6ActDouble);
+			cs.setDouble(52, zone7SetDouble);
+			cs.setDouble(53, zone7ActDouble);
+			cs.setDouble(54, zone8SetDouble);
+			cs.setDouble(55, zone8ActDouble);
+			cs.setDouble(56, zone9SetDouble);
+			cs.setDouble(57, zone9ActDouble);
+			cs.setDouble(58, zoneB1SetDouble);
+			cs.setDouble(59, zoneB1ActDouble);
+			cs.setDouble(60, zoneB2SetDouble);
+			cs.setDouble(61, zoneB2ActDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -1920,10 +1899,12 @@ public class processConditions {
 		double zone13SetDouble = convertToDouble(zone13Set);
 		String zone13Act = zone13ActField.getText();
 		double zone13ActDouble = convertToDouble(zone13Act);
+		String mixDropTemp = mixDropTempField.getText();
+		double mixDropTempDouble = convertToDouble(mixDropTemp);
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrProcessLine2(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrProcessLine2(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, shift);
 			cs.setString(3, workStation);
@@ -1950,41 +1931,42 @@ public class processConditions {
 			cs.setDouble(24, airRingTempDouble);
 			cs.setDouble(25, drumNipDouble);
 			cs.setDouble(26, winderNipRollDouble);
-			cs.setDouble(27, winderNipSpeedDouble);
-			cs.setDouble(28, collapsingShieldSpeedDouble);
-			cs.setDouble(29, collapsingShieldTempField);
-			cs.setDouble(30, plenumTempDouble);
-			cs.setDouble(31, airRingGapDouble);
-			cs.setDouble(32, fingerAdjustLeftDouble);
-			cs.setDouble(33, fingerAdjustRightDouble);
-			cs.setDouble(34, trimPullerSpeedDouble);
-			cs.setDouble(35, mandrelAirPressureDouble);
-			cs.setDouble(36, zone1SetDouble);
-			cs.setDouble(37, zone1ActDouble);
-			cs.setDouble(38, zone2SetDouble);
-			cs.setDouble(39, zone2ActDouble);
-			cs.setDouble(40, zone3SetDouble);
-			cs.setDouble(41, zone3ActDouble);
-			cs.setDouble(42, zone4SetDouble);
-			cs.setDouble(43, zone4ActDouble);
-			cs.setDouble(44, zone5SetDouble);
-			cs.setDouble(45, zone5ActDouble);
-			cs.setDouble(46, zone6SetDouble);
-			cs.setDouble(47, zone6ActDouble);
-			cs.setDouble(48, zone7SetDouble);
-			cs.setDouble(49, zone7ActDouble);
-			cs.setDouble(50, zone8SetDouble);
-			cs.setDouble(51, zone8ActDouble);
-			cs.setDouble(52, zone9SetDouble);
-			cs.setDouble(53, zone9ActDouble);
-			cs.setDouble(54, zone10SetDouble);
-			cs.setDouble(55, zone10ActDouble);
-			cs.setDouble(56, zone11SetDouble);
-			cs.setDouble(57, zone11ActDouble);
-			cs.setDouble(58, zone12SetDouble);
-			cs.setDouble(59, zone12ActDouble);
-			cs.setDouble(60, zone13SetDouble);
-			cs.setDouble(61, zone13ActDouble);
+			cs.setDouble(27, mixDropTempDouble);
+			cs.setDouble(28, winderNipSpeedDouble);
+			cs.setDouble(29, collapsingShieldSpeedDouble);
+			cs.setDouble(30, collapsingShieldTempField);
+			cs.setDouble(31, plenumTempDouble);
+			cs.setDouble(32, airRingGapDouble);
+			cs.setDouble(33, fingerAdjustLeftDouble);
+			cs.setDouble(34, fingerAdjustRightDouble);
+			cs.setDouble(35, trimPullerSpeedDouble);
+			cs.setDouble(36, mandrelAirPressureDouble);
+			cs.setDouble(37, zone1SetDouble);
+			cs.setDouble(38, zone1ActDouble);
+			cs.setDouble(39, zone2SetDouble);
+			cs.setDouble(40, zone2ActDouble);
+			cs.setDouble(41, zone3SetDouble);
+			cs.setDouble(42, zone3ActDouble);
+			cs.setDouble(43, zone4SetDouble);
+			cs.setDouble(44, zone4ActDouble);
+			cs.setDouble(45, zone5SetDouble);
+			cs.setDouble(46, zone5ActDouble);
+			cs.setDouble(47, zone6SetDouble);
+			cs.setDouble(48, zone6ActDouble);
+			cs.setDouble(49, zone7SetDouble);
+			cs.setDouble(50, zone7ActDouble);
+			cs.setDouble(51, zone8SetDouble);
+			cs.setDouble(52, zone8ActDouble);
+			cs.setDouble(53, zone9SetDouble);
+			cs.setDouble(54, zone9ActDouble);
+			cs.setDouble(55, zone10SetDouble);
+			cs.setDouble(56, zone10ActDouble);
+			cs.setDouble(57, zone11SetDouble);
+			cs.setDouble(58, zone11ActDouble);
+			cs.setDouble(59, zone12SetDouble);
+			cs.setDouble(60, zone12ActDouble);
+			cs.setDouble(61, zone13SetDouble);
+			cs.setDouble(62, zone13ActDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -2098,10 +2080,12 @@ public class processConditions {
 		double zone10SetDouble = convertToDouble(zone10Set);
 		String zone10Act = zone10ActField.getText();
 		double zone10ActDouble = convertToDouble(zone10Act);
+		String mixDropTemp = mixDropTempField.getText();
+		double mixDropTempDouble = convertToDouble(mixDropTemp);
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrProcessLine3(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrProcessLine3(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, shift);
 			cs.setString(3, workStation);
@@ -2127,30 +2111,31 @@ public class processConditions {
 			cs.setDouble(23, pinchRollTempDouble);
 			cs.setDouble(24, airRingSpeedDouble);
 			cs.setDouble(25, airRingTempDouble);
-			cs.setDouble(26, trimLeftMeasureDouble);
-			cs.setDouble(27, trimRightMeasureDouble);
-			cs.setDouble(28, airRingGapDouble);
-			cs.setDouble(29, trimPullerSpeedDouble);
-			cs.setDouble(30, feedValvesDouble);
-			cs.setDouble(31, doorsDouble);
-			cs.setDouble(32, zone1SetDouble);
-			cs.setDouble(33, zone1ActDouble);
-			cs.setDouble(34, zone2SetDouble);
-			cs.setDouble(35, zone2ActDouble);
-			cs.setDouble(36, zone3SetDouble);
-			cs.setDouble(37, zone3ActDouble);
-			cs.setDouble(38, zone4SetDouble);
-			cs.setDouble(39, zone4ActDouble);
-			cs.setDouble(40, zone5SetDouble);
-			cs.setDouble(41, zone5ActDouble);
-			cs.setDouble(42, zone6SetDouble);
-			cs.setDouble(43, zone6ActDouble);
-			cs.setDouble(44, zone8SetDouble);
-			cs.setDouble(45, zone8ActDouble);
-			cs.setDouble(46, zone9SetDouble);
-			cs.setDouble(47, zone9ActDouble);
-			cs.setDouble(48, zone10SetDouble);
-			cs.setDouble(49, zone10ActDouble);
+			cs.setDouble(26, mixDropTempDouble);
+			cs.setDouble(27, trimLeftMeasureDouble);
+			cs.setDouble(28, trimRightMeasureDouble);
+			cs.setDouble(29, airRingGapDouble);
+			cs.setDouble(30, trimPullerSpeedDouble);
+			cs.setDouble(31, feedValvesDouble);
+			cs.setDouble(32, doorsDouble);
+			cs.setDouble(33, zone1SetDouble);
+			cs.setDouble(34, zone1ActDouble);
+			cs.setDouble(35, zone2SetDouble);
+			cs.setDouble(36, zone2ActDouble);
+			cs.setDouble(37, zone3SetDouble);
+			cs.setDouble(38, zone3ActDouble);
+			cs.setDouble(39, zone4SetDouble);
+			cs.setDouble(40, zone4ActDouble);
+			cs.setDouble(41, zone5SetDouble);
+			cs.setDouble(42, zone5ActDouble);
+			cs.setDouble(43, zone6SetDouble);
+			cs.setDouble(44, zone6ActDouble);
+			cs.setDouble(45, zone8SetDouble);
+			cs.setDouble(46, zone8ActDouble);
+			cs.setDouble(47, zone9SetDouble);
+			cs.setDouble(48, zone9ActDouble);
+			cs.setDouble(49, zone10SetDouble);
+			cs.setDouble(50, zone10ActDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -2264,10 +2249,12 @@ public class processConditions {
 		double zone10SetDouble = convertToDouble(zone10Set);
 		String zone10Act = zone10ActField.getText();
 		double zone10ActDouble = convertToDouble(zone10Act);
+		String mixDropTemp = mixDropTempField.getText();
+		double mixDropTempDouble = convertToDouble(mixDropTemp);
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrProcessLine4(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrProcessLine4(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, shift);
 			cs.setString(3, workStation);
@@ -2293,30 +2280,31 @@ public class processConditions {
 			cs.setDouble(23, pinchRollTempDouble);
 			cs.setDouble(24, airRingSpeedDouble);
 			cs.setDouble(25, airRingTempDouble);
-			cs.setDouble(26, trimLeftMeasureDouble);
-			cs.setDouble(27, trimRightMeasureDouble);
-			cs.setDouble(28, airRingGapDouble);
-			cs.setDouble(29, trimPullerSpeedDouble);
-			cs.setDouble(30, feedValvesDouble);
-			cs.setDouble(31, doorsDouble);
-			cs.setDouble(32, zone1SetDouble);
-			cs.setDouble(33, zone1ActDouble);
-			cs.setDouble(34, zone2SetDouble);
-			cs.setDouble(35, zone2ActDouble);
-			cs.setDouble(36, zone3SetDouble);
-			cs.setDouble(37, zone3ActDouble);
-			cs.setDouble(38, zone4SetDouble);
-			cs.setDouble(39, zone4ActDouble);
-			cs.setDouble(40, zone5SetDouble);
-			cs.setDouble(41, zone5ActDouble);
-			cs.setDouble(42, zone6SetDouble);
-			cs.setDouble(43, zone6ActDouble);
-			cs.setDouble(44, zone8SetDouble);
-			cs.setDouble(45, zone8ActDouble);
-			cs.setDouble(46, zone9SetDouble);
-			cs.setDouble(47, zone9ActDouble);
-			cs.setDouble(48, zone10SetDouble);
-			cs.setDouble(49, zone10ActDouble);
+			cs.setDouble(26, mixDropTempDouble);
+			cs.setDouble(27, trimLeftMeasureDouble);
+			cs.setDouble(28, trimRightMeasureDouble);
+			cs.setDouble(29, airRingGapDouble);
+			cs.setDouble(30, trimPullerSpeedDouble);
+			cs.setDouble(31, feedValvesDouble);
+			cs.setDouble(32, doorsDouble);
+			cs.setDouble(33, zone1SetDouble);
+			cs.setDouble(34, zone1ActDouble);
+			cs.setDouble(35, zone2SetDouble);
+			cs.setDouble(36, zone2ActDouble);
+			cs.setDouble(37, zone3SetDouble);
+			cs.setDouble(38, zone3ActDouble);
+			cs.setDouble(39, zone4SetDouble);
+			cs.setDouble(40, zone4ActDouble);
+			cs.setDouble(41, zone5SetDouble);
+			cs.setDouble(42, zone5ActDouble);
+			cs.setDouble(43, zone6SetDouble);
+			cs.setDouble(44, zone6ActDouble);
+			cs.setDouble(45, zone8SetDouble);
+			cs.setDouble(46, zone8ActDouble);
+			cs.setDouble(47, zone9SetDouble);
+			cs.setDouble(48, zone9ActDouble);
+			cs.setDouble(49, zone10SetDouble);
+			cs.setDouble(50, zone10ActDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -2475,6 +2463,7 @@ public class processConditions {
 		double forceSetPointSecondaryDouble = convertToDouble(forceSetPointSecondary);
 		String drumToNipTrimSecondary = drumToNipTrimSecondaryField.getText();
 		double drumToNipTrimSecondaryDouble = convertToDouble(drumToNipTrimSecondary);
+
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
@@ -2680,11 +2669,13 @@ public class processConditions {
 		double chillRollSetDouble = convertToDouble(chillRollSet);
 		String chillRollAct = chillRollActField.getText();
 		double chillRollActDouble = convertToDouble(chillRollAct);
+		String mixDropTemp = mixDropTempField.getText();
+		double mixDropTempDouble = convertToDouble(mixDropTemp);
 
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrProcessLine7(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrProcessLine7(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, shift);
 			cs.setString(3, workStation);
@@ -2709,40 +2700,41 @@ public class processConditions {
 			cs.setDouble(22, drumTempDouble);
 			cs.setDouble(23, pinchRollTempDouble);
 			cs.setDouble(24, airRingSpeedDouble);
-			cs.setDouble(25, trimLeftMeasureDouble);
-			cs.setDouble(26, trimRightMeasureDouble);
-			cs.setDouble(27, airRingGapDouble);
-			cs.setDouble(28, curtainLinksDouble);
-			cs.setDouble(29, trimPullerSpeedDouble);
-			cs.setDouble(30, feedValvesDouble);
-			cs.setDouble(31, zone1SetDouble);
-			cs.setDouble(32, zone1ActDouble);
-			cs.setDouble(33, zone2SetDouble);
-			cs.setDouble(34, zone2ActDouble);
-			cs.setDouble(35, zone3SetDouble);
-			cs.setDouble(36, zone3ActDouble);
-			cs.setDouble(37, zone4SetDouble);
-			cs.setDouble(38, zone4ActDouble);
-			cs.setDouble(39, zone5SetDouble);
-			cs.setDouble(40, zone5ActDouble);
-			cs.setDouble(41, zone6SetDouble);
-			cs.setDouble(42, zone6ActDouble);
-			cs.setDouble(43, zone7SetDouble);
-			cs.setDouble(44, zone7ActDouble);
-			cs.setDouble(45, zone8SetDouble);
-			cs.setDouble(46, zone8ActDouble);
-			cs.setDouble(47, zone9SetDouble);
-			cs.setDouble(48, zone9ActDouble);
-			cs.setDouble(49, zone10SetDouble);
-			cs.setDouble(50, zone10ActDouble);
-			cs.setDouble(51, zone11SetDouble);
-			cs.setDouble(52, zone11ActDouble);
-			cs.setDouble(53, hotRoll1SetDouble);
-			cs.setDouble(54, hotRoll1ActDouble);
-			cs.setDouble(55, hotRoll2SetDouble);
-			cs.setDouble(56, hotRoll2ActDouble);
-			cs.setDouble(57, chillRollSetDouble);
-			cs.setDouble(58, chillRollActDouble);
+			cs.setDouble(25, mixDropTempDouble);
+			cs.setDouble(26, trimLeftMeasureDouble);
+			cs.setDouble(27, trimRightMeasureDouble);
+			cs.setDouble(28, airRingGapDouble);
+			cs.setDouble(29, curtainLinksDouble);
+			cs.setDouble(30, trimPullerSpeedDouble);
+			cs.setDouble(31, feedValvesDouble);
+			cs.setDouble(32, zone1SetDouble);
+			cs.setDouble(33, zone1ActDouble);
+			cs.setDouble(34, zone2SetDouble);
+			cs.setDouble(35, zone2ActDouble);
+			cs.setDouble(36, zone3SetDouble);
+			cs.setDouble(37, zone3ActDouble);
+			cs.setDouble(38, zone4SetDouble);
+			cs.setDouble(39, zone4ActDouble);
+			cs.setDouble(40, zone5SetDouble);
+			cs.setDouble(41, zone5ActDouble);
+			cs.setDouble(42, zone6SetDouble);
+			cs.setDouble(43, zone6ActDouble);
+			cs.setDouble(44, zone7SetDouble);
+			cs.setDouble(45, zone7ActDouble);
+			cs.setDouble(46, zone8SetDouble);
+			cs.setDouble(47, zone8ActDouble);
+			cs.setDouble(48, zone9SetDouble);
+			cs.setDouble(49, zone9ActDouble);
+			cs.setDouble(50, zone10SetDouble);
+			cs.setDouble(51, zone10ActDouble);
+			cs.setDouble(52, zone11SetDouble);
+			cs.setDouble(53, zone11ActDouble);
+			cs.setDouble(54, hotRoll1SetDouble);
+			cs.setDouble(55, hotRoll1ActDouble);
+			cs.setDouble(56, hotRoll2SetDouble);
+			cs.setDouble(57, hotRoll2ActDouble);
+			cs.setDouble(58, chillRollSetDouble);
+			cs.setDouble(59, chillRollActDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -2872,11 +2864,13 @@ public class processConditions {
 		double chillRollSetDouble = convertToDouble(chillRollSet);
 		String chillRollAct = chillRollActField.getText();
 		double chillRollActDouble = convertToDouble(chillRollAct);
+		String mixDropTemp = mixDropTempField.getText();
+		double mixDropTempDouble = convertToDouble(mixDropTemp);
 
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrProcessLine8(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrProcessLine8(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, dateTime);
 			cs.setString(2, shift);
 			cs.setString(3, workStation);
@@ -2901,39 +2895,40 @@ public class processConditions {
 			cs.setDouble(22, drumTempDouble);
 			cs.setDouble(23, pinchRollTempDouble);
 			cs.setDouble(24, airRingSpeedDouble);
-			cs.setDouble(25, trimLeftMeasureDouble);
-			cs.setDouble(26, trimRightMeasureDouble);
-			cs.setDouble(27, airRingGapDouble);
-			cs.setDouble(28, curtainLinksDouble);
-			cs.setDouble(29, feedValvesDouble);
-			cs.setDouble(30, zone1SetDouble);
-			cs.setDouble(31, zone1ActDouble);
-			cs.setDouble(32, zone2SetDouble);
-			cs.setDouble(33, zone2ActDouble);
-			cs.setDouble(34, zone3SetDouble);
-			cs.setDouble(35, zone3ActDouble);
-			cs.setDouble(36, zone4SetDouble);
-			cs.setDouble(37, zone4ActDouble);
-			cs.setDouble(38, zone5SetDouble);
-			cs.setDouble(39, zone5ActDouble);
-			cs.setDouble(40, zone6SetDouble);
-			cs.setDouble(41, zone6ActDouble);
-			cs.setDouble(42, zone7SetDouble);
-			cs.setDouble(43, zone7ActDouble);
-			cs.setDouble(44, zone8SetDouble);
-			cs.setDouble(45, zone8ActDouble);
-			cs.setDouble(46, zone9SetDouble);
-			cs.setDouble(47, zone9ActDouble);
-			cs.setDouble(48, zone10SetDouble);
-			cs.setDouble(49, zone10ActDouble);
-			cs.setDouble(50, zone11SetDouble);
-			cs.setDouble(51, zone11ActDouble);
-			cs.setDouble(52, hotRoll1SetDouble);
-			cs.setDouble(53, hotRoll1ActDouble);
-			cs.setDouble(54, hotRoll2SetDouble);
-			cs.setDouble(55, hotRoll2ActDouble);
-			cs.setDouble(56, chillRollSetDouble);
-			cs.setDouble(57, chillRollActDouble);
+			cs.setDouble(25, mixDropTempDouble);
+			cs.setDouble(26, trimLeftMeasureDouble);
+			cs.setDouble(27, trimRightMeasureDouble);
+			cs.setDouble(28, airRingGapDouble);
+			cs.setDouble(29, curtainLinksDouble);
+			cs.setDouble(30, feedValvesDouble);
+			cs.setDouble(31, zone1SetDouble);
+			cs.setDouble(32, zone1ActDouble);
+			cs.setDouble(33, zone2SetDouble);
+			cs.setDouble(34, zone2ActDouble);
+			cs.setDouble(35, zone3SetDouble);
+			cs.setDouble(36, zone3ActDouble);
+			cs.setDouble(37, zone4SetDouble);
+			cs.setDouble(38, zone4ActDouble);
+			cs.setDouble(39, zone5SetDouble);
+			cs.setDouble(40, zone5ActDouble);
+			cs.setDouble(41, zone6SetDouble);
+			cs.setDouble(42, zone6ActDouble);
+			cs.setDouble(43, zone7SetDouble);
+			cs.setDouble(44, zone7ActDouble);
+			cs.setDouble(45, zone8SetDouble);
+			cs.setDouble(46, zone8ActDouble);
+			cs.setDouble(47, zone9SetDouble);
+			cs.setDouble(48, zone9ActDouble);
+			cs.setDouble(49, zone10SetDouble);
+			cs.setDouble(50, zone10ActDouble);
+			cs.setDouble(51, zone11SetDouble);
+			cs.setDouble(52, zone11ActDouble);
+			cs.setDouble(53, hotRoll1SetDouble);
+			cs.setDouble(54, hotRoll1ActDouble);
+			cs.setDouble(55, hotRoll2SetDouble);
+			cs.setDouble(56, hotRoll2ActDouble);
+			cs.setDouble(57, chillRollSetDouble);
+			cs.setDouble(58, chillRollActDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {

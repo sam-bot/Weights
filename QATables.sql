@@ -2606,3 +2606,86 @@ BEGIN
 	AND shift = @shift
 	AND lineNumber = @lineNumber
 END
+
+CREATE TABLE [dbo].[ArrRollWeight](
+	[rollWeightID] [int] IDENTITY(1,1) NOT NULL,
+	[workStation] [varchar](255) NULL,
+	[operator] [varchar](255) NULL,
+	[shift] [varchar](255) NULL,
+	setNumber int NULL,
+	[dateTimeStamp] [datetime] NULL,
+	[workOrder] [decimal](10, 2) NULL,
+	[ItemNumber] [decimal](10, 2) NULL,
+	targetWeight [decimal](10, 2) NULL,
+	rollsPerSet [decimal](10, 2) NULL,
+	[CoreTagNumber] [varchar](255) NULL,
+	[rollWeight] [decimal](7, 2) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[rollWeightID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Sam Renick
+-- Create date: 03-09-15
+-- Description:	Insert Aurora Roll Weights
+-- =============================================
+CREATE PROCEDURE InsertArrRollWeight
+	-- Add the parameters for the stored procedure here
+	@workStation VARCHAR(255) = NULL,
+	@operator VARCHAR(255) = NULL,
+	@shift VARCHAR(255) = NULL,
+	@setNumber INT = 0,
+	@dateTimeStamp dateTime = NULL, 
+	@workOrder decimal(7, 2)= 0,
+	@itemNumber decimal(7, 2)= 0,
+	@targetWeight decimal(7, 2)= 0,
+	@rollsPerSet decimal(7, 2)= 0,
+	@coreTagNumber VARCHAR(255) = NULL,
+	@rollWeight decimal(7, 2)= 0
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	INSERT INTO ArrRolLWeight
+	(
+	workStation,
+	operator,
+	shift,
+	setNumber,
+	dateTimeStamp,
+	workOrder,
+	itemNumber,
+	targetWeight,
+	rollsPerSet,
+	coreTagNumber,
+	rollWeight
+	)
+	VALUES
+	(
+	@workStation,
+	@operator,
+	@shift,
+	@setNumber,
+	@dateTimeStamp,
+	@workOrder,
+	@itemNumber,
+	@targetWeight,
+	@rollsPerSet,
+	@coreTagNumber,
+	@rollWeight
+	)
+END
+GO
