@@ -49,7 +49,7 @@ public class weights {
 
 	private JFrame frame;
 	private JTextField setNumberField;
-	private static JComboBox compoundBox;
+	static JComboBox compoundBox;
 	private JTextField lineSpeedField;
 	private JLabel lblTargetWt;
 	private JTextField targetWeightOneField;
@@ -171,7 +171,7 @@ public class weights {
 	private JLabel lblCompound;
 	private JLabel label_24;
 	private JLabel lblShift;
-	private static JComboBox shiftBox;
+	static JComboBox shiftBox;
 	DecimalFormat df = new DecimalFormat("###0.00");
 	String dateTime = "";
 	String[] parts = dateTime.split(" ");
@@ -823,12 +823,10 @@ public class weights {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							// populate work order fields from weights
-							if (!(workOrderOneField == null))
+							if (!(weights.workOrderOneField == null))
 								window.workOrder1Field
 										.setText(weights.workOrderOneField
 												.getText());
-
 							if (!(weights.workOrderTwoField == null))
 								window.workOrder2Field
 										.setText(weights.workOrderTwoField

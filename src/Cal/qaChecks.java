@@ -510,6 +510,17 @@ public class qaChecks {
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
 		String setNumber = setNumberField.getText().trim();
+		// populate work order fields from weights
+		if (!(weights.workOrderOneField == null))
+			workOrder1Field.setText(weights.workOrderOneField.getText());
+		if (!(weights.workOrderTwoField == null))
+			workOrder2Field.setText(weights.workOrderTwoField.getText());
+		if (!(weights.lineNumberBox == null))
+			lineNumber = (String) weights.lineNumberBox.getSelectedItem();
+		if (!(weights.compoundBox == null))
+			compound = (String) weights.compoundBox.getSelectedItem();
+		if (!(weights.shiftBox == null))
+			shift = (String) weights.shiftBox.getSelectedItem();
 		int setInt = convertToInt(setNumber);
 		String workOrder1 = workOrder1Field.getText().trim();
 		String workOrder2 = workOrder2Field.getText().trim();
