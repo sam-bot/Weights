@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,7 +40,7 @@ public class arrExtrusion {
 	private JFrame frame;
 	private ArrayList<JTextField> fieldList;
 	private JComboBox<String> workStationBox;
-	private JTextField operatorField;
+	static JTextField operatorField;
 	private String operator;
 	private JComboBox<String> shiftBox;
 	private JLabel fgCoreTagNumberField;
@@ -69,13 +70,25 @@ public class arrExtrusion {
 	private JTextField rollWeightField;
 	private JScrollPane scrollPane;
 	private JTable rollWeightsTable;
-	static DefaultTableModel model5 = new DefaultTableModel();
-	static DefaultTableModel model6 = new DefaultTableModel();
+	static arrQaAudit qaWindow;
+	static DefaultTableModel model5 = new DefaultTableModel() {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			// all cells false
+			return false;
+		}
+	};
+	static DefaultTableModel model6 = new DefaultTableModel() {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			// all cells false
+			return false;
+		}
+	};
 	private JPanel panel_3;
 	private JButton btnAudit;
 	private JButton btnSoc;
 	private JButton btnShiftChecklist;
-	private arrQaAudit qaWindow = new arrQaAudit();
 	private arrHousekeeping housekeepingWindow = new arrHousekeeping();
 	private processConditions socWindow;
 	private JLabel lblRollWeights;
@@ -94,7 +107,6 @@ public class arrExtrusion {
 	private JLabel percentOfTargetLbl;
 	private JLabel label_5;
 	private JLabel label_6;
-	private JSeparator separator;
 	private JTextField targetSetWeightOneField;
 	private JTextField actualSetWeightOneField;
 	private JTextField targetSetWeightTwoField;
@@ -105,6 +117,9 @@ public class arrExtrusion {
 	private JTextField actualSetWeightFourField;
 	private JButton btnResetForm;
 	private Robot robot;
+	private JLabel lblFormulation;
+	private JComboBox formulationBox;
+	private JButton btnRemoveLastRoll;
 
 	/**
 	 * Launch the application.
@@ -113,7 +128,7 @@ public class arrExtrusion {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					arrExtrusion window = new arrExtrusion();
+					arrExtrusion window = new arrExtrusion("sRenick");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -125,16 +140,16 @@ public class arrExtrusion {
 	/**
 	 * Create the application.
 	 */
-	public arrExtrusion() {
-		initialize();
+	public arrExtrusion(String operator) {
+		initialize(operator);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(final String operator) {
 		frame = new JFrame("Extrusion");
-		frame.setBounds(100, 100, 673, 492);
+		frame.setBounds(100, 100, 825, 492);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(
 				new MigLayout("", "[grow][grow][grow]",
@@ -142,8 +157,9 @@ public class arrExtrusion {
 
 		JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, "cell 0 0 3 1");
-		panel.setLayout(new MigLayout("",
-				"[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow]",
+		panel.setLayout(new MigLayout(
+				"",
+				"[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][100.00,grow][grow]",
 				"[][]"));
 
 		String[] extrusionLines = { "", "FEX340001", "FEX340002", "FEX340003",
@@ -154,14 +170,17 @@ public class arrExtrusion {
 		JLabel lblWorkstation = new JLabel("Workstation");
 		panel.add(lblWorkstation, "cell 0 0");
 		workStationBox = new JComboBox(extrusionLines);
-		panel.add(workStationBox, "cell 1 0,growx");
+		panel.add(workStationBox, "cell 1 0");
 
 		JLabel lblOperator = new JLabel("Operator");
 		panel.add(lblOperator, "cell 3 0");
 
 		operatorField = new JTextField();
-		panel.add(operatorField, "cell 4 0,growx");
+		panel.add(operatorField, "cell 4 0");
 		operatorField.setColumns(10);
+		operatorField.setEditable(false);
+		operatorField.setText(operator);
+		qaWindow = new arrQaAudit(operator);
 		fieldList.add(operatorField);
 		String[] shifts = { "", "A", "B", "C", "D" };
 
@@ -177,6 +196,16 @@ public class arrExtrusion {
 		panel.add(setNumberField, "cell 9 0");
 		setNumberField.setColumns(10);
 		setNumberField.setText("1");
+
+		lblFormulation = new JLabel("Formulation");
+		panel.add(lblFormulation, "cell 10 0,alignx trailing");
+		String[] formulations = { "", "CRMF", "Digi Shrink", "Gold Cutterbox",
+				"Gold Meat", "Gold Mushroom", "Gold Mushroom PWMF",
+				"Gold Revolution RHW", "Green Produce", "HW Revolution",
+				"Omni MT", "Premium MT", "Premium Processor",
+				"Premium Supermarket", "Shrink", };
+		formulationBox = new JComboBox(formulations);
+		panel.add(formulationBox, "cell 11 0");
 		DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
@@ -184,7 +213,7 @@ public class arrExtrusion {
 		panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, "cell 0 1 3 1,growx");
 		panel_1.setLayout(new MigLayout("",
-				"[grow][grow][grow][grow][grow][grow][][grow]", "[][][][][]"));
+				"[grow][grow][grow][grow][grow][grow][grow]", "[][][][][]"));
 
 		lblWorkOrder = new JLabel("Work Order");
 		panel_1.add(lblWorkOrder, "cell 1 0");
@@ -201,11 +230,8 @@ public class arrExtrusion {
 		label_5 = new JLabel("Target Set Weight");
 		panel_1.add(label_5, "cell 5 0");
 
-		separator = new JSeparator();
-		panel_1.add(separator, "cell 6 0");
-
 		label_6 = new JLabel("Actual Set Weight");
-		panel_1.add(label_6, "cell 7 0");
+		panel_1.add(label_6, "cell 6 0");
 
 		label = new JLabel("#1");
 		panel_1.add(label, "cell 0 1,alignx trailing");
@@ -256,7 +282,7 @@ public class arrExtrusion {
 		actualSetWeightOneField = new JTextField();
 		actualSetWeightOneField.setEditable(false);
 		actualSetWeightOneField.setColumns(10);
-		panel_1.add(actualSetWeightOneField, "cell 7 1,growx");
+		panel_1.add(actualSetWeightOneField, "cell 6 1,growx");
 
 		label_1 = new JLabel("#2");
 		panel_1.add(label_1, "cell 0 2,alignx trailing");
@@ -306,7 +332,7 @@ public class arrExtrusion {
 		actualSetWeightTwoField = new JTextField();
 		actualSetWeightTwoField.setColumns(10);
 		actualSetWeightTwoField.setEditable(false);
-		panel_1.add(actualSetWeightTwoField, "cell 7 2,growx");
+		panel_1.add(actualSetWeightTwoField, "cell 6 2,growx");
 
 		label_2 = new JLabel("#3");
 		panel_1.add(label_2, "cell 0 3,alignx trailing");
@@ -356,7 +382,7 @@ public class arrExtrusion {
 		actualSetWeightThreeField = new JTextField();
 		actualSetWeightThreeField.setColumns(10);
 		actualSetWeightThreeField.setEditable(false);
-		panel_1.add(actualSetWeightThreeField, "cell 7 3,growx");
+		panel_1.add(actualSetWeightThreeField, "cell 6 3,growx");
 
 		label_3 = new JLabel("#4");
 		panel_1.add(label_3, "cell 0 4,alignx trailing");
@@ -406,7 +432,7 @@ public class arrExtrusion {
 		actualSetWeightFourField = new JTextField();
 		actualSetWeightFourField.setEditable(false);
 		actualSetWeightFourField.setColumns(10);
-		panel_1.add(actualSetWeightFourField, "cell 7 4,growx");
+		panel_1.add(actualSetWeightFourField, "cell 6 4,growx");
 
 		panel_2 = new JPanel();
 		panel_2.setBackground(Color.BLACK);
@@ -432,12 +458,13 @@ public class arrExtrusion {
 				rollWeightField.setText("");
 				coreTagNumberField.requestFocus();
 			}
+
 			@Override
 			public void focusGained(FocusEvent e) {
 				try {
 					robot = new Robot();
-				    robot.keyPress(KeyEvent.VK_F11);
-				    robot.keyRelease(KeyEvent.VK_F11);
+					robot.keyPress(KeyEvent.VK_F11);
+					robot.keyRelease(KeyEvent.VK_F11);
 				} catch (AWTException e1) {
 					e1.printStackTrace();
 				}
@@ -485,7 +512,7 @@ public class arrExtrusion {
 
 		panel_3 = new JPanel();
 		frame.getContentPane().add(panel_3, "cell 0 10 3 1,grow");
-		panel_3.setLayout(new MigLayout("", "[grow][grow][grow][grow][grow]",
+		panel_3.setLayout(new MigLayout("", "[grow][grow][grow][grow][grow][]",
 				"[][]"));
 
 		btnAudit = new JButton("Audit");
@@ -511,7 +538,7 @@ public class arrExtrusion {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							socWindow = new processConditions("placeholder");
+							socWindow = new processConditions(operator);
 							socWindow.getFrame().setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -546,6 +573,10 @@ public class arrExtrusion {
 				setNumber++;
 				String setString = Integer.toString(setNumber);
 				setNumberField.setText(setString);
+				actualSetWeightOneField.setText("");
+				actualSetWeightTwoField.setText("");
+				actualSetWeightThreeField.setText("");
+				actualSetWeightFourField.setText("");
 			}
 		});
 		panel_3.add(btnSubmit, "cell 3 0,alignx center");
@@ -585,9 +616,23 @@ public class arrExtrusion {
 				actualSetWeightFourField.setText("");
 				coreTagNumberField.setText("");
 				rollWeightField.setText("");
+				formulationBox.setSelectedIndex(0);
 			}
 		});
 		panel_3.add(btnResetForm, "cell 4 0,alignx center");
+
+		btnRemoveLastRoll = new JButton("Remove Last Roll");
+		btnRemoveLastRoll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				model5.removeRow(model5.getRowCount() - 1);
+				int returnCheck = updatePercentOfTarget();
+				if (returnCheck == 0)
+					return;
+				coreTagNumberField.setText("");
+				rollWeightField.setText("");
+			}
+		});
+		panel_3.add(btnRemoveLastRoll, "cell 5 0,growx");
 	}
 
 	private int updatePercentOfTarget() {
@@ -602,9 +647,11 @@ public class arrExtrusion {
 				&& (workOrderTwoField.getText().equals(""))
 				&& (workOrderThreeField.getText().equals(""))
 				&& (workOrderFourField.getText().equals(""))) {
-			String targetRollWeightOne = targetWeightOneField.getText();
+			String targetRollWeightOne = removeWhiteSpace(targetWeightOneField
+					.getText());
 			double targetRollWeightOneInt = convertToDouble(targetRollWeightOne);
-			String rollsPerSetOne = rollsPerSetOneField.getText();
+			String rollsPerSetOne = removeWhiteSpace(rollsPerSetOneField
+					.getText());
 			int rollsPersetOneInt = convertToInt(rollsPerSetOne);
 			double targetSetWeightOne = targetRollWeightOneInt
 					* rollsPersetOneInt;
@@ -622,17 +669,21 @@ public class arrExtrusion {
 				&& !(workOrderTwoField.getText().equals(""))
 				&& (workOrderThreeField.getText().equals(""))
 				&& (workOrderFourField.getText().equals(""))) {
-			String targetRollWeightOne = targetWeightOneField.getText();
+			String targetRollWeightOne = removeWhiteSpace(targetWeightOneField
+					.getText());
 			double targetRollWeightOneInt = convertToDouble(targetRollWeightOne);
-			String rollsPerSetOne = rollsPerSetOneField.getText();
+			String rollsPerSetOne = removeWhiteSpace(rollsPerSetOneField
+					.getText());
 			int rollsPersetOneInt = convertToInt(rollsPerSetOne);
 			double targetSetWeightOne = targetRollWeightOneInt
 					* rollsPersetOneInt;
 			double actualSetWeightOne = 0;
 
-			String targetRollWeightTwo = targetWeightTwoField.getText();
+			String targetRollWeightTwo = removeWhiteSpace(targetWeightTwoField
+					.getText());
 			double targetRollWeightTwoInt = convertToDouble(targetRollWeightTwo);
-			String rollsPerSetTwo = rollsPerSetTwoField.getText();
+			String rollsPerSetTwo = removeWhiteSpace(rollsPerSetTwoField
+					.getText());
 			int rollsPersetTwoInt = convertToInt(rollsPerSetTwo);
 			double targetSetWeightTwo = targetRollWeightTwoInt
 					* rollsPersetTwoInt;
@@ -662,25 +713,31 @@ public class arrExtrusion {
 				&& !(workOrderThreeField.getText().equals(""))
 				&& (workOrderFourField.getText().equals(""))) {
 
-			String targetRollWeightOne = targetWeightOneField.getText();
+			String targetRollWeightOne = removeWhiteSpace(targetWeightOneField
+					.getText());
 			double targetRollWeightOneInt = convertToDouble(targetRollWeightOne);
-			String rollsPerSetOne = rollsPerSetOneField.getText();
+			String rollsPerSetOne = removeWhiteSpace(rollsPerSetOneField
+					.getText());
 			int rollsPersetOneInt = convertToInt(rollsPerSetOne);
 			double targetSetWeightOne = targetRollWeightOneInt
 					* rollsPersetOneInt;
 			double actualSetWeightOne = 0;
 
-			String targetRollWeightTwo = targetWeightTwoField.getText();
+			String targetRollWeightTwo = removeWhiteSpace(targetWeightTwoField
+					.getText());
 			double targetRollWeightTwoInt = convertToDouble(targetRollWeightTwo);
-			String rollsPerSetTwo = rollsPerSetTwoField.getText();
+			String rollsPerSetTwo = removeWhiteSpace(rollsPerSetTwoField
+					.getText());
 			int rollsPersetTwoInt = convertToInt(rollsPerSetTwo);
 			double targetSetWeightTwo = targetRollWeightTwoInt
 					* rollsPersetTwoInt;
 			double actualSetWeightTwo = 0;
 
-			String targetRollWeightThree = targetWeightThreeField.getText();
+			String targetRollWeightThree = removeWhiteSpace(targetWeightThreeField
+					.getText());
 			double targetRollWeightThreeInt = convertToDouble(targetRollWeightThree);
-			String rollsPerSetThree = rollsPerSetThreeField.getText();
+			String rollsPerSetThree = removeWhiteSpace(rollsPerSetThreeField
+					.getText());
 			int rollsPersetThreeInt = convertToInt(rollsPerSetThree);
 			double targetSetWeightThree = targetRollWeightThreeInt
 					* rollsPersetThreeInt;
@@ -716,33 +773,41 @@ public class arrExtrusion {
 				&& !(workOrderThreeField.getText().equals(""))
 				&& !(workOrderFourField.getText().equals(""))) {
 
-			String targetRollWeightOne = targetWeightOneField.getText();
+			String targetRollWeightOne = removeWhiteSpace(targetWeightOneField
+					.getText());
 			double targetRollWeightOneInt = convertToDouble(targetRollWeightOne);
-			String rollsPerSetOne = rollsPerSetOneField.getText();
+			String rollsPerSetOne = removeWhiteSpace(rollsPerSetOneField
+					.getText());
 			int rollsPersetOneInt = convertToInt(rollsPerSetOne);
 			double targetSetWeightOne = targetRollWeightOneInt
 					* rollsPersetOneInt;
 			double actualSetWeightOne = 0;
 
-			String targetRollWeightTwo = targetWeightTwoField.getText();
+			String targetRollWeightTwo = removeWhiteSpace(targetWeightTwoField
+					.getText());
 			double targetRollWeightTwoInt = convertToDouble(targetRollWeightTwo);
-			String rollsPerSetTwo = rollsPerSetTwoField.getText();
+			String rollsPerSetTwo = removeWhiteSpace(rollsPerSetTwoField
+					.getText());
 			int rollsPersetTwoInt = convertToInt(rollsPerSetTwo);
 			double targetSetWeightTwo = targetRollWeightTwoInt
 					* rollsPersetTwoInt;
 			double actualSetWeightTwo = 0;
 
-			String targetRollWeightThree = targetWeightThreeField.getText();
+			String targetRollWeightThree = removeWhiteSpace(targetWeightThreeField
+					.getText());
 			double targetRollWeightThreeInt = convertToDouble(targetRollWeightThree);
-			String rollsPerSetThree = rollsPerSetThreeField.getText();
+			String rollsPerSetThree = removeWhiteSpace(rollsPerSetThreeField
+					.getText());
 			int rollsPersetThreeInt = convertToInt(rollsPerSetThree);
 			double targetSetWeightThree = targetRollWeightThreeInt
 					* rollsPersetThreeInt;
 			double actualSetWeightThree = 0;
 
-			String targetRollWeightFour = targetWeightFourField.getText();
+			String targetRollWeightFour = removeWhiteSpace(targetWeightFourField
+					.getText());
 			double targetRollWeightFourInt = convertToDouble(targetRollWeightFour);
-			String rollsPerSetFour = rollsPerSetFourField.getText();
+			String rollsPerSetFour = removeWhiteSpace(rollsPerSetFourField
+					.getText());
 			int rollsPersetFourInt = convertToInt(rollsPerSetFour);
 			double targetSetWeightFour = targetRollWeightFourInt
 					* rollsPersetFourInt;
@@ -784,22 +849,28 @@ public class arrExtrusion {
 	private void InsertRollWeightSQL() {
 		arrWeights.sqlConnection();
 		String workStation = (String) workStationBox.getSelectedItem();
-		String operator = operatorField.getText();
+		String operator = removeWhiteSpace(operatorField.getText());
 		String shift = (String) shiftBox.getSelectedItem();
-		String setNumber = setNumberField.getText();
+		String setNumber = removeWhiteSpace(setNumberField.getText());
 		int setNumberInt = convertToInt(setNumber);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
 		String coreTagNumber = coreTagNumberField.getText();
 		String rollWeight = rollWeightField.getText();
-		rollWeight = rollWeight.substring(7,10);
+		rollWeight = removeWhiteSpace(rollWeight);
 		double rollWeightDouble = convertToDouble(rollWeight);
-		String workOrder = coreTagNumber.substring(1, 9);
-		String workOrderOne = workOrderOneField.getText();
-		String workOrderTwo = workOrderTwoField.getText();
-		String workOrderThree = workOrderThreeField.getText();
-		String workOrderFour = workOrderFourField.getText();
+		String workOrder = removeWhiteSpace(coreTagNumber);
+		try {
+			workOrder = workOrder.substring(1, 9);
+			workOrder = removeWhiteSpace(workOrder);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Scan a core tag");
+		}
+		String workOrderOne = removeWhiteSpace(workOrderOneField.getText());
+		String workOrderTwo = removeWhiteSpace(workOrderTwoField.getText());
+		String workOrderThree = removeWhiteSpace(workOrderThreeField.getText());
+		String workOrderFour = removeWhiteSpace(workOrderFourField.getText());
 		int workOrderInt = 0;
 		String itemNumber = "";
 		double itemNumberDouble = 0;
@@ -807,59 +878,68 @@ public class arrExtrusion {
 		double targetWeightDouble = 0;
 		String rollsPerSet = "";
 		double rollsPerSetDouble = 0;
+		String formulation = (String) formulationBox.getSelectedItem();
 		if (workOrderOne.equals(workOrder)) {
 			workOrder = workOrderOne;
 			workOrderInt = convertToInt(workOrder);
-			itemNumber = itemNumberOneField.getText();
+			itemNumber = removeWhiteSpace(itemNumberOneField.getText());
 			itemNumberDouble = convertToDouble(itemNumber);
-			targetWeight = targetWeightOneField.getText();
+			targetWeight = removeWhiteSpace(targetWeightOneField.getText());
 			targetWeightDouble = convertToDouble(targetWeight);
-			rollsPerSet = rollsPerSetOneField.getText();
+			rollsPerSet = removeWhiteSpace(rollsPerSetOneField.getText());
 			rollsPerSetDouble = convertToDouble(rollsPerSet);
-			String actualSetWeightOne = actualSetWeightOneField.getText();
+			String actualSetWeightOne = removeWhiteSpace(actualSetWeightOneField
+					.getText());
 			double actualSetWeightOneDouble = convertToDouble(actualSetWeightOne);
 			actualSetWeightOneDouble += rollWeightDouble;
+			actualSetWeightOneDouble = RoundTo2Decimals(actualSetWeightOneDouble);
 			actualSetWeightOne = String.valueOf(actualSetWeightOneDouble);
 			actualSetWeightOneField.setText(actualSetWeightOne);
 		} else if (workOrderTwo.equals(workOrder)) {
 			workOrder = workOrderTwo;
 			workOrderInt = convertToInt(workOrder);
-			itemNumber = itemNumberTwoField.getText();
+			itemNumber = removeWhiteSpace(itemNumberTwoField.getText());
 			itemNumberDouble = convertToDouble(itemNumber);
-			targetWeight = targetWeightTwoField.getText();
+			targetWeight = removeWhiteSpace(targetWeightTwoField.getText());
 			targetWeightDouble = convertToDouble(targetWeight);
-			rollsPerSet = rollsPerSetTwoField.getText();
+			rollsPerSet = removeWhiteSpace(rollsPerSetTwoField.getText());
 			rollsPerSetDouble = convertToDouble(rollsPerSet);
-			String actualSetWeightTwo = actualSetWeightTwoField.getText();
+			String actualSetWeightTwo = removeWhiteSpace(actualSetWeightTwoField
+					.getText());
 			double actualSetWeightTwoDouble = convertToDouble(actualSetWeightTwo);
 			actualSetWeightTwoDouble += rollWeightDouble;
+			actualSetWeightTwoDouble = RoundTo2Decimals(actualSetWeightTwoDouble);
 			actualSetWeightTwo = String.valueOf(actualSetWeightTwoDouble);
 			actualSetWeightTwoField.setText(actualSetWeightTwo);
 		} else if (workOrderThree.equals(workOrder)) {
 			workOrder = workOrderThree;
 			workOrderInt = convertToInt(workOrder);
-			itemNumber = itemNumberThreeField.getText();
+			itemNumber = removeWhiteSpace(itemNumberThreeField.getText());
 			itemNumberDouble = convertToDouble(itemNumber);
-			targetWeight = targetWeightThreeField.getText();
+			targetWeight = removeWhiteSpace(targetWeightThreeField.getText());
 			targetWeightDouble = convertToDouble(targetWeight);
-			rollsPerSet = rollsPerSetThreeField.getText();
+			rollsPerSet = removeWhiteSpace(rollsPerSetThreeField.getText());
 			rollsPerSetDouble = convertToDouble(rollsPerSet);
-			String actualSetWeightThree = actualSetWeightThreeField.getText();
+			String actualSetWeightThree = removeWhiteSpace(actualSetWeightThreeField
+					.getText());
 			double actualSetWeightThreeDouble = convertToDouble(actualSetWeightThree);
 			actualSetWeightThreeDouble += rollWeightDouble;
+			actualSetWeightThreeDouble = RoundTo2Decimals(actualSetWeightThreeDouble);
 			actualSetWeightThree = String.valueOf(actualSetWeightThreeDouble);
 			actualSetWeightThreeField.setText(actualSetWeightThree);
 		} else if (workOrderFour.equals(workOrder)) {
 			workOrder = workOrderFour;
 			workOrderInt = convertToInt(workOrder);
-			itemNumber = itemNumberFourField.getText();
+			itemNumber = removeWhiteSpace(itemNumberFourField.getText());
 			itemNumberDouble = convertToDouble(itemNumber);
-			targetWeight = targetWeightFourField.getText();
+			targetWeight = removeWhiteSpace(targetWeightFourField.getText());
 			targetWeightDouble = convertToDouble(targetWeight);
-			rollsPerSet = rollsPerSetFourField.getText();
+			rollsPerSet = removeWhiteSpace(rollsPerSetFourField.getText());
 			rollsPerSetDouble = convertToDouble(rollsPerSet);
-			String actualSetWeightFour = actualSetWeightFourField.getText();
+			String actualSetWeightFour = removeWhiteSpace(actualSetWeightFourField
+					.getText());
 			double actualSetWeightFourDouble = convertToDouble(actualSetWeightFour);
+			actualSetWeightFourDouble = RoundTo2Decimals(actualSetWeightFourDouble);
 			actualSetWeightFourDouble += rollWeightDouble;
 			actualSetWeightFour = String.valueOf(actualSetWeightFourDouble);
 			actualSetWeightFourField.setText(actualSetWeightFour);
@@ -867,18 +947,19 @@ public class arrExtrusion {
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrRollWeight(?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrRollWeight(?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, workStation);
 			cs.setString(2, operator);
 			cs.setString(3, shift);
 			cs.setInt(4, setNumberInt);
 			cs.setString(5, dateTime);
 			cs.setInt(6, workOrderInt);
-			cs.setDouble(7, itemNumberDouble);
-			cs.setDouble(8, targetWeightDouble);
-			cs.setDouble(9, rollsPerSetDouble);
-			cs.setString(10, coreTagNumber);
-			cs.setDouble(11, rollWeightDouble);
+			cs.setString(7, formulation);
+			cs.setDouble(8, itemNumberDouble);
+			cs.setDouble(9, targetWeightDouble);
+			cs.setDouble(10, rollsPerSetDouble);
+			cs.setString(11, coreTagNumber);
+			cs.setDouble(12, rollWeightDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -898,14 +979,15 @@ public class arrExtrusion {
 	private void SubmitSetSQL() {
 		arrWeights.sqlConnection();
 		String workStation = (String) workStationBox.getSelectedItem();
-		String operator = operatorField.getText();
+		String operator = removeWhiteSpace(operatorField.getText());
 		String shift = (String) shiftBox.getSelectedItem();
-		String setNumber = setNumberField.getText();
+		String setNumber = removeWhiteSpace(setNumberField.getText());
 		int setNumberInt = convertToInt(setNumber);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
-		String actualPercentOfTarget = percentOfTargetLbl.getText();
+		String actualPercentOfTarget = removeWhiteSpace(percentOfTargetLbl
+				.getText());
 		double actualPercentOfTargetDouble = 0;
 		actualPercentOfTargetDouble = convertToDouble(actualPercentOfTarget);
 
@@ -921,6 +1003,7 @@ public class arrExtrusion {
 		double targetSetWeightOneDouble = convertToDouble(targetSetWeightOne);
 		String actualSetWeightOne = actualSetWeightOneField.getText();
 		double actualSetWeightOneDouble = convertToDouble(actualSetWeightOne);
+		String formulation = (String) formulationBox.getSelectedItem();
 
 		String workOrderTwo = workOrderTwoField.getText();
 		int workOrderTwoInt = convertToInt(workOrderTwo);
@@ -964,37 +1047,38 @@ public class arrExtrusion {
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrWeightTotal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrWeightTotal(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, workStation);
 			cs.setString(2, operator);
 			cs.setString(3, shift);
 			cs.setInt(4, setNumberInt);
 			cs.setString(5, dateTime);
 			cs.setDouble(6, actualPercentOfTargetDouble);
-			cs.setInt(7, workOrderOneInt);
-			cs.setDouble(8, itemNumberOneDouble);
-			cs.setDouble(9, targetWeightOneDouble);
-			cs.setDouble(10, rollsPerSetOneDouble);
-			cs.setDouble(11, targetSetWeightOneDouble);
-			cs.setDouble(12, actualSetWeightOneDouble);
-			cs.setInt(13, workOrderTwoInt);
-			cs.setDouble(14, itemNumberTwoDouble);
-			cs.setDouble(15, targetWeightTwoDouble);
-			cs.setDouble(16, rollsPerSetTwoDouble);
-			cs.setDouble(17, targetSetWeightTwoDouble);
-			cs.setDouble(18, actualSetWeightTwoDouble);
-			cs.setInt(19, workOrderThreeInt);
-			cs.setDouble(20, itemNumberThreeDouble);
-			cs.setDouble(21, targetWeightThreeDouble);
-			cs.setDouble(22, rollsPerSetThreeDouble);
-			cs.setDouble(23, targetSetWeightThreeDouble);
-			cs.setDouble(24, actualSetWeightThreeDouble);
-			cs.setInt(25, workOrderFourInt);
-			cs.setDouble(26, itemNumberFourDouble);
-			cs.setDouble(27, targetWeightFourDouble);
-			cs.setDouble(28, rollsPerSetFourDouble);
-			cs.setDouble(29, targetSetWeightFourDouble);
-			cs.setDouble(30, actualSetWeightFourDouble);
+			cs.setString(7, formulation);
+			cs.setInt(8, workOrderOneInt);
+			cs.setDouble(9, itemNumberOneDouble);
+			cs.setDouble(10, targetWeightOneDouble);
+			cs.setDouble(11, rollsPerSetOneDouble);
+			cs.setDouble(12, targetSetWeightOneDouble);
+			cs.setDouble(13, actualSetWeightOneDouble);
+			cs.setInt(14, workOrderTwoInt);
+			cs.setDouble(15, itemNumberTwoDouble);
+			cs.setDouble(16, targetWeightTwoDouble);
+			cs.setDouble(17, rollsPerSetTwoDouble);
+			cs.setDouble(18, targetSetWeightTwoDouble);
+			cs.setDouble(19, actualSetWeightTwoDouble);
+			cs.setInt(20, workOrderThreeInt);
+			cs.setDouble(21, itemNumberThreeDouble);
+			cs.setDouble(22, targetWeightThreeDouble);
+			cs.setDouble(23, rollsPerSetThreeDouble);
+			cs.setDouble(24, targetSetWeightThreeDouble);
+			cs.setDouble(25, actualSetWeightThreeDouble);
+			cs.setInt(26, workOrderFourInt);
+			cs.setDouble(27, itemNumberFourDouble);
+			cs.setDouble(28, targetWeightFourDouble);
+			cs.setDouble(29, rollsPerSetFourDouble);
+			cs.setDouble(30, targetSetWeightFourDouble);
+			cs.setDouble(31, actualSetWeightFourDouble);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -1041,5 +1125,19 @@ public class arrExtrusion {
 			}
 		}
 		return tableData;
+	}
+
+	private String removeWhiteSpace(String st) {
+		st.replaceAll("\\s+", "");
+		return st;
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	double RoundTo2Decimals(double val) {
+		DecimalFormat df2 = new DecimalFormat("###.##");
+		return Double.valueOf(df2.format(val));
 	}
 }

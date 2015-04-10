@@ -1,7 +1,10 @@
 package Arr;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Robot;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 
@@ -20,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -50,6 +54,7 @@ public class arrDriller {
 	private JComboBox shiftBox;
 	private ArrayList<JTextField> fieldList;
 	private JTextField trimmedItemNumberField;
+	private Robot robot;
 
 	/**
 	 * Launch the application.
@@ -58,7 +63,7 @@ public class arrDriller {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					arrDriller window = new arrDriller();
+					arrDriller window = new arrDriller("user");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,14 +75,14 @@ public class arrDriller {
 	/**
 	 * Create the application. Stored in plant server.
 	 */
-	public arrDriller() {
-		initialize();
+	public arrDriller(String userName) {
+		initialize(userName);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String userName) {
 		frame = new JFrame("Driller");
 		frame.setBounds(100, 100, 764, 368);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,7 +104,8 @@ public class arrDriller {
 		JLabel lblOperator = new JLabel("Operator");
 		panel.add(lblOperator, "cell 3 0");
 
-		operatorField = new JTextField();
+		operatorField = new JTextField(userName);
+		operatorField.setEditable(false);
 		panel.add(operatorField, "cell 4 0,growx");
 		operatorField.setColumns(10);
 		fieldList.add(operatorField);
@@ -223,7 +229,7 @@ public class arrDriller {
 		trimmedItemNumberField = new JTextField();
 		fieldList.add(trimmedItemNumberField);
 		trimmedItemNumberField.setColumns(10);
-		panel_1.add(trimmedItemNumberField, "cell 1 6,growx");
+		panel_1.add(trimmedItemNumberField, "cell 1 6");
 
 		JLabel lblTarget = new JLabel("Weight Target");
 		panel_1.add(lblTarget, "cell 0 7,alignx center");
@@ -242,6 +248,25 @@ public class arrDriller {
 			public void focusLost(FocusEvent e) {
 				wipCoreTagNumberField.requestFocus();
 				insertArrDrillerSQL();
+				wipCoreTagNumberField.setText("");
+				rollWeightField.setText("");
+				String fgCoreTagNumber = fgCoreTagNumberField.getText();
+				long fgCoreTagNumberInt = Long.valueOf(fgCoreTagNumber);
+				fgCoreTagNumberInt += 1;
+				fgCoreTagNumber = String.valueOf(fgCoreTagNumberInt);
+				fgCoreTagNumberField.setText(fgCoreTagNumber);
+				model3.setRowCount(0);
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+				try {
+					robot = new Robot();
+					robot.keyPress(KeyEvent.VK_F11);
+					robot.keyRelease(KeyEvent.VK_F11);
+				} catch (AWTException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		frame.getContentPane().add(rollWeightField, "cell 3 1,growx");
@@ -278,7 +303,6 @@ public class arrDriller {
 		arrDriller.model3.addColumn("Lot Code In");
 		arrDriller.model3.addColumn("Date / Time");
 		arrDriller.model3.addColumn("Wgt");
-		arrDriller.model3.addColumn("Set#");
 		scrollPane.setViewportView(table);
 	}
 
@@ -314,6 +338,8 @@ public class arrDriller {
 		double extrudedItemNumberField = convertToDouble(extrudedItemNumber);
 		String trimmedItemNumber = trimmedItemNumberField.getText();
 		double trimmedItemNumberDouble = convertToDouble(trimmedItemNumber);
+		model3.addRow(new Object[] { wipCoreTagNumber, fgCoreTagNumber,
+				dateTime, rollWeight });
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
@@ -347,6 +373,7 @@ public class arrDriller {
 				System.err.println(e);
 			}
 		}
+
 	}
 
 	public static double convertToDouble(String val) {
@@ -362,5 +389,9 @@ public class arrDriller {
 		for (JTextField t : fieldList)
 			t.setText("");
 		shiftBox.setSelectedIndex(0);
+	}
+
+	public Window getFrame() {
+		return frame;
 	}
 }

@@ -2,6 +2,7 @@ package Arr;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 
@@ -60,7 +61,7 @@ public class arrTrimmer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					arrTrimmer window = new arrTrimmer();
+					arrTrimmer window = new arrTrimmer("user");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,14 +73,14 @@ public class arrTrimmer {
 	/**
 	 * Create the application. Stored in plant server.
 	 */
-	public arrTrimmer() {
-		initialize();
+	public arrTrimmer(String userName) {
+		initialize(userName);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String userName) {
 		frame = new JFrame("Trimmer");
 		frame.setBounds(100, 100, 668, 410);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,7 +103,8 @@ public class arrTrimmer {
 		JLabel lblOperator = new JLabel("Operator");
 		panel.add(lblOperator, "cell 3 0");
 
-		operatorField = new JTextField();
+		operatorField = new JTextField(userName);
+		operatorField.setEditable(false);
 		panel.add(operatorField, "cell 4 0,growx");
 		operatorField.setColumns(10);
 		fieldList.add(operatorField);
@@ -237,6 +239,14 @@ public class arrTrimmer {
 			public void focusLost(FocusEvent e) {
 				wipCoreTagNumberField.requestFocus();
 				insertArrTrimmerSQL();
+				wipCoreTagNumberField.setText("");
+				rollWeightField.setText("");
+				String fgCoreTagNumber = fgCoreTagNumberField.getText();
+				long fgCoreTagNumberInt = Long.valueOf(fgCoreTagNumber);
+				fgCoreTagNumberInt += 1;
+				fgCoreTagNumber = String.valueOf(fgCoreTagNumberInt);
+				fgCoreTagNumberField.setText(fgCoreTagNumber);
+				model3.setRowCount(0);
 			}
 		});
 		frame.getContentPane().add(rollWeightField, "cell 3 1,growx");
@@ -309,7 +319,6 @@ public class arrTrimmer {
 		arrTrimmer.model3.addColumn("Lot Code In");
 		arrTrimmer.model3.addColumn("Date / Time");
 		arrTrimmer.model3.addColumn("Wgt");
-		arrTrimmer.model3.addColumn("Set#");
 		scrollPane.setViewportView(table);
 	}
 
@@ -349,7 +358,8 @@ public class arrTrimmer {
 		double finishedWidthDouble = convertToDouble(finishedWidth);
 		String extrudedItemNumber = extrudedItemNumberField.getText();
 		double extrudedItemNumberField = convertToDouble(extrudedItemNumber);
-
+		model3.addRow(new Object[] { wipCoreTagNumber, fgCoreTagNumber,
+				dateTime, rollWeight });
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
@@ -401,5 +411,9 @@ public class arrTrimmer {
 			t.setText("");
 		workStationBox.setSelectedIndex(0);
 		shiftBox.setSelectedIndex(0);
+	}
+
+	public Window getFrame() {
+		return frame;
 	}
 }

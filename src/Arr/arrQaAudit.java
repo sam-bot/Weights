@@ -44,9 +44,12 @@ public class arrQaAudit {
 	private ButtonGroup weightGroup = new ButtonGroup();
 	private JTextField rollIdField;
 	private JTextField usernameField;
-	private JTextField workStationField;
 	private JTextField shiftDateField;
 	private JComboBox shiftComboBox;
+	private JTextField workOrderField;
+	private JComboBox formulationBox;
+	private JComboBox workstationBox;
+	static arrQaAudit qaWindow;
 
 	/**
 	 * Launch the application.
@@ -55,8 +58,8 @@ public class arrQaAudit {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					arrQaAudit window = new arrQaAudit();
-					window.getFrame().setVisible(true);
+					qaWindow = new arrQaAudit("user");
+					qaWindow.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -67,19 +70,19 @@ public class arrQaAudit {
 	/**
 	 * Create the application.
 	 */
-	public arrQaAudit() {
-		initialize();
+	public arrQaAudit(String userName) {
+		initialize(userName);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String userName) {
 		setFrame(new JFrame("Product Quality Audit"));
 		getFrame().setBounds(100, 100, 628, 384);
 		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getFrame().getContentPane().setLayout(
-				new MigLayout("", "[][][][][]",
+				new MigLayout("", "[][][][][grow]",
 						"[grow][][][][][][][][grow][grow][][]"));
 
 		// button groups to create toggle switches for each label
@@ -98,24 +101,27 @@ public class arrQaAudit {
 		JLabel lblUsername = new JLabel("Username");
 		getFrame().getContentPane().add(lblUsername, "cell 0 0,alignx right");
 
-		usernameField = new JTextField();
+		usernameField = new JTextField(userName);
+		usernameField.setEditable(false);
 		getFrame().getContentPane().add(usernameField, "cell 1 0 2 1,growx");
 		usernameField.setColumns(10);
 
 		JLabel lblWorkStation = new JLabel("Work Station");
-		getFrame().getContentPane().add(lblWorkStation, "cell 3 0,alignx right");
-
-		workStationField = new JTextField();
-		getFrame().getContentPane().add(workStationField, "cell 4 0,growx");
-		workStationField.setColumns(10);
+		getFrame().getContentPane().add(lblWorkStation,
+				"cell 3 0,alignx trailing");
+		String[] extrusionLines = { "", "FEX340001", "FEX340002", "FEX340003",
+				"FEX340004", "FEX340006", "FEX340007", "FEX340008" };
+		workstationBox = new JComboBox(extrusionLines);
+		frame.getContentPane().add(workstationBox, "cell 4 0,growx");
 
 		JLabel lblShiftDate = new JLabel("Date & Time");
-		getFrame().getContentPane().add(lblShiftDate, "cell 0 1,alignx trailing");
+		getFrame().getContentPane().add(lblShiftDate,
+				"cell 0 1,alignx trailing");
 
 		shiftDateField = new JTextField();
 		getFrame().getContentPane().add(shiftDateField, "cell 1 1 2 1,growx");
 		shiftDateField.setColumns(10);
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
 		shiftDateField.setText(dateTime);
@@ -126,82 +132,100 @@ public class arrQaAudit {
 		String[] shifts = { "", "A", "B", "C", "D" };
 		shiftComboBox = new JComboBox(shifts);
 		getFrame().getContentPane().add(shiftComboBox, "cell 4 1,growx");
+
+		JLabel lblRollId = new JLabel("Roll ID");
+		getFrame().getContentPane().add(lblRollId, "cell 0 2,alignx right");
+
+		rollIdField = new JTextField();
+		getFrame().getContentPane().add(rollIdField, "cell 1 2,growx");
+		rollIdField.setColumns(10);
+		String[] formulations = { "", "CRMF", "Digi Shrink", "Gold Cutterbox",
+				"Gold Meat", "Gold Mushroom", "Gold Mushroom PWMF",
+				"Gold Revolution RHW", "Green Produce", "HW Revolution",
+				"Omni MT", "Premium MT", "Premium Processor",
+				"Premium Supermarket", "Shrink", };
+
+		JLabel lblWorkOrder = new JLabel("Work Order");
+		frame.getContentPane().add(lblWorkOrder, "cell 3 2,alignx trailing");
+
+		workOrderField = new JTextField();
+		frame.getContentPane().add(workOrderField, "cell 4 2,growx");
+		workOrderField.setColumns(10);
+
+		JLabel lblFormulation = new JLabel("Formulation");
+		frame.getContentPane().add(lblFormulation, "cell 0 3,alignx trailing");
+		formulationBox = new JComboBox(formulations);
+		frame.getContentPane().add(formulationBox, "cell 1 3,growx");
+
+		JLabel lblPackaging = new JLabel("Packaging");
+		getFrame().getContentPane().add(lblPackaging, "cell 3 3,alignx right");
+
+		JRadioButton packagingInSpec = new JRadioButton("In Spec");
+		getFrame().getContentPane().add(packagingInSpec, "flowx,cell 4 3");
+		packagingGroup.add(packagingInSpec);
 		JLabel lblKnifeMovement = new JLabel("Knife Movement");
-		getFrame().getContentPane().add(lblKnifeMovement, "cell 0 2,alignx right");
+		getFrame().getContentPane().add(lblKnifeMovement,
+				"cell 0 4,alignx right");
 
 		JRadioButton knifeInSpec = new JRadioButton("In Spec");
 
-		getFrame().getContentPane().add(knifeInSpec, "flowx,cell 1 2");
+		getFrame().getContentPane().add(knifeInSpec, "flowx,cell 1 4");
 
-		JRadioButton knifeOutOfSpec = new JRadioButton("Out of Spec");
+		// add all radio buttons to their groups
+		knifeGroup.add(knifeInSpec);
 
-		getFrame().getContentPane().add(knifeOutOfSpec, "cell 1 2");
+		JLabel lblDieLines = new JLabel("Die Lines");
+		getFrame().getContentPane().add(lblDieLines, "cell 3 4,alignx right");
 
-		JLabel lblRollId = new JLabel("Roll ID");
-		getFrame().getContentPane().add(lblRollId, "cell 3 2,alignx right");
-
-		rollIdField = new JTextField();
-		getFrame().getContentPane().add(rollIdField, "cell 4 2,growx");
-		rollIdField.setColumns(10);
+		JRadioButton dieLinesNo = new JRadioButton("No");
+		getFrame().getContentPane().add(dieLinesNo, "flowx,cell 4 4");
+		dieLinesGroup.add(dieLinesNo);
 
 		JLabel lblCenteredOnCore = new JLabel("Centered On Core");
-		getFrame().getContentPane().add(lblCenteredOnCore, "cell 0 3,alignx right");
+		getFrame().getContentPane().add(lblCenteredOnCore,
+				"cell 0 5,alignx right");
 
 		JRadioButton centeredInSpec = new JRadioButton("In Spec");
 
-		getFrame().getContentPane().add(centeredInSpec, "flowx,cell 1 3");
-
-		JRadioButton centeredOutOfSpec = new JRadioButton("Out of Spec");
-
-		getFrame().getContentPane().add(centeredOutOfSpec, "cell 1 3");
+		getFrame().getContentPane().add(centeredInSpec, "flowx,cell 1 5");
+		coreGroup.add(centeredInSpec);
 
 		JLabel lblWidth = new JLabel("Width");
-		getFrame().getContentPane().add(lblWidth, "cell 3 3,alignx right");
+		getFrame().getContentPane().add(lblWidth, "cell 3 5,alignx right");
 
 		JRadioButton widthInSpec = new JRadioButton("In Spec");
-		getFrame().getContentPane().add(widthInSpec, "flowx,cell 4 3");
+		getFrame().getContentPane().add(widthInSpec, "flowx,cell 4 5");
+		widthGroup.add(widthInSpec);
 
 		JLabel lblCounter = new JLabel("Counter");
-		getFrame().getContentPane().add(lblCounter, "cell 0 4,alignx right");
+		getFrame().getContentPane().add(lblCounter, "cell 0 6,alignx right");
 
 		JRadioButton counterInSpec = new JRadioButton("In Spec");
-		getFrame().getContentPane().add(counterInSpec, "flowx,cell 1 4");
+		getFrame().getContentPane().add(counterInSpec, "flowx,cell 1 6");
+		counterGroup.add(counterInSpec);
 
 		JLabel lblEdgeQuality = new JLabel("Edge Quality");
-		getFrame().getContentPane().add(lblEdgeQuality, "cell 3 4,alignx right");
+		getFrame().getContentPane()
+				.add(lblEdgeQuality, "cell 3 6,alignx right");
 
 		JRadioButton edgeInSpec = new JRadioButton("In Spec");
-		getFrame().getContentPane().add(edgeInSpec, "flowx,cell 4 4");
+		getFrame().getContentPane().add(edgeInSpec, "flowx,cell 4 6");
+		edgeQualityGroup.add(edgeInSpec);
 
 		JLabel lblHardWrinkles = new JLabel("Hard Wrinkles");
-		getFrame().getContentPane().add(lblHardWrinkles, "cell 0 5,alignx right");
+		getFrame().getContentPane().add(lblHardWrinkles,
+				"cell 0 7,alignx right");
 
 		JRadioButton wrinklesInSpec = new JRadioButton("In Spec");
-		getFrame().getContentPane().add(wrinklesInSpec, "flowx,cell 1 5");
+		getFrame().getContentPane().add(wrinklesInSpec, "flowx,cell 1 7");
+		hardWrinklesGroup.add(wrinklesInSpec);
 
 		JLabel lblBurn = new JLabel("Burn");
-		getFrame().getContentPane().add(lblBurn, "cell 3 5,alignx right");
+		getFrame().getContentPane().add(lblBurn, "cell 3 7,alignx right");
 
 		JRadioButton burnInSpec = new JRadioButton("In Spec");
-		getFrame().getContentPane().add(burnInSpec, "flowx,cell 4 5");
-
-		JLabel lblPackaging = new JLabel("Packaging");
-		getFrame().getContentPane().add(lblPackaging, "cell 0 6,alignx right");
-
-		JRadioButton packagingInSpec = new JRadioButton("In Spec");
-		getFrame().getContentPane().add(packagingInSpec, "flowx,cell 1 6");
-
-		JLabel lblWeight = new JLabel("Weight");
-		getFrame().getContentPane().add(lblWeight, "cell 3 6,alignx right");
-
-		JRadioButton weightInSpec = new JRadioButton("In Spec");
-		getFrame().getContentPane().add(weightInSpec, "flowx,cell 4 6");
-
-		JLabel lblDieLines = new JLabel("Die Lines");
-		getFrame().getContentPane().add(lblDieLines, "cell 0 7,alignx right");
-
-		JRadioButton dieLinesNo = new JRadioButton("No");
-		getFrame().getContentPane().add(dieLinesNo, "flowx,cell 1 7");
+		getFrame().getContentPane().add(burnInSpec, "flowx,cell 4 7");
+		burnGroup.add(burnInSpec);
 
 		JLabel lblComments = new JLabel("Comments");
 		getFrame().getContentPane().add(lblComments, "cell 0 8,alignx right");
@@ -209,29 +233,12 @@ public class arrQaAudit {
 		commentsArea = new JTextArea();
 		getFrame().getContentPane().add(commentsArea, "cell 1 8 2 3,grow");
 
-		JRadioButton widthOutOfSpec = new JRadioButton("Out of Spec");
-		getFrame().getContentPane().add(widthOutOfSpec, "cell 4 3");
+		JLabel lblWeight = new JLabel("Weight");
+		getFrame().getContentPane().add(lblWeight, "cell 3 8,alignx right");
 
-		JRadioButton edgeOutOfSpec = new JRadioButton("Out of Spec");
-		getFrame().getContentPane().add(edgeOutOfSpec, "cell 4 4");
-
-		JRadioButton burnOutOfSpec = new JRadioButton("Out of Spec");
-		getFrame().getContentPane().add(burnOutOfSpec, "cell 4 5");
-
-		JRadioButton weightUnder = new JRadioButton("Under");
-		getFrame().getContentPane().add(weightUnder, "cell 4 6");
-
-		JRadioButton counterOutOfSpec = new JRadioButton("Out of Spec");
-		getFrame().getContentPane().add(counterOutOfSpec, "cell 1 4");
-
-		JRadioButton wrinklesOutOfSpec = new JRadioButton("Out of Spec");
-		getFrame().getContentPane().add(wrinklesOutOfSpec, "cell 1 5");
-
-		JRadioButton packagingOutOfSpec = new JRadioButton("Out of Spec");
-		getFrame().getContentPane().add(packagingOutOfSpec, "cell 1 6");
-
-		JRadioButton dieLinesYes = new JRadioButton("Yes");
-		getFrame().getContentPane().add(dieLinesYes, "cell 1 7");
+		JRadioButton weightInSpec = new JRadioButton("In Spec");
+		getFrame().getContentPane().add(weightInSpec, "flowx,cell 4 8");
+		weightGroup.add(weightInSpec);
 
 		JPanel panel = new JPanel();
 		getFrame().getContentPane().add(panel, "cell 0 11 4 1,grow");
@@ -264,31 +271,56 @@ public class arrQaAudit {
 		panel.add(btnClearButtons, "cell 3 0");
 
 		JButton btnReturnToExtrusion = new JButton("Return to Extrusion");
+		btnReturnToExtrusion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				arrExtrusion.qaWindow.getFrame().setVisible(false);
+			}
+		});
 		panel.add(btnReturnToExtrusion, "cell 6 0");
 
-		// add all radio buttons to their groups
-		knifeGroup.add(knifeInSpec);
+		JRadioButton knifeOutOfSpec = new JRadioButton("Out of Spec");
+
+		getFrame().getContentPane().add(knifeOutOfSpec, "cell 1 4");
 		knifeGroup.add(knifeOutOfSpec);
-		coreGroup.add(centeredInSpec);
+
+		JRadioButton centeredOutOfSpec = new JRadioButton("Out of Spec");
+
+		getFrame().getContentPane().add(centeredOutOfSpec, "cell 1 5");
 		coreGroup.add(centeredOutOfSpec);
-		counterGroup.add(counterInSpec);
+
+		JRadioButton counterOutOfSpec = new JRadioButton("Out of Spec");
+		getFrame().getContentPane().add(counterOutOfSpec, "cell 1 6");
 		counterGroup.add(counterOutOfSpec);
-		hardWrinklesGroup.add(wrinklesInSpec);
+
+		JRadioButton wrinklesOutOfSpec = new JRadioButton("Out of Spec");
+		getFrame().getContentPane().add(wrinklesOutOfSpec, "cell 1 7");
 		hardWrinklesGroup.add(wrinklesOutOfSpec);
-		packagingGroup.add(packagingInSpec);
+
+		JRadioButton packagingOutOfSpec = new JRadioButton("Out of Spec");
+		getFrame().getContentPane().add(packagingOutOfSpec, "cell 4 3");
 		packagingGroup.add(packagingOutOfSpec);
-		dieLinesGroup.add(dieLinesNo);
+
+		JRadioButton dieLinesYes = new JRadioButton("Yes");
+		getFrame().getContentPane().add(dieLinesYes, "cell 4 4");
 		dieLinesGroup.add(dieLinesYes);
-		widthGroup.add(widthInSpec);
+
+		JRadioButton widthOutOfSpec = new JRadioButton("Out of Spec");
+		getFrame().getContentPane().add(widthOutOfSpec, "cell 4 5");
 		widthGroup.add(widthOutOfSpec);
-		edgeQualityGroup.add(edgeInSpec);
+
+		JRadioButton edgeOutOfSpec = new JRadioButton("Out of Spec");
+		getFrame().getContentPane().add(edgeOutOfSpec, "cell 4 6");
 		edgeQualityGroup.add(edgeOutOfSpec);
-		burnGroup.add(burnInSpec);
+
+		JRadioButton burnOutOfSpec = new JRadioButton("Out of Spec");
+		getFrame().getContentPane().add(burnOutOfSpec, "cell 4 7");
 		burnGroup.add(burnOutOfSpec);
-		weightGroup.add(weightInSpec);
+
+		JRadioButton weightUnder = new JRadioButton("Under");
+		getFrame().getContentPane().add(weightUnder, "cell 4 8");
 		weightGroup.add(weightUnder);
 		JRadioButton weightOver = new JRadioButton("Over");
-		getFrame().getContentPane().add(weightOver, "cell 4 6");
+		getFrame().getContentPane().add(weightOver, "cell 4 8");
 		weightGroup.add(weightOver);
 		// add all buttonGroups to an ArrayList for manipulation purposes
 		allButtons.add(knifeGroup);
@@ -308,11 +340,13 @@ public class arrQaAudit {
 	private void insertAuditSQL() {
 		arrWeights.sqlConnection();
 		String userName = usernameField.getText();
-		String workStation = workStationField.getText();
+		String workStation = (String) workstationBox.getSelectedItem();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
 		String shift = (String) shiftComboBox.getSelectedItem();
+		String workOrder = (String) workOrderField.getText();
+		String formulation = (String) formulationBox.getSelectedItem();
 		String rollID = rollIdField.getText();
 		String knifeMovement = getSelectedButtonText(knifeGroup);
 		String centeredOnCore = getSelectedButtonText(coreGroup);
@@ -329,23 +363,25 @@ public class arrQaAudit {
 		try {
 			CallableStatement cs = null;
 			cs = arrWeights.conn
-					.prepareCall("{call InsertArrQaAudit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+					.prepareCall("{call InsertArrQaAudit(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 			cs.setString(1, userName);
 			cs.setString(2, workStation);
 			cs.setString(3, dateTime);
 			cs.setString(4, shift);
-			cs.setString(5, rollID);
-			cs.setString(6, knifeMovement);
-			cs.setString(7, centeredOnCore);
-			cs.setString(8, counter);
-			cs.setString(9, hardWrinkles);
-			cs.setString(10, packaging);
-			cs.setString(11, dieLines);
-			cs.setString(12, width);
-			cs.setString(13, edgeQuality);
-			cs.setString(14, burn);
-			cs.setString(15, weight);
-			cs.setString(16, comments);
+			cs.setString(5, formulation);
+			cs.setString(6, workOrder);
+			cs.setString(7, rollID);
+			cs.setString(8, knifeMovement);
+			cs.setString(9, centeredOnCore);
+			cs.setString(10, counter);
+			cs.setString(11, hardWrinkles);
+			cs.setString(12, packaging);
+			cs.setString(13, dieLines);
+			cs.setString(14, width);
+			cs.setString(15, edgeQuality);
+			cs.setString(16, burn);
+			cs.setString(17, weight);
+			cs.setString(18, comments);
 			cs.execute();
 			cs.close();
 		} catch (SQLException e) {
@@ -392,5 +428,5 @@ public class arrQaAudit {
 	public void setFrame(JFrame frame) {
 		this.frame = frame;
 	}
-	
+
 }

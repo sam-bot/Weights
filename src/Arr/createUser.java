@@ -14,8 +14,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class createUser {
 
@@ -23,6 +28,14 @@ public class createUser {
 	private JTextField userNameField;
 	private JTextField passwordField;
 	private ArrayList<JTextField> list;
+	private JTable table;
+	static DefaultTableModel model8 = new DefaultTableModel() {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			// all cells false
+			return false;
+		}
+	};
 
 	/**
 	 * Launch the application.
@@ -52,10 +65,10 @@ public class createUser {
 	 */
 	private void initialize() {
 		frame = new JFrame("Create New Users");
-		frame.setBounds(100, 100, 330, 134);
+		frame.setBounds(100, 100, 449, 247);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(
-				new MigLayout("", "[][grow]", "[][][][]"));
+				new MigLayout("", "[grow][grow]", "[][][grow][]"));
 		// add all textfields to one collection
 		list = new ArrayList<JTextField>();
 		JLabel lblUserName = new JLabel("User Name");
@@ -79,9 +92,20 @@ public class createUser {
 			public void actionPerformed(ActionEvent e) {
 				insertUserSQL();
 				clearFields();
+				SQLSelect();
 			}
 
 		});
+
+		JScrollPane scrollPane = new JScrollPane();
+		frame.getContentPane().add(scrollPane, "cell 0 2 2 1,grow");
+
+		table = new JTable(model8);
+		createUser.model8.addColumn("User IDs");
+		createUser.model8.addColumn("User Name");
+		createUser.model8.addColumn("Password");
+		scrollPane.setRowHeaderView(table);
+		SQLSelect();
 		frame.getContentPane().add(btnSubmit, "flowx,cell 1 3,alignx center");
 
 		JButton btnDelete = new JButton("Delete");
@@ -89,6 +113,7 @@ public class createUser {
 			public void actionPerformed(ActionEvent e) {
 				deleteUserSQL();
 				clearFields();
+				SQLSelect();
 			}
 		});
 		frame.getContentPane().add(btnDelete, "cell 1 3");
@@ -105,7 +130,8 @@ public class createUser {
 			cs.setString(2, password);
 			cs.execute();
 			cs.close();
-			JOptionPane.showMessageDialog(null, "User " + userName + " created");
+			JOptionPane
+					.showMessageDialog(null, "User " + userName + " created");
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
@@ -127,7 +153,8 @@ public class createUser {
 			cs.setString(1, userName);
 			cs.execute();
 			cs.close();
-			JOptionPane.showMessageDialog(null, "User " + userName + " deleted");
+			JOptionPane
+					.showMessageDialog(null, "User " + userName + " deleted");
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		} finally {
@@ -144,5 +171,30 @@ public class createUser {
 	private void clearFields() {
 		for (JTextField j : list)
 			j.setText("");
+	}
+
+	private void SQLSelect() {
+		arrWeights.sqlConnection();
+		try {
+			CallableStatement cs = null;
+			String whereClause = "";
+			cs = arrWeights.conn.prepareCall("{call SelectArrUsers(?)}");
+			cs.setString(1, whereClause);
+			ResultSet rs = cs.executeQuery();
+			model8.setRowCount(0);
+			java.sql.ResultSetMetaData rsmd = rs.getMetaData();
+			int colNo = rsmd.getColumnCount();
+			while (rs.next()) {
+				Object[] objects = new Object[colNo];
+				for (int i = 0; i < colNo; i++) {
+					objects[i] = rs.getObject(i + 1);
+				}
+				model8.addRow(objects);
+			}
+			cs.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		} finally {
+		}
 	}
 }

@@ -272,7 +272,10 @@ public class processConditions {
 		getFrame()
 				.getContentPane()
 				.setLayout(
-						new MigLayout("", "[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][][grow]", "[][25px:n][grow][][][][][25px:n][][][][][25px:n][][25px:n][]"));
+						new MigLayout(
+								"",
+								"[grow][grow][grow][grow][grow][grow][grow][grow][grow][grow][][grow]",
+								"[][25px:n][grow][][][][][25px:n][][][][][25px:n][][25px:n][]"));
 
 		panel_2 = new JPanel();
 		list = new ArrayList<JTextField>();
@@ -286,7 +289,7 @@ public class processConditions {
 		label = new JLabel("Shift Date");
 		panel_2.add(label, "cell 0 0,alignx right");
 		shiftDateField = new JTextField();
-		DateFormat dateFormat = new SimpleDateFormat("YYYY/MM/dd");
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
 		Calendar cal = Calendar.getInstance();
 		String dateTime = dateFormat.format(cal.getTime());
 		shiftDateField.setText(dateTime);
@@ -704,7 +707,8 @@ public class processConditions {
 		label_2 = new JLabel("Operator");
 		panel_2.add(label_2, "cell 6 0,alignx right");
 
-		operatorField = new JTextField();
+		operatorField = new JTextField(operator);
+		operatorField.setEditable(false);
 		panel_2.add(operatorField, "cell 7 0");
 		operatorField.setColumns(10);
 		operatorField.setText(operator);

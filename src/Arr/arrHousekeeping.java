@@ -99,11 +99,12 @@ public class arrHousekeeping {
 		shiftField = new JTextField();
 		panel_2.add(shiftField, "cell 3 0");
 		shiftField.setColumns(10);
-
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
+		Calendar cal = Calendar.getInstance();
+		String dateTime = dateFormat.format(cal.getTime());
 		JLabel lblDate = new JLabel("Date");
 		panel_2.add(lblDate, "cell 4 0,alignx trailing");
-
-		dateField = new JTextField();
+		dateField = new JTextField(dateTime);
 		panel_2.add(dateField, "cell 5 0");
 		dateField.setColumns(10);
 

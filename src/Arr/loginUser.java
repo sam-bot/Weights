@@ -20,10 +20,11 @@ import java.sql.Types;
 
 public class loginUser {
 
-	private JFrame frame;
-	private JTextField userNameField;
+	JFrame frame;
+	static JTextField userNameField;
 	private JPasswordField passwordField;
 	private JButton btnSubmit;
+	static loginUser loginUserWindow;
 
 	/**
 	 * Launch the application.
@@ -32,8 +33,8 @@ public class loginUser {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					loginUser window = new loginUser();
-					window.frame.setVisible(true);
+					loginUserWindow = new loginUser();
+					loginUserWindow.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -94,8 +95,9 @@ public class loginUser {
 			cs.execute();
 			int returnValue = cs.getInt(1);
 			if (returnValue == 1) {
-				processConditions window = new processConditions(userName);
+				arrExtrusion window = new arrExtrusion(userName);
 				window.getFrame().setVisible(true);
+				loginUserWindow.frame.setVisible(false);
 			} else if (returnValue == 0) {
 				JOptionPane.showMessageDialog(null,
 						"Incorrect user name or password");
